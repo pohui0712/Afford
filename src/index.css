@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.webgi-canvas {
+  width: 100%;
+  height: 100%;
+  background: transparent;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.webgi-canvas-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  /* pointer-events: none; */
+  min-height: 831px;
+  background: transparent;
+}
+
+.nav-wrapper {
+  margin: 0;
+  width: 100%;
+  min-width: 320px;
+  height: 60px;
+  max-height: 52px;
+  font-size: 17px;
+  background-color: #f2f2f2;
+}
+
+.nav-content {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 26px;
+}
+
+.list-styled {
+  cursor: default;
+  width: auto;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.link-styled {
+  font-size: 16px;
+  margin-top: 2px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  color: #000000cc;
 }
