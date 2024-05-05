@@ -3,21 +3,19 @@ import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   return (
-    <nav className="nav-wrapper">
-      <div className="nav-content">
-        <ul className="list-styled">
-          <li className="link-styled">AFFORD</li>
-          <li className="link-styled">Services</li>
-          <li className="link-styled">Plan</li>
-          <li className="link-styled">Contact</li>
-          <button className="bg-blue-400 hover:bg-fuchsia-400 rounded-lg px-6 justify-center mt-2">
-            Booking
-          </button>
-          <li className="link-styled">
-            <CgProfile className="w-full h-3/4" />
-          </li>
-        </ul>
-      </div>
+    <nav className="w-full sticky top-0 px-6 bg-orange-50 shadow-lg">
+      <ul className="flex items-center justify-between py-2 text-lg">
+        <li>AFFORD</li>
+        <li>Services</li>
+        <li>Plan</li>
+        <li>Contact</li>
+        <button className="bg-blue-400 hover:bg-fuchsia-400 px-4 py-2 text-white rounded-md">
+          Booking
+        </button>
+        <li>
+          <CgProfile className="w-8 h-8" />
+        </li>
+      </ul>
     </nav>
   );
 };
