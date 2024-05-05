@@ -40,7 +40,7 @@ const Service = () => {
       id="service"
       className="flex flex-row bg-gradient-to-b from-white to-blue-400"
     >
-      <div className="p-14">
+      <div id="serviceContent" className="p-14 opacity-0">
         <div className="text-3xl">Various Services, Easy Solutions</div>
         <div className="grid grid-cols-2 gap-10 ">
           {serviceInfo.map((card, index) => (
