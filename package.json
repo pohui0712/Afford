@@ -9,8 +9,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.1.0",
+    "react-router": "^6.23.0",
+    "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@types/three": "^0.164.0",
+    "@types/webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz",
+    "webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,8 +42,9 @@
     ]
   },
   "devDependencies": {
-    "@types/webgi": "https://dist.pixotronics.com/webgi/runtime/bundle-types-0.9.7.tgz",
     "tailwindcss": "^3.4.3",
-    "webgi": "https://dist.pixotronics.com/webgi/runtime/bundle-0.9.7.tgz"
+    "@types/three": "^0.164.0",
+    "@types/webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz",
+    "webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz"
   }
 }

@@ -17,20 +17,32 @@ import {
   BloomPlugin,
   GammaCorrectionPlugin,
   mobileAndTabletCheck,
-} from "https://dist.pixotronics.com/webgi/runtime/bundle-0.9.2.mjs";
+} from "webgi";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { scrollAnimation } from "../lib/scrollAnimation";
 
-const WebgiViewer = () => {
+gsap.registerPlugin(ScrollTrigger);
+
+function WebgiViewer() {
   const canvasRef = useRef(null);
 
+  const memorizeScrollAnimation = useCallback((position, target, onUpdate) => {
+    if (position && target && onUpdate) {
+      scrollAnimation(position, target, onUpdate);
+    }
+  }, []);
+
   const setupViewer = useCallback(async () => {
-    // Initialize the viewer
     const viewer = new ViewerApp({
       canvas: canvasRef.current,
     });
 
     const manager = await viewer.addPlugin(AssetManagerPlugin);
+    const camera = viewer.scene.activeCamera;
+    const position = camera.position;
+    const target = camera.target;
+
     await viewer.addPlugin(GBufferPlugin);
     await viewer.addPlugin(new ProgressivePlugin(32));
     await viewer.addPlugin(new TonemapPlugin(true));
@@ -39,14 +51,28 @@ const WebgiViewer = () => {
     await viewer.addPlugin(SSAOPlugin);
     await viewer.addPlugin(BloomPlugin);
 
-    // Import and add a GLB file.
     viewer.renderer.refreshPipeline();
-    await manager.addFromPath("mustangY.glb");
+
+    await manager.addFromPath("scene.glb");
     viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
+    // viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
 
-    //viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+    window.scrollTo(0, 0);
 
-    window.scroll(0, 0);
+    let needUpdate = true;
+
+    const onUpdate = () => {
+      needUpdate = true;
+      viewer.setDirty();
+    };
+
+    viewer.addEventListener("preFrame", () => {
+      if (needUpdate) {
+        camera.positionUpdated(true);
+        needUpdate = false;
+      }
+    });
+    memorizeScrollAnimation(position, target, onUpdate);
   }, []);
 
   useEffect(() => {
@@ -58,6 +84,6 @@ const WebgiViewer = () => {
       <canvas className="webgi-canvas" ref={canvasRef}></canvas>
     </div>
   );
-};
+}
 
 export default WebgiViewer;
