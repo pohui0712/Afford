@@ -17,7 +17,7 @@ import {
   BloomPlugin,
   GammaCorrectionPlugin,
   mobileAndTabletCheck,
-} from "webgi";
+} from "https://dist.pixotronics.com/webgi/runtime/bundle-0.9.2.mjs";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { scrollAnimation } from "../lib/scrollAnimation";
