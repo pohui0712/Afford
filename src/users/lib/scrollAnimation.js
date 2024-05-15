@@ -28,6 +28,15 @@ export const scrollAnimation = (position, target, onUpdate) => {
         immediateRender: false,
       },
     })
+    .to("#serviceContent", {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#service",
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+      },
+    })
     .to(".webgi-canvas-container", {
       opacity: 0,
       scrollTrigger: {
