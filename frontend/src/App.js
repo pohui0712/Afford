@@ -1,21 +1,13 @@
 import "./App.css";
-import HomePage from "./users/screen/mainpage";
-import Navbar from "./users/components/navbar";
-import WebgiViewer from "./users/components/webgi";
-import Planning from "./users/screen/planningPage";
-import Service from "./users/screen/servicePage";
-import Loader from "./users/components/loader";
+import { Routes, Route } from "react-router-dom";
+import Home from "./users/pages/Home";
+import Login from "./users/components/login";
 
 function App() {
   return (
-    <div>
-      <Loader />
-      <Navbar />
-      <HomePage />
-      <WebgiViewer />
-      <Service />
-      <Planning />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 
