@@ -19,7 +19,7 @@ const RegisterForm = () => {
       align="center"
       className="mx-auto my-auto w-[28rem] "
     >
-      <Text size="6" weight="bold" mb="2">
+      <Text size="6" weight="bold" mb="2" className="text-white">
         Welcome to Join Ford's Family!
       </Text>
       <Text color="gray" size="3">
