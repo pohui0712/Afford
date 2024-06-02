@@ -4,6 +4,7 @@ import { Theme } from "@radix-ui/themes";
 import { Routes, Route } from "react-router-dom";
 import Home from "./users/pages/Home";
 import Login from "./users/pages/Login";
+import Register from "./users/pages/Register";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Theme>
   );
