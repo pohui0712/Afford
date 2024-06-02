@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { IoKeyOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
+import { Link as RouterLink } from "react-router-dom";
 
 const LoginForm = () => {
   return (
@@ -55,7 +56,9 @@ const LoginForm = () => {
         <Text color="gray" size="3">
           Don't have an account?{" "}
           <Link href="#" color="gray" underline="always">
-            Sign in here.
+            <RouterLink to="/register" className="underline;">
+              Sign Up here.
+            </RouterLink>
           </Link>
         </Text>
       </Flex>

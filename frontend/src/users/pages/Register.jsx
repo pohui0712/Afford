@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Grid } from "@radix-ui/themes";
 import { GitGlobe } from "../components/GitGlobe";
+import RegisterForm from "../components/RegisterForm";
 
 const Register = () => {
   useEffect(() => {
@@ -8,11 +9,14 @@ const Register = () => {
   }, []);
 
   return (
-    <div className="min-h-screen dark:bg-black dark:text-white">
-      <Grid columns="2" minHeight="100vh">
-        <GitGlobe />
-      </Grid>
-    </div>
+    <>
+      <div className="dark min-h-screen dark:bg-black dark:text-white">
+        <Grid columns="2" minHeight="100vh">
+          <RegisterForm />
+          <GitGlobe />
+        </Grid>
+      </div>
+    </>
   );
 };
 
