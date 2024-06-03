@@ -14,17 +14,15 @@ import { MdOutlinePhone } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 const RegisterForm = () => {
   return (
-    <Flex
-      direction="column"
-      align="center"
-      className="mx-auto my-auto w-[28rem] "
-    >
-      <Text size="6" weight="bold" mb="2" className="text-white">
-        Welcome to Join Ford's Family!
-      </Text>
-      <Text color="gray" size="3">
-        Please sign up below.
-      </Text>
+    <Flex direction="column" className="mx-auto my-auto w-[28rem] ">
+      <Flex direction="column" align="center">
+        <Text size="6" weight="bold" mb="2" className="text-white">
+          Welcome to Join Ford's Family!
+        </Text>
+        <Text color="gray" size="3">
+          Please sign up below.
+        </Text>
+      </Flex>
       <TextField.Root
         radius="full"
         size="3"
@@ -78,23 +76,25 @@ const RegisterForm = () => {
         </TextField.Slot>
       </TextField.Root>
 
-      <Button color="gray" variant="soft" size="3">
+      <Button color="gray" variant="soft" size="3" radius="large">
         Sign In
       </Button>
 
       <Separator orientation="borizontal" size="4" my="2" />
-      <Text color="gray" size="3">
-        Already have an account?{" "}
-        <Link href="#" color="gray" underline="always">
-          <RouterLink
-            to="/login"
-            onClick={() => document.documentElement.classList.remove("dark")}
-            className="underline;"
-          >
-            Sign In here.
-          </RouterLink>
-        </Link>
-      </Text>
+
+      <Flex direction="column" align="center">
+        <Text color="gray" size="3">
+          Already have an account?{" "}
+          <Link href="#" color="gray" underline="always">
+            <RouterLink
+              to="/login"
+              onClick={() => document.documentElement.classList.remove("dark")}
+            >
+              Sign In here.
+            </RouterLink>
+          </Link>
+        </Text>
+      </Flex>
     </Flex>
   );
 };
