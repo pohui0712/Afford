@@ -13,8 +13,8 @@ import { Link as RouterLink } from "react-router-dom";
 
 const LoginForm = () => {
   return (
-    <>
-      <Flex direction="column" className="mx-auto my-auto w-[28rem] ">
+    <form className="mx-auto my-auto w-[28rem] ">
+      <Flex direction="column">
         <Flex direction="column" align="center">
           <Text size="8" weight="bold" mb="2">
             Welcome to Afford
@@ -62,7 +62,7 @@ const LoginForm = () => {
           </Text>
         </Flex>
       </Flex>
-    </>
+    </form>
   );
 };
 
