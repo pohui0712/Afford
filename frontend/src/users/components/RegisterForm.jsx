@@ -16,6 +16,7 @@ import { MdOutlinePhone } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 const RegisterForm = () => {
@@ -30,15 +31,19 @@ const RegisterForm = () => {
       // create
       await axios.post("http://localhost:5000/users", data);
 
-      navigate(0);
+      // navigate(0);
+      toast.success("Email sent successfully!");
     } catch (error) {
       setSubmitting(false);
+      toast.error("Email sent unsuccessfully!");
       setError("An unexpected error occured.");
     }
+    setSubmitting(false);
   });
 
   return (
     <form onSubmit={onSubmit} className="mx-auto my-auto w-[28rem] ">
+      <Toaster />;
       <Flex direction="column">
         <Flex direction="column" align="center">
           <Text size="6" weight="bold" mb="2" className="text-white">
