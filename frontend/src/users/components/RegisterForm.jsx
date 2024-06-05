@@ -142,9 +142,9 @@ const RegisterForm = () => {
             <Link href="#" color="gray" underline="always">
               <RouterLink
                 to="/login"
-                onClick={() =>
-                  document.documentElement.classList.remove("dark")
-                }
+                // onClick={() =>
+                //   document.documentElement.classList.remove("dark")
+                // }
               >
                 Sign In here.
               </RouterLink>
