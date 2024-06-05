@@ -28,11 +28,11 @@ const RegisterForm = () => {
       await axios.post("http://localhost:5000/users", data);
 
       // navigate(0);
-      toast.success("Email sent successfully!");
+      toast.success("Register successfully");
       setError("");
     } catch (error) {
       setSubmitting(false);
-      toast.error("Email sent unsuccessfully!");
+      toast.error("Register unsuccessfully!");
       setError("An unexpected error occured.");
     }
     setSubmitting(false);
