@@ -20,7 +20,10 @@ const GridLayout = ({ children }) => {
       >
         <Grid columns="2" minHeight="100vh" className="relative">
           <Link to="/" className="absolute">
-            <IoHomeSharp className="text-xl m-2 dark:text-white" />
+            <IoHomeSharp
+              className="text-xl m-2 dark:text-white"
+              onClick={() => document.documentElement.classList.remove("dark")}
+            />
           </Link>
           {children}
         </Grid>
