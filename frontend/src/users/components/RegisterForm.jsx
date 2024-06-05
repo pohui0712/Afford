@@ -1,28 +1,24 @@
-import React, { useState } from "react";
 import {
   Button,
+  Callout,
   Flex,
   Link,
   Separator,
+  Spinner,
   Text,
   TextField,
-  Callout,
-  Spinner,
 } from "@radix-ui/themes";
-import { MdOutlineEmail } from "react-icons/md";
-import { IoPeople } from "react-icons/io5";
-import { IoKeyOutline } from "react-icons/io5";
-import { MdOutlinePhone } from "react-icons/md";
-import { Link as RouterLink } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { IoKeyOutline, IoPeople } from "react-icons/io5";
+import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
+import { Link as RouterLink } from "react-router-dom";
 
 const RegisterForm = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
-  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
@@ -33,6 +29,7 @@ const RegisterForm = () => {
 
       // navigate(0);
       toast.success("Email sent successfully!");
+      setError("");
     } catch (error) {
       setSubmitting(false);
       toast.error("Email sent unsuccessfully!");
