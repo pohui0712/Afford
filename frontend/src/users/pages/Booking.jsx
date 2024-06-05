@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BookingForm from "../components/BookingForm";
 
 const Booking = () => {
+  useEffect(() => {
+    document.documentElement.classList.remove("dark");
+  }, []);
+
   return (
     <div className="flex items-center justify-center min-h-[140vh]">
       {/* blury dots: pink  */}
