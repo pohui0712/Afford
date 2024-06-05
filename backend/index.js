@@ -3,6 +3,7 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
+import bookingRouter from "./routes/bookingRoute.js";
 
 const app = express();
 
@@ -29,3 +30,5 @@ app.get("/", (request, response) => {
 });
 
 app.use("/users", userRouter);
+
+app.use("/booking", bookingRouter);

@@ -140,14 +140,7 @@ const RegisterForm = () => {
           <Text color="gray" size="3">
             Already have an account?{" "}
             <Link href="#" color="gray" underline="always">
-              <RouterLink
-                to="/login"
-                onClick={() =>
-                  document.documentElement.classList.remove("dark")
-                }
-              >
-                Sign In here.
-              </RouterLink>
+              <RouterLink to="/login">Sign In here.</RouterLink>
             </Link>
           </Text>
         </Flex>
