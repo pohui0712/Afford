@@ -17,7 +17,7 @@ import {
   BloomPlugin,
   GammaCorrectionPlugin,
   mobileAndTabletCheck,
-} from "webgi";
+} from "https://dist.pixotronics.com/webgi/runtime/bundle-0.9.2.mjs";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { scrollAnimation } from "../lib/scrollAnimation";
@@ -53,7 +53,7 @@ function WebgiViewer() {
 
     viewer.renderer.refreshPipeline();
 
-    await manager.addFromPath("scene.glb");
+    await manager.addFromPath("mustang.glb");
     viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
     // viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
 

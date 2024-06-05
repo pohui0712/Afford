@@ -49,15 +49,15 @@ const infoCard = [
 
 const Planning = () => {
   return (
-    <section id="planning" className="bg-gradient-to-b from-blue-400 to-white">
+    <section id="planning" className="bg-gray-100">
       <div
         id="planningContent"
-        className="flex justify-center flex-col items-center opacity-0"
+        className="flex justify-center flex-col items-center h-screen "
       >
-        <div className="font-bold text-4xl mb-4">
+        <div className="font-bold text-4xl mb-4 mt-2">
           <div className="mt-12">Get car protection from time to time</div>
         </div>
-        <div className="text-xl mb-12">Book the service packages now</div>
+        <div className="text-xl mb-10">Book the service packages now</div>
         <div className="grid grid-cols-3 gap-4 grid-rows-auto m-10">
           {infoCard.map((card, index) => (
             <PlanningCard

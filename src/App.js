@@ -1,20 +1,23 @@
 import "./App.css";
-import HomePage from "./users/screen/mainpage";
-import Navbar from "./users/components/navbar";
+import HomePage from "./users/screen/mainpage.jsx";
+import Navbar from "./users/components/navbar.jsx";
 import WebgiViewer from "./users/components/webgi";
-import Planning from "./users/screen/planningPage";
-import Service from "./users/screen/servicePage";
+import Planning from "./users/screen/planningPage.jsx";
+import Service from "./users/screen/servicePage.jsx";
 import Loader from "./users/components/loader";
+import Contact from "./users/screen/contact.jsx";
+import Review from "./users/screen/review.jsx";
 
 function App() {
   return (
-    <div>
-      <Loader />
+    <div className="scroll-smooth">
       <Navbar />
       <HomePage />
-      <WebgiViewer />
       <Service />
       <Planning />
+      <Review />
+      <Contact />
+      {/* <WebgiViewer /> */}
     </div>
   );
 }
