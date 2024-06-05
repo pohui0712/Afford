@@ -53,7 +53,7 @@ function WebgiViewer() {
 
     viewer.renderer.refreshPipeline();
 
-    await manager.addFromPath("scene.glb");
+    await manager.addFromPath("mustang.glb");
     viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
     // viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
 

@@ -1,22 +1,24 @@
-import React from 'react'
+import "../../App.css";
 import HomePage from "../screen/mainpage";
 import Navbar from "../components/navbar";
 import WebgiViewer from "../components/webgi";
 import Planning from "../screen/planningPage";
 import Service from "../screen/servicePage";
-import Loader from "../components/loader";
+import Contact from "../screen/contact";
+import Review from "../screen/review";
 
-const Home = () => {
+function App() {
   return (
-    <div>
-        <Loader />
-        <Navbar />
-        <HomePage />
-        <WebgiViewer />
-        <Service />
-        <Planning />
+    <div className="scroll-smooth">
+      <Navbar />
+      <HomePage />
+      <Service />
+      <Planning />
+      <Review />
+      <Contact />
+      {/* <WebgiViewer /> */}
     </div>
-  )
+  );
 }
 
-export default Home
+export default App;
