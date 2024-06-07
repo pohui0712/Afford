@@ -131,18 +131,19 @@ app.use("/booking", bookingRouter);
 // }
 // createMechanic("mechanic@gmail.com", "mechanic123");
 
-// async function createInventory(carPart, quantity, price) {
+// async function createInventory() {
 //   const inventory = new Inventory({
-//     carPart,
-//     quantity,
-//     price,
+//     inventory: [
+//       { carPart: "Tyre", quantity: 10, price: "RM500" },
+//       { carPart: "Baterry", quantity: 1, price: "RM100" },
+//     ],
 //   });
 
 //   const result = await inventory.save();
 //   console.log(result);
 // }
 
-// createInventory("tyre", 10, "RM100");
+// createInventory();
 
 // async function createService(serviceName) {
 //   const service = new Service({
