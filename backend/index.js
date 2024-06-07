@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import bookingRouter from "./routes/bookingRoute.js";
+import { AppointmentService } from "./models/appService.js";
+import { Admin } from "./models/adminModel.js";
+import { Mechanic } from "./models/mechanicModel.js";
 
 const app = express();
 
@@ -59,44 +62,44 @@ app.use("/booking", bookingRouter);
 //   "6661a08e69ce8709ee0dd850"
 // );
 
-async function listAll() {
-  const data = await AppointmentService.find()
-    .populate({
-      path: "booking",
-      populate: [
-        { path: "user", model: "User" },
-        { path: "admin", model: "Admin" },
-      ],
-    })
-    .populate("service")
-    .populate("mechanic")
-    .populate("inventory");
-  console.log(data);
-}
+// async function listAll() {
+//   const data = await AppointmentService.find()
+//     .populate({
+//       path: "booking",
+//       populate: [
+//         { path: "user", model: "User" },
+//         { path: "admin", model: "Admin" },
+//       ],
+//     })
+//     .populate("service")
+//     .populate("mechanic")
+//     .populate("inventory");
+//   console.log(data);
+// }
 // listAll();
 
-app.get("/all", async (request, response) => {
-  try {
-    const all = await AppointmentService.find()
-      .populate({
-        path: "booking",
-        populate: [
-          { path: "user", model: "User" },
-          { path: "admin", model: "Admin" },
-        ],
-      })
-      .populate("service")
-      .populate("mechanic")
-      .populate("inventory");
-    return response.status(200).json({
-      count: all.length,
-      data: all,
-    });
-  } catch (error) {
-    console.error(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
+// app.get("/all", async (request, response) => {
+//   try {
+//     const all = await AppointmentService.find()
+//       .populate({
+//         path: "booking",
+//         populate: [
+//           { path: "user", model: "User" },
+//           { path: "admin", model: "Admin" },
+//         ],
+//       })
+//       .populate("service")
+//       .populate("mechanic")
+//       .populate("inventory");
+//     return response.status(200).json({
+//       count: all.length,
+//       data: all,
+//     });
+//   } catch (error) {
+//     console.error(error.message);
+//     response.status(500).send({ message: error.message });
+//   }
+// });
 
 // async function listUser() {
 //   const data = await User.find();

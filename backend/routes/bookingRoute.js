@@ -1,6 +1,7 @@
 import express from "express";
 import { Booking } from "../models/bookingModel.js";
-import mongoose from "mongoose";
+import { Service } from "../models/serviceModel.js";
+import { AppointmentService } from "../models/appService.js";
 
 const router = express.Router();
 
@@ -12,31 +13,54 @@ router.post("/", async (request, response) => {
       !request.body.carModel ||
       !request.body.time ||
       !request.body.date ||
-      !request.body.currentMileage ||
-      !request.body.services ||
+      !request.body.mileage ||
+      !request.body.serviceName ||
       !request.body.user
     ) {
       return response.status(400).send({
         message: "All the fields are required.",
       });
     }
-    const servicesArray = request.body.services.map((service) => ({
-      name: service,
-    }));
 
+    // Insert to Booking Table
     const newBooking = {
       carPlate: request.body.carPlate,
       carModel: request.body.carModel,
-      remark: request.body.body,
+      remark: request.body.remark,
       time: request.body.time,
       date: request.body.date,
-      currentMileage: request.body.currentMileage,
-      services: servicesArray,
+      status: request.body.status,
+      mileage: request.body.mileage,
       user: request.body.user,
     };
 
-    const data = await Booking.create(newBooking);
-    return response.status(201).send(data);
+    // Insert to Service Table
+    const newService = {
+      serviceName: request.body.serviceName,
+    };
+
+    const bookingData = await Booking.create(newBooking);
+    const serviceData = await Service.create(newService);
+
+    // Get the IDs of the newly created documents
+    const newBookingId = bookingData._id;
+    const newServiceId = serviceData._id;
+
+    // Insert to AppointService Table
+    const newAppointmentService = {
+      booking: newBookingId,
+      service: newServiceId,
+    };
+
+    const appServiceData = await AppointmentService.create(
+      newAppointmentService
+    );
+
+    return response.status(201).send({
+      bookingId: bookingData,
+      service: serviceData,
+      compositeData: appServiceData,
+    });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -46,7 +70,7 @@ router.post("/", async (request, response) => {
 // Route for GET ALL bookings
 router.get("/", async (request, response) => {
   try {
-    const bookings = await Booking.find().populate("user");
+    const bookings = await Booking.find().populate("user").populate("admin");
     return response.status(200).json({
       count: bookings.length,
       data: bookings,
@@ -62,7 +86,9 @@ router.get("/:id", async (request, response) => {
   const { id } = request.params;
 
   try {
-    const booking = await Booking.findById(id).populate("user");
+    const booking = await Booking.findById(id)
+      .populate("user")
+      .populate("admin");
     if (!booking) {
       return response.status(404).json({ message: "Booking not found" });
     }
@@ -81,19 +107,16 @@ router.patch("/:id", async (request, response) => {
   // const updateObject = request.body;
 
   try {
-    const servicesArray = request.body.services.map((service) => ({
-      name: service,
-    }));
-
     const updateObject = {
       carPlate: request.body.carPlate,
       carModel: request.body.carModel,
-      remark: request.body.body,
+      remark: request.body.remark,
       time: request.body.time,
       date: request.body.date,
-      currentMileage: request.body.currentMileage,
-      services: servicesArray,
+      status: request.body.status,
+      mileage: request.body.mileage,
       user: request.body.user,
+      admin: request.body.admin,
     };
 
     const updatedBooking = await Booking.findByIdAndUpdate(

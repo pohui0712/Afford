@@ -11,7 +11,11 @@ const bookingSchema = new mongoose.Schema(
     mileage: { type: Number, required: true },
     createdTime: { type: Date, default: Date.now },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    admin: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" },
+    admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
+      default: "6662dc604fe11de2e92f7253",
+    },
   },
   { versionKey: false }
 );
