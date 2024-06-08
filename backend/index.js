@@ -5,6 +5,7 @@ import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import bookingRouter from "./routes/bookingRoute.js";
 import inventoryRouter from "./routes/inventoryRoute.js";
+import serviceRouter from "./routes/serviceRoute.js";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
@@ -38,6 +39,8 @@ app.use("/users", userRouter);
 app.use("/booking", bookingRouter);
 
 app.use("/inventory", inventoryRouter);
+
+app.use("/service", serviceRouter);
 
 // async function listBooking() {
 //   const data = await Booking.find()
