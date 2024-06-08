@@ -8,7 +8,7 @@ const AdminLayout = ({ children }) => {
       <div className="col-span-1">
         <AdminNavBar />
       </div>
-      <div className="col-span-4 p-5">
+      <div className="col-span-4 p-5 bg-gray-100">
         <Container>{children}</Container>
       </div>
     </div>
