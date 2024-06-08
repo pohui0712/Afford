@@ -1,4 +1,4 @@
-export const PORT = 5000;
+export const PORT = 5500;
 
 // mongodb
 export const mongoDBURL =
