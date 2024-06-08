@@ -1,21 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { CgProfile } from "react-icons/cg";
 
-const Navbar = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+const Navbar = ({ isTopOfPage }) => {
   const links = [
     { href: "#", label: "Home" },
     { href: "#service", label: "Service" },
@@ -23,11 +9,13 @@ const Navbar = () => {
     { href: "#contact", label: "Contact" },
   ];
 
+  const navBarBackground = isTopOfPage
+    ? "bg-transparent"
+    : "bg-blue-600 drop-shadow";
+
   return (
     <nav
-      className={`w-full fixed top-0 px-6 z-20 transition-colors duration-300 ${
-        scrollY > 750 ? "bg-blue-600" : "bg-transparent"
-      }`}
+      className={`w-full fixed top-0 px-6 z-20 transition-colors duration-300 ${navBarBackground}`}
     >
       <ul className="flex justify-between items-center py-3 text-xl font-pt-sans text-white">
         <a href="#" className="font-pt-sans-bold italic">

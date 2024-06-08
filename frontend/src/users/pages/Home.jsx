@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import "../../App.css";
 import HomePage from "../screen/mainpage";
 import Navbar from "../components/navbar";
@@ -12,11 +13,33 @@ function App() {
   useEffect(() => {
     document.documentElement.classList.remove("dark");
   }, []);
+
+  const [isTopOfPage, setTopOfPage] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const secondSection = document.getElementById("service");
+      if (secondSection) {
+        const sectionTop = secondSection.getBoundingClientRect().top;
+        if (sectionTop <= 0) {
+          setTopOfPage(false);
+        } else {
+          setTopOfPage(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="scroll-smooth">
-      <Navbar />
+      <Navbar isTopOfPage={isTopOfPage} />
       <HomePage />
-      <Service />
+      <Service id="service" />
       <Planning />
       <Review />
       <Contact />
