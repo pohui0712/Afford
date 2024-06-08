@@ -8,6 +8,7 @@ import Register from "./users/pages/Register";
 import Booking from "./users/pages/Booking";
 import AdminDashboardPage from "./admin/pages/AdminDashboardPage";
 import AdminBookingPage from "./admin/pages/AdminBookingPage";
+import AdminUserManagePage from "./admin/pages/AdminUserManagePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="/admin/booking" element={<AdminBookingPage />} />
+        <Route path="/admin/userManagement" element={<AdminUserManagePage />} />
       </Routes>
     </Theme>
   );

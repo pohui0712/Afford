@@ -3,6 +3,7 @@ import React from "react";
 import { LuBarChartBig } from "react-icons/lu";
 import { SlCalender } from "react-icons/sl";
 import { Link, useLocation } from "react-router-dom";
+import { IoPeopleSharp } from "react-icons/io5";
 
 const AdminNavBar = () => {
   return (
@@ -27,6 +28,11 @@ const NavLinks = () => {
   const links = [
     { label: "Dashboard", href: "/admin/dashboard", icon: <LuBarChartBig /> },
     { label: "Appointment", href: "/admin/booking", icon: <SlCalender /> },
+    {
+      label: "User",
+      href: "/admin/userManagement",
+      icon: <IoPeopleSharp />,
+    },
   ];
 
   return (
