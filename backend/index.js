@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import bookingRouter from "./routes/bookingRoute.js";
+import inventoryRouter from "./routes/inventoryRoute.js";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
@@ -35,6 +36,8 @@ app.get("/", (request, response) => {
 app.use("/users", userRouter);
 
 app.use("/booking", bookingRouter);
+
+app.use("/inventory", inventoryRouter);
 
 // async function listBooking() {
 //   const data = await Booking.find()

@@ -57,7 +57,7 @@ router.post("/", async (request, response) => {
     );
 
     return response.status(201).send({
-      bookingId: bookingData,
+      booking: bookingData,
       service: serviceData,
       compositeData: appServiceData,
     });

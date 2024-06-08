@@ -51,7 +51,6 @@ router.get("/:id", async (request, response) => {
   try {
     const users = await User.findById(id);
     return response.status(200).json({
-      count: users.length,
       data: users,
     });
   } catch (error) {
