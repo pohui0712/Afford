@@ -4,13 +4,18 @@ const bookingSchema = new mongoose.Schema(
   {
     carPlate: { type: String, required: true },
     carModel: { type: String, required: true },
-    remarks: { type: String },
+    remark: { type: String, default: "" },
     time: { type: String, required: true },
     date: { type: String, required: true },
     status: { type: String, default: "pending" },
-    dealer: { type: String, required: true },
-    services: [{ type: String, required: true }],
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true },
+    mileage: { type: Number, required: true },
+    createdTime: { type: Date, default: Date.now },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
+      default: "6662dc604fe11de2e92f7253",
+    },
   },
   { versionKey: false }
 );
