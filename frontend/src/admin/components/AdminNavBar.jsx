@@ -41,7 +41,7 @@ const NavLinks = () => {
         <li
           key={link.href}
           className={`p-2 rounded-md mb-2 transition-colors duration-200 ${
-            pathname === link.href
+            pathname.startsWith(link.href)
               ? "bg-neutral-800 font-bold text-white"
               : "hover:bg-gray-200"
           }`}
