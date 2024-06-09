@@ -10,8 +10,7 @@ router.get("/", async (request, response) => {
   try {
     const services = await Service.find();
     return response.status(200).json({
-      count: services.length,
-      data: services,
+      services,
     });
   } catch (error) {
     console.error(error.message);
@@ -30,7 +29,7 @@ router.get("/:id", async (request, response) => {
       return response.status(404).json({ message: "service not found" });
     }
     return response.status(200).json({
-      data: service,
+      service,
     });
   } catch (error) {
     console.error(error.message);

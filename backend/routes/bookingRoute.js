@@ -72,8 +72,7 @@ router.get("/", async (request, response) => {
   try {
     const bookings = await Booking.find().populate("user").populate("admin");
     return response.status(200).json({
-      count: bookings.length,
-      data: bookings,
+      bookings,
     });
   } catch (error) {
     console.error(error.message);
@@ -93,7 +92,7 @@ router.get("/:id", async (request, response) => {
       return response.status(404).json({ message: "Booking not found" });
     }
     return response.status(200).json({
-      data: booking,
+      booking,
     });
   } catch (error) {
     console.error(error.message);
