@@ -9,6 +9,7 @@ import Booking from "./users/pages/Booking";
 import AdminDashboardPage from "./admin/pages/AdminDashboardPage";
 import AdminBookingPage from "./admin/pages/AdminBookingPage";
 import AdminUserManagePage from "./admin/pages/AdminUserManagePage";
+import AdminSpecifyUserPage from "./admin/pages/AdminSpecifyUserPage";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="/admin/booking" element={<AdminBookingPage />} />
         <Route path="/admin/userManagement" element={<AdminUserManagePage />} />
+        <Route
+          path="/admin/userManagement/:id"
+          element={<AdminSpecifyUserPage />}
+        />
       </Routes>
     </Theme>
   );
