@@ -18,10 +18,10 @@ router.post("/", async (request, response) => {
     //   });
     // }
     const { error } = validateUser(request.body);
-    if (error) return response.status(500).send(error.details[0].message);
+    if (error) return response.status(400).send(error.details[0].message);
 
     let user = await User.findOne({ email: request.body.email });
-    if (user) return response.status(500).send("User already registered");
+    if (user) return response.status(400).send("User already registered");
 
     const newUser = {
       name: request.body.name,

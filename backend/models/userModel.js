@@ -5,7 +5,7 @@ import config from "config";
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, minlength: 5, maxlength: 50, required: true },
+    name: { type: String, maxlength: 50, required: true },
     email: {
       type: String,
       minlength: 5,
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
 // validate new user
 export function validateUser(user) {
   const schema = Joi.object({
-    name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().max(50).required(),
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(255).required(),
     contact: Joi.string().max(11).required(),
