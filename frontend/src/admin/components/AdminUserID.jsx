@@ -134,7 +134,8 @@ const AdminUserID = () => {
           <Flex gapX="3">
             <Button color="violet" disabled={isSubmitting}>
               <FaEdit />
-              {isSubmitting ? <Spinner /> : "Update"}
+              Update
+              {isSubmitting && <Spinner />}
             </Button>
             <DeleteButton />
           </Flex>
