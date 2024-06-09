@@ -19,6 +19,7 @@ if (!config.get("jwtPrivateKey")) {
   process.exit(1);
 }
 
+console.log(`jwtPrivateKey: ${config.get("jwtPrivateKey")}`);
 const app = express();
 
 // Middleware for pasesing JSON request body
