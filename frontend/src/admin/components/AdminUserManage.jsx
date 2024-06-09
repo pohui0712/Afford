@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
 import { Heading, Table, Link } from "@radix-ui/themes";
-import { Link as RouterLink } from "react-router-dom";
 
 const AdminUserManage = () => {
   const [users, setUsers] = useState([]);
