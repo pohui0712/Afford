@@ -31,7 +31,7 @@ const AdminUserManage = () => {
 
   return (
     <>
-      <Heading my="5">User Management</Heading>
+      <Heading mb="3">User Management</Heading>
       {error && (
         <Callout.Root color="red" className="mb-5">
           <Callout.Text>{error}</Callout.Text>

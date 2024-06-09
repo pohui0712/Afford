@@ -1,27 +1,24 @@
 import {
-  Button,
+  Blockquote,
+  Box,
   Callout,
+  Card,
+  DataList,
+  Em,
   Flex,
   Heading,
-  Spinner,
-  TextField,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
-import { FaEdit } from "react-icons/fa";
-import { IoKeyOutline, IoPeople } from "react-icons/io5";
-import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
 import { useParams } from "react-router";
+import BackButton from "./BackButton";
 import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 const AdminUserID = () => {
   const { id } = useParams();
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
   const [error, setError] = useState();
-  const [isSubmitting, setSubmitting] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,7 +26,6 @@ const AdminUserID = () => {
       .get(`http://localhost:5500/users/${id}`, { signal: controller.signal })
       .then((response) => {
         setUser(response.data.user);
-        reset(response.data.user); // Reset the form values with fetched data
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -37,24 +33,7 @@ const AdminUserID = () => {
       });
 
     return () => controller.abort();
-  }, [id, reset]);
-
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      setSubmitting(true);
-      //update
-      await axios.patch(`http://localhost:5500/users/${id}`, data);
-
-      toast.success("Update successfully");
-      setError("");
-      //   navigate("/admin/userManagement");
-    } catch (error) {
-      setSubmitting(false);
-      toast.error("Update unsuccessfully!");
-      setError("An unexpected error occured.");
-    }
-    setSubmitting(false);
-  });
+  }, []);
 
   if (!user) {
     return (
@@ -63,83 +42,60 @@ const AdminUserID = () => {
       </Callout.Root>
     );
   }
+
   return (
     <>
-      <Toaster />
-      <Heading my="5">User: {user._id}</Heading>
-      <form onSubmit={onSubmit}>
-        <Flex direction="column" gapY="3">
-          {error && (
-            <Callout.Root color="red" className="mb-5">
-              <Callout.Text>{error}</Callout.Text>
-            </Callout.Root>
-          )}
-          <TextField.Root
-            placeholder="Name(IC)"
-            defaultValue={user.name}
-            radius="full"
-            size="3"
-            type="text"
-            required
-            className="w-full"
-            {...register("name")}
-          >
-            <TextField.Slot>
-              <IoPeople />
-            </TextField.Slot>
-          </TextField.Root>
-          <TextField.Root
-            placeholder="Email"
-            defaultValue={user.email}
-            radius="full"
-            size="3"
-            type="text"
-            required
-            className="w-full"
-            {...register("email")}
-          >
-            <TextField.Slot>
-              <MdOutlineEmail />
-            </TextField.Slot>
-          </TextField.Root>
-          <TextField.Root
-            placeholder="Contact"
-            defaultValue={user.contact}
-            radius="full"
-            size="3"
-            type="text"
-            required
-            className="w-full"
-            {...register("contact")}
-          >
-            <TextField.Slot>
-              <MdOutlinePhone />
-            </TextField.Slot>
-          </TextField.Root>
-          <TextField.Root
-            placeholder="Password"
-            defaultValue={user.password}
-            radius="full"
-            size="3"
-            type="text"
-            required
-            className="w-full"
-            {...register("password")}
-          >
-            <TextField.Slot>
-              <IoKeyOutline />
-            </TextField.Slot>
-          </TextField.Root>
-          <Flex gapX="3">
-            <Button color="violet" disabled={isSubmitting}>
-              <FaEdit />
-              Update
-              {isSubmitting && <Spinner />}
-            </Button>
+      {error && (
+        <Callout.Root color="red" className="mb-5">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
+
+      <Heading mb="3">
+        <Em>{user.name}</Em>'s Personal Information
+      </Heading>
+
+      <Flex gapX="8">
+        <Box>
+          <Card>
+            <DataList.Root>
+              <DataList.Item>
+                <DataList.Label>ID</DataList.Label>
+                <DataList.Value>{user._id}</DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Name</DataList.Label>
+                <DataList.Value>{user.name}</DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Email</DataList.Label>
+                <DataList.Value>{user.email}</DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Password</DataList.Label>
+                <DataList.Value>{user.password}</DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Contact</DataList.Label>
+                <DataList.Value>{user.contact}</DataList.Value>
+              </DataList.Item>
+            </DataList.Root>
+          </Card>
+        </Box>
+        <Box className="w-[10rem]">
+          <Flex direction="column" gapY="3">
+            <EditButton
+              href={`/admin/userManagement/edit/${user._id}`}
+              target="User"
+            />
             <DeleteButton route="users" />
+            <BackButton href={`/admin/userManagement`} />
           </Flex>
-        </Flex>
-      </form>
+        </Box>
+      </Flex>
+      <Blockquote my="4" size="4" weight="light">
+        Appointment History
+      </Blockquote>
     </>
   );
 };
