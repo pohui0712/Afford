@@ -1,5 +1,6 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ isTopOfPage }) => {
   const links = [
@@ -32,9 +33,9 @@ const Navbar = ({ isTopOfPage }) => {
             </a>
           ))}
         </div>
-        <a href="#">
+        <Link to="/login">
           <CgProfile className="w-8 h-8 hover:text-green-400" />
-        </a>
+        </Link>
       </ul>
     </nav>
   );

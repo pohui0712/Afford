@@ -6,14 +6,38 @@ import {
   Text,
   TextField,
 } from "@radix-ui/themes";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoKeyOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5500/auth", {
+        email,
+        password,
+      });
+      console.log(email);
+      console.log(password);
+      localStorage.setItem("token", response.data);
+      navigate("/");
+      console.log("Login successfully");
+    } catch (error) {
+      setError(error.response.data);
+    }
+  };
+
   return (
-    <form className="mx-auto my-auto w-[28rem] ">
+    <form className="mx-auto my-auto w-[28rem]" onSubmit={handleSubmit}>
       <Flex direction="column">
         <Flex direction="column" align="center">
           <Text size="8" weight="bold" mb="2">
@@ -30,6 +54,8 @@ const LoginForm = () => {
           placeholder="Email"
           my="3"
           className="w-full"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         >
           <TextField.Slot>
             <MdOutlineEmail color="black" height="16" width="auto" />
@@ -41,6 +67,8 @@ const LoginForm = () => {
           placeholder="Password"
           mb="3"
           className="w-full"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         >
           <TextField.Slot>
             <IoKeyOutline color="black" height="16" width="16" />

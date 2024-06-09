@@ -1,5 +1,6 @@
 import React from "react";
 import car from "../assests/ford4.webp";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -20,9 +21,12 @@ const HomePage = () => {
           excellence, we take pride in keeping your car running smoothly and
           reliably on the road.
         </p>
-        <button className="bg-blue-400 hover:bg-red-300 px-4 py-2 text-white font-pt-sans-bold italic text-md mt-10 shadow-lg">
+        <Link
+          className="bg-blue-400 hover:bg-red-300 px-4 py-2 text-white font-pt-sans-bold italic text-md mt-10 shadow-lg"
+          to="/booking"
+        >
           Schedule An Appointment
-        </button>
+        </Link>
       </div>
     </section>
   );

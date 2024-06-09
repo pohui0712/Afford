@@ -25,7 +25,7 @@ const RegisterForm = () => {
     try {
       setSubmitting(true);
       // create
-      await axios.post("http://localhost:5000/users", data);
+      await axios.post("http://localhost:5500/users", data);
 
       // navigate(0);
       toast.success("Register successfully");

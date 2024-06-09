@@ -1,29 +1,41 @@
 import express from "express";
-import { User } from "../models/userModel.js";
+import { User, validateUser } from "../models/userModel.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
 // Route for POST a new user
 router.post("/", async (request, response) => {
   try {
-    if (
-      !request.body.name ||
-      !request.body.email ||
-      !request.body.password ||
-      !request.body.contact
-    ) {
-      return response.status(400).send({
-        message: "All the fileds is required.",
-      });
-    }
+    // if (
+    //   !request.body.name ||
+    //   !request.body.email ||
+    //   !request.body.password ||
+    //   !request.body.contact
+    // ) {
+    //   return response.status(400).send({
+    //     message: "All the fileds is required.",
+    //   });
+    // }
+    const { error } = validateUser(request.body);
+    if (error) return response.status(500).send(error.details[0].message);
+
+    let user = await User.findOne({ email: request.body.email });
+    if (user) return response.status(500).send("User already registered");
+
     const newUser = {
       name: request.body.name,
       email: request.body.email,
       password: request.body.password,
       contact: request.body.contact,
     };
+
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
+
     const data = await User.create(newUser);
-    return response.status(201).send(data);
+    const token = data.generateAuthToken();
+    return response.header("x-auth-token", token).send(data);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });

@@ -6,10 +6,18 @@ import userRouter from "./routes/userRoute.js";
 import bookingRouter from "./routes/bookingRoute.js";
 import inventoryRouter from "./routes/inventoryRoute.js";
 import serviceRouter from "./routes/serviceRoute.js";
+import authRouter from "./routes/authRoute.js";
 import appServiceRouter from "./routes/appServiceRoute.js";
+import config from "config";
+
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
+
+if (!config.get("jwtPrivateKey")) {
+  console.error("FATAL ERROR: jwtPrivateKey is not defined");
+  process.exit(1);
+}
 
 const app = express();
 
@@ -44,6 +52,8 @@ app.use("/inventory", inventoryRouter);
 app.use("/service", serviceRouter);
 
 app.use("/appointmentService", appServiceRouter);
+
+app.use("/auth", authRouter);
 
 // async function listBooking() {
 //   const data = await Booking.find()

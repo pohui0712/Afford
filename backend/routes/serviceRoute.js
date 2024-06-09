@@ -3,7 +3,7 @@ import { Service } from "../models/serviceModel.js";
 
 const router = express.Router();
 
-// POST is not requiere for this route, it is done in bookingRoute
+// POST is not require for this route, it is done in bookingRoute
 
 // Route for GET ALL services
 router.get("/", async (request, response) => {

@@ -54,9 +54,9 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.3",
     "@types/three": "^0.164.0",
     "@types/webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz",
+    "tailwindcss": "^3.4.3",
     "webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz"
   }
 }
