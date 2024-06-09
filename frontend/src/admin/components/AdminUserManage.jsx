@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
-import { Heading, Table, Link } from "@radix-ui/themes";
+import { Heading, Table, Link, Callout } from "@radix-ui/themes";
 
 const AdminUserManage = () => {
   const [users, setUsers] = useState([]);
@@ -21,9 +21,22 @@ const AdminUserManage = () => {
     return () => controller.abort();
   }, []);
 
+  if (!users) {
+    return (
+      <Callout.Root color="red" className="mb-5">
+        <Callout.Text>There are no users registered.</Callout.Text>
+      </Callout.Root>
+    );
+  }
+
   return (
     <>
       <Heading my="5">User Management</Heading>
+      {error && (
+        <Callout.Root color="red" className="mb-5">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
