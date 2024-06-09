@@ -1,20 +1,20 @@
 import {
+  Button,
+  Callout,
   Flex,
   Heading,
-  TextField,
-  Button,
   Spinner,
-  Callout,
+  TextField,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
-import { IoKeyOutline, IoPeople } from "react-icons/io5";
-import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
-import { useParams, useNavigate } from "react-router";
-import { FaEdit } from "react-icons/fa";
-import DeleteButton from "./DeleteButton";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { FaEdit } from "react-icons/fa";
+import { IoKeyOutline, IoPeople } from "react-icons/io5";
+import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
+import { useParams } from "react-router";
+import DeleteButton from "./DeleteButton";
 
 const AdminUserID = () => {
   const { id } = useParams();
@@ -137,7 +137,7 @@ const AdminUserID = () => {
               Update
               {isSubmitting && <Spinner />}
             </Button>
-            <DeleteButton />
+            <DeleteButton route="users" />
           </Flex>
         </Flex>
       </form>
