@@ -48,8 +48,7 @@ router.get("/", async (request, response) => {
     const inventories = await Inventory.find();
 
     return response.status(200).json({
-      count: inventories.length,
-      data: inventories,
+      inventories,
     });
   } catch (error) {
     console.error(error.message);
@@ -67,7 +66,7 @@ router.get("/:id", async (request, response) => {
       return response.status(404).json({ message: "Iventory not found" });
     }
     return response.status(200).json({
-      data: inventory,
+      inventory,
     });
   } catch (error) {
     console.error(error.message);

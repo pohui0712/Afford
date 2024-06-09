@@ -9,13 +9,18 @@ const router = express.Router();
 router.get("/", async (request, response) => {
   try {
     const appService = await AppointmentService.find()
-      .populate("booking")
+      .populate({
+        path: "booking",
+        populate: [
+          { path: "user", model: "User" },
+          { path: "admin", model: "Admin" },
+        ],
+      })
       .populate("service")
       .populate("mechanic")
       .populate("inventory");
     return response.status(200).json({
-      count: appService.length,
-      data: appService,
+      appService,
     });
   } catch (error) {
     console.error(error.message);
@@ -37,7 +42,7 @@ router.get("/:id", async (request, response) => {
       return response.status(404).json({ message: "Composite data not found" });
     }
     return response.status(200).json({
-      data: appService,
+      appService,
     });
   } catch (error) {
     console.error(error.message);

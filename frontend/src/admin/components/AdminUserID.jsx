@@ -28,8 +28,8 @@ const AdminUserID = () => {
     axios
       .get(`http://localhost:5500/users/${id}`, { signal: controller.signal })
       .then((response) => {
-        setUser(response.data.data);
-        reset(response.data.data); // Reset the form values with fetched data
+        setUser(response.data.user);
+        reset(response.data.user); // Reset the form values with fetched data
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -42,7 +42,6 @@ const AdminUserID = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true);
-      console.log(data);
       //update
       await axios.patch(`http://localhost:5500/users/${id}`, data);
 

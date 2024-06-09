@@ -35,8 +35,7 @@ router.get("/", async (request, response) => {
   try {
     const users = await User.find();
     return response.status(200).json({
-      count: users.length,
-      data: users,
+      users,
     });
   } catch (error) {
     console.error(error.message);
@@ -49,9 +48,9 @@ router.get("/:id", async (request, response) => {
   const { id } = request.params;
 
   try {
-    const users = await User.findById(id);
+    const user = await User.findById(id);
     return response.status(200).json({
-      data: users,
+      user,
     });
   } catch (error) {
     console.error(error.message);

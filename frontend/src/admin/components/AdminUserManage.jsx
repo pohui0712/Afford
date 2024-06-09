@@ -11,7 +11,7 @@ const AdminUserManage = () => {
     axios
       .get("http://localhost:5500/users", { signal: controller.signal })
       .then((response) => {
-        setUsers(response.data.data);
+        setUsers(response.data.users);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
