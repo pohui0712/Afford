@@ -14,12 +14,13 @@ import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
 
+const app = express();
+
 if (!config.get("jwtPrivateKey")) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
 }
 
-console.log(`jwtPrivateKey: ${config.get("jwtPrivateKey")}`);
 const app = express();
 
 // Middleware for pasesing JSON request body

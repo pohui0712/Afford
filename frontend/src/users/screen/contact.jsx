@@ -4,10 +4,7 @@ import { RiInstagramFill } from "react-icons/ri";
 
 const Contact = () => {
   return (
-    <div
-      id="contact"
-      className="h-screen flex flex-col p-10 bg-black text-white"
-    >
+    <div id="contact" className="flex flex-col p-10 bg-black text-white">
       <div className="flex justify-center items-center mt-5">
         <div className="text-3xl font-bold">VISIT OUR SERVICES</div>
       </div>
@@ -56,7 +53,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="flex items-center w-3/6 grayscale invert">
+        <div className="flex items-center w-3/6 grayscale invert mt-5">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63746.40485830259!2d101.5786289486328!3d3.054415100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4b18b9caab63%3A0xcbb0269e14a4d182!2sFord%20Puchong%2C%20Star%20East%20Enterprise%2C%20Showroom%2C%20Service%20Centre%2C%20Spare%20Parts!5e0!3m2!1sen!2smy!4v1717252219615!5m2!1sen!2smy"
             width="100%"
