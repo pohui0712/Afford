@@ -21,7 +21,8 @@ if (!config.get("jwtPrivateKey")) {
   process.exit(1);
 }
 
-const app = express();
+// const app = express();
+console.log(`${config.get("jwtPrivateKey")}`);
 
 // Middleware for pasesing JSON request body
 app.use(express.json());
