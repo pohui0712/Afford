@@ -13,12 +13,14 @@ import { MdOutlineEmail } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "./authProvider";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,11 +29,9 @@ const LoginForm = () => {
         email,
         password,
       });
-      console.log(email);
-      console.log(password);
-      localStorage.setItem("token", response.data);
+      login(response.data);
+      console.log("Succesffuly login");
       navigate("/");
-      console.log("Login successfully");
     } catch (error) {
       setError(error.response.data);
       toast.error("Invalid Email or Password!");
