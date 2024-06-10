@@ -1,6 +1,9 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { useAuth } from "./authProvider";
+
+// logout function need to adjust to profile
 
 const Navbar = ({ isTopOfPage }) => {
   const links = [
@@ -13,6 +16,8 @@ const Navbar = ({ isTopOfPage }) => {
   const navBarBackground = isTopOfPage
     ? "bg-transparent"
     : "bg-blue-600 drop-shadow";
+
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <nav
@@ -33,9 +38,20 @@ const Navbar = ({ isTopOfPage }) => {
             </a>
           ))}
         </div>
-        <Link to="/login">
-          <CgProfile className="w-8 h-8 hover:text-green-400" />
-        </Link>
+        {isAuthenticated ? (
+          <>
+            <Link to="/profile">
+              <CgProfile className="w-8 h-8 hover:text-green-400" />
+            </Link>
+            <button onClick={logout} className="hover:text-green-400">
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link to="/login">
+            <CgProfile className="w-8 h-8 hover:text-green-400" />
+          </Link>
+        )}
       </ul>
     </nav>
   );

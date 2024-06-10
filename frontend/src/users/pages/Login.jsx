@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <GridLayout>
-      <p>Design??</p>
+      <p>Design</p>
       <LoginForm />
     </GridLayout>
   );
