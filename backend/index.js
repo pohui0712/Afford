@@ -20,6 +20,9 @@ if (!config.get("jwtPrivateKey")) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
 }
+
+const app = express();
+
 // Middleware for pasesing JSON request body
 app.use(express.json());
 

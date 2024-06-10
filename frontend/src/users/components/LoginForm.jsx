@@ -12,6 +12,7 @@ import { IoKeyOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -33,11 +34,13 @@ const LoginForm = () => {
       console.log("Login successfully");
     } catch (error) {
       setError(error.response.data);
+      toast.error("Invalid Email or Password!");
     }
   };
 
   return (
     <form className="mx-auto my-auto w-[28rem]" onSubmit={handleSubmit}>
+      <Toaster />;
       <Flex direction="column">
         <Flex direction="column" align="center">
           <Text size="8" weight="bold" mb="2">
@@ -54,6 +57,7 @@ const LoginForm = () => {
           placeholder="Email"
           my="3"
           className="w-full"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         >
@@ -67,6 +71,7 @@ const LoginForm = () => {
           placeholder="Password"
           mb="3"
           className="w-full"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         >

@@ -10,6 +10,7 @@ import AdminDashboardPage from "./admin/pages/AdminDashboardPage";
 import AdminBookingPage from "./admin/pages/AdminBookingPage";
 import AdminUserManagePage from "./admin/pages/AdminUserManagePage";
 import AdminSpecifyUserPage from "./admin/pages/AdminSpecifyUserPage";
+import AdminUserEdit from "./admin/pages/AdminUserEdit";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
         <Route
           path="/admin/userManagement/:id"
           element={<AdminSpecifyUserPage />}
+        />
+        <Route
+          path="/admin/userManagement/edit/:id"
+          element={<AdminUserEdit />}
         />
       </Routes>
     </Theme>
