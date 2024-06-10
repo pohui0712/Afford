@@ -6,6 +6,7 @@ import {
   DataList,
   Em,
   Flex,
+  Grid,
   Heading,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
@@ -17,7 +18,7 @@ import EditButton from "./EditButton";
 
 const AdminUserID = () => {
   const { id } = useParams();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState([]);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -55,8 +56,9 @@ const AdminUserID = () => {
         <Em>{user.name}</Em>'s Personal Information
       </Heading>
 
-      <Flex gapX="8">
-        <Box>
+      {/* <Flex gapX="8"> */}
+      <div className="md:grid grid-cols-4 gap-3">
+        <Box className="col-span-3">
           <Card>
             <DataList.Root>
               <DataList.Item>
@@ -92,7 +94,8 @@ const AdminUserID = () => {
             <BackButton href={`/admin/userManagement`} />
           </Flex>
         </Box>
-      </Flex>
+      </div>
+      {/* </Flex> */}
       <Blockquote my="4" size="4" weight="light">
         Appointment History
       </Blockquote>
