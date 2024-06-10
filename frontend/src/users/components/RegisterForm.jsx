@@ -32,7 +32,7 @@ const RegisterForm = () => {
       setError("");
     } catch (error) {
       setSubmitting(false);
-      toast.error("Register unsuccessfully!");
+      toast.error("Email already registered!");
       setError("An unexpected error occured.");
     }
     setSubmitting(false);

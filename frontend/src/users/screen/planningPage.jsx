@@ -52,7 +52,7 @@ const Planning = () => {
     <section id="planning" className="bg-gray-100">
       <div
         id="planningContent"
-        className="flex justify-center flex-col items-center h-screen "
+        className="flex justify-center flex-col items-center"
       >
         <div className="font-bold text-4xl mb-4 mt-2">
           <div className="mt-12">Get car protection from time to time</div>

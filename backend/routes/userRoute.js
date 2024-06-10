@@ -7,21 +7,12 @@ const router = express.Router();
 // Route for POST a new user
 router.post("/", async (request, response) => {
   try {
-    // if (
-    //   !request.body.name ||
-    //   !request.body.email ||
-    //   !request.body.password ||
-    //   !request.body.contact
-    // ) {
-    //   return response.status(400).send({
-    //     message: "All the fileds is required.",
-    //   });
-    // }
     const { error } = validateUser(request.body);
     if (error) return response.status(400).send(error.details[0].message);
 
     let user = await User.findOne({ email: request.body.email });
-    if (user) return response.status(400).send("User already registered");
+    if (user)
+      return response.status(400).send({ message: "User already registered" });
 
     const newUser = {
       name: request.body.name,
