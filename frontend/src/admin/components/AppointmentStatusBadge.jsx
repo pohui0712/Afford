@@ -4,7 +4,7 @@ import React from "react";
 // Define the status map with updated labels and colors
 const statusMap = {
   pending: { label: "Pending", color: "indigo" },
-  in_progess: { label: "In Progress", color: "violet" },
+  in_progress: { label: "In Progress", color: "violet" },
   rejected: { label: "Rejected", color: "red" },
   approved: { label: "Approved", color: "green" },
 };

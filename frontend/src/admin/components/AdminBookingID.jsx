@@ -1,24 +1,23 @@
 import {
-  Blockquote,
   Box,
   Callout,
   Card,
+  Code,
   DataList,
   Flex,
-  Text,
   Heading,
   HoverCard,
   Link,
   Strong,
-  Code,
+  Text,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
-import EditButton from "./EditButton";
-import DeleteButton from "./DeleteButton";
 import BackButton from "./BackButton";
+import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 const AdminBookingID = () => {
   const { id } = useParams();
@@ -141,7 +140,10 @@ const AdminBookingID = () => {
         </Card>
       </Box>
       <Flex gapX="3" mt="3">
-        <EditButton />
+        <EditButton
+          href={`/admin/booking/edit/${appointment._id}`}
+          target="Appointment"
+        />
         <DeleteButton />
         <BackButton href={`/admin/booking`} />
       </Flex>
