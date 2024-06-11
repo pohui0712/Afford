@@ -65,7 +65,15 @@ const AdminBooking = () => {
         <Table.Body>
           {appointments.map((appointment) => (
             <Table.Row key={appointment._id}>
-              <Table.Cell>{appointment.booking.user.name}</Table.Cell>
+              <Table.Cell>
+                <Link
+                  href={`/admin/booking/${appointment._id}`}
+                  underline="always"
+                  highContrast
+                >
+                  {appointment.booking.user.name}
+                </Link>
+              </Table.Cell>
               <Table.Cell>
                 <AppointmentStatusBadge status={appointment.booking.status} />
               </Table.Cell>
