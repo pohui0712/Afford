@@ -3,8 +3,6 @@ import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { useAuth } from "./authProvider";
 
-// logout function need to adjust to profile
-
 const Navbar = ({ isTopOfPage }) => {
   const links = [
     { href: "#", label: "Home" },
@@ -17,14 +15,14 @@ const Navbar = ({ isTopOfPage }) => {
     ? "bg-transparent"
     : "bg-blue-600 drop-shadow";
 
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
     <nav
       className={`w-full fixed top-0 px-6 z-20 transition-colors duration-300 ${navBarBackground}`}
     >
       <ul className="flex justify-between items-center py-3 text-xl font-pt-sans text-white">
-        <a href="#" className="font-pt-sans-bold italic">
+        <a href="#" className="font-bold italic ">
           AFFORD
         </a>
         <div className="flex space-x-20">
@@ -43,9 +41,6 @@ const Navbar = ({ isTopOfPage }) => {
             <Link to="/profile">
               <CgProfile className="w-8 h-8 hover:text-green-400" />
             </Link>
-            <button onClick={logout} className="hover:text-green-400">
-              Logout
-            </button>
           </>
         ) : (
           <Link to="/login">

@@ -1,39 +1,7 @@
 import React from "react";
 import ServiceCard from "../components/serviceCard";
-import aircond from "../assests/aircond.png";
-import battery from "../assests/battery.jpg";
-import brake from "../assests/brake.jpg";
-import diagnosis from "../assests/diagnosis.png";
-import engine from "../assests/engine.jpg";
-import suspension from "../assests/suspension.jpg";
 import worker from "../assests/worker.jpeg";
-
-const serviceInfo = [
-  {
-    image: battery,
-    description: "Battery Replacement",
-  },
-  {
-    image: aircond,
-    description: "Aircond Services",
-  },
-  {
-    image: brake,
-    description: "Brake Replacement",
-  },
-  {
-    image: suspension,
-    description: "Suspension Repair",
-  },
-  {
-    image: diagnosis,
-    description: "Diagnosis",
-  },
-  {
-    image: engine,
-    description: "Engine Oil Change",
-  },
-];
+import serviceInfo from "../data/serviceInfo";
 
 const Service = () => {
   return (
