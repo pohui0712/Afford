@@ -1,13 +1,11 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../App.css";
-import HomePage from "../screen/mainpage";
 import Navbar from "../components/navbar";
-import WebgiViewer from "../components/webgi";
-import Planning from "../screen/planningPage";
-import Service from "../screen/servicePage";
 import Contact from "../screen/contact";
+import HomePage from "../screen/mainpage";
+import Planning from "../screen/planningPage";
 import Review from "../screen/review";
+import Service from "../screen/servicePage";
 
 function App() {
   useEffect(() => {
@@ -43,7 +41,6 @@ function App() {
       <Planning />
       <Review />
       <Contact />
-      {/* <WebgiViewer /> */}
     </div>
   );
 }
