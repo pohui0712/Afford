@@ -9,7 +9,7 @@ import logo from "../assests/mustangLogo.png";
 import { useAuth } from "../components/authProvider";
 
 const SidebarItem = ({ icon: Icon, to, label }) => (
-  <Link to={to} className="flex items-center hover:text-green-400">
+  <Link to={to} className="flex items-center text-left hover:text-green-400">
     <Icon />
     <div className="ml-2">{label}</div>
   </Link>
@@ -23,16 +23,16 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex flex-row bg-blue-900 h-screen font-pt-sans">
+    <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans">
       <div className="p-4 w-1/6 text-white">
         <Link
           to="/"
-          className="text-2xl font-semibold text-bold italic p-6 mr-10 flex justify-center items-center"
+          className="text-2xl font-semibold text-bold italic mr-6 flex justify-center items-center"
         >
           <img src={logo} className="w-[70px] h-[70px]" alt="logo" />
           AFFORD
         </Link>
-        <div className="space-y-10 mt-8 p-7 text-lg">
+        <div className="space-y-10 mt-10 ml-5">
           <SidebarItem
             icon={TbLayoutDashboard}
             label="Dashboard"
@@ -45,7 +45,7 @@ const Profile = () => {
           />
           <SidebarItem
             icon={MdOutlineHistory}
-            label="Booking History"
+            label="Book History"
             to="/user/history"
           />
           <SidebarItem
