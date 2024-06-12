@@ -9,6 +9,7 @@ import serviceRouter from "./routes/serviceRoute.js";
 import authRouter from "./routes/authRoute.js";
 import appServiceRouter from "./routes/appServiceRoute.js";
 import protectRouter from "./routes/protectRoute.js";
+import emailRouter from "./routes/emailRoute.js";
 import config from "config";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
@@ -59,6 +60,8 @@ app.use("/appointmentService", appServiceRouter);
 app.use("/auth", authRouter);
 
 app.use("/protected", protectRouter);
+
+app.use("/api/sendEmail", emailRouter);
 
 // async function listBooking() {
 //   const data = await Booking.find()
