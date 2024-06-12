@@ -40,7 +40,7 @@ const LoginForm = () => {
 
   return (
     <form className="mx-auto my-auto w-[28rem]" onSubmit={handleSubmit}>
-      <Toaster />;
+      <Toaster />
       <Flex direction="column">
         <Flex direction="column" align="center">
           <Text size="8" weight="bold" mb="2">

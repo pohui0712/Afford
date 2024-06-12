@@ -43,7 +43,7 @@ const BookingForm = () => {
           <div className="col-span-1">
             <Flex direction="column" gap="1">
               <Text weight="medium">Car Model: </Text>
-              <Select.Root defaultValue="Ranger">
+              <Select.Root defaultValue="Range Rover">
                 <Select.Trigger />
                 <Select.Content>
                   <Select.Group>
@@ -96,7 +96,7 @@ const BookingForm = () => {
 
               <Text weight="medium">Slot: </Text>
               <RadioCards.Root
-                defaultValue="1"
+                defaultValue="9 a.m."
                 columns={{ initial: "2", sm: "3" }}
                 size="1"
               >

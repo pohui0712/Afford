@@ -34,7 +34,13 @@ router.get("/:id", async (request, response) => {
 
   try {
     const appService = await AppointmentService.findById(id)
-      .populate("booking")
+      .populate({
+        path: "booking",
+        populate: [
+          { path: "user", model: "User" },
+          { path: "admin", model: "Admin" },
+        ],
+      })
       .populate("service")
       .populate("mechanic")
       .populate("inventory");
