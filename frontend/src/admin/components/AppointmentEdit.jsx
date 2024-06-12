@@ -10,6 +10,10 @@ import {
   Text,
   TextArea,
   TextField,
+  SegmentedControl,
+  CheckboxGroup,
+  Checkbox,
+  CheckboxCards,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
@@ -32,12 +36,12 @@ const AppointmentEdit = () => {
     handleSubmit: handleSubmit_booking,
     control: control_booking,
   } = useForm();
-  const { register: register_service, handleSubmit: handleSubmit_service } =
-    useForm({
-      defaultValues: {
-        serviceName: [],
-      },
-    });
+  const {
+    register: register_service,
+    handleSubmit: handleSubmit_service,
+    control: control_service,
+    setValue,
+  } = useForm();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -60,11 +64,12 @@ const AppointmentEdit = () => {
     try {
       setSubmitting(true);
       //   update;
-      await axios.patch(
-        `http://localhost:5500/booking/${appointment.booking._id}`,
-        data
-      );
+      // await axios.patch(
+      //   `http://localhost:5500/booking/${appointment.booking._id}`,
+      //   data
+      // );
       //   toast.success("Update successfully");
+      console.log(data);
 
       onSubmit_service();
     } catch (error) {
@@ -78,11 +83,11 @@ const AppointmentEdit = () => {
   const onSubmit_service = handleSubmit_service(async (data) => {
     try {
       //   update;
-      await axios.patch(
-        `http://localhost:5500/service/${appointment.service._id}`,
-        data
-      );
-
+      // await axios.patch(
+      //   `http://localhost:5500/service/${appointment.service._id}`,
+      //   data
+      // );
+      console.log(data);
       toast.success("Update successfully");
       setError("");
     } catch (error) {
@@ -117,7 +122,7 @@ const AppointmentEdit = () => {
 
       <form onSubmit={onSubmit_booking}>
         {/* Status */}
-        <Controller
+        {/* <Controller
           name="status"
           control={control_booking}
           defaultValue={appointment.booking.status}
@@ -139,8 +144,35 @@ const AppointmentEdit = () => {
               </Select.Content>
             </Select.Root>
           )}
-        />
+        /> */}
 
+        <Controller
+          name="status"
+          control={control_booking}
+          defaultValue={appointment.booking.status}
+          render={({ field }) => (
+            <SegmentedControl.Root
+              defaultValue={appointment.booking.status}
+              size="2"
+              variant="surface"
+              onValueChange={field.onChange}
+              {...field}
+            >
+              <SegmentedControl.Item value="pending">
+                Pending
+              </SegmentedControl.Item>
+              <SegmentedControl.Item value="in_progress">
+                In Progress
+              </SegmentedControl.Item>
+              <SegmentedControl.Item value="approved">
+                Approved
+              </SegmentedControl.Item>
+              <SegmentedControl.Item value="rejected">
+                Rejected
+              </SegmentedControl.Item>
+            </SegmentedControl.Root>
+          )}
+        />
         {/* Car Plate */}
         <TextField.Root
           placeholder="Car Plate No."
@@ -189,8 +221,7 @@ const AppointmentEdit = () => {
         <input
           type="date"
           className="border border-solid border-slate-300 rounded-sm py-1 px-2 text-sm"
-          //   defaultValue={appointment.booking.date}
-          defaultValue="2014-02-09"
+          defaultValue={appointment.booking.date}
           {...register_booking("date")}
         />
         {/* Slot */}
@@ -225,7 +256,7 @@ const AppointmentEdit = () => {
         />
 
         {/* Services */}
-        {services.map((item) => (
+        {/* {services.map((item) => (
           <Flex>
             <input
               type="checkbox"
@@ -237,7 +268,44 @@ const AppointmentEdit = () => {
             />
             <Text>{item.value}</Text>
           </Flex>
-        ))}
+        ))} */}
+        {/* <Controller
+          name="serviceName"
+          control={control_service}
+          defaultValue={appointment.service.serviceName}
+          render={({ field }) => (
+            <CheckboxCards.Root
+              defaultValue={appointment.service.serviceName}
+              columns={{ initial: "1", sm: "3" }}
+              onValueChange={field.onChange}
+              {...field}
+            >
+              {services.map((service) => (
+                <CheckboxCards.Item key={service.value} value={service.value}>
+                  <Text weight="bold">{service.title}</Text>
+                </CheckboxCards.Item>
+              ))}
+            </CheckboxCards.Root>
+          )}
+        /> */}
+        <Controller
+          name="serviceName"
+          defaultValue={appointment.service.serviceName}
+          control={control_service}
+          render={({ field }) => (
+            <CheckboxCards.Root
+              defaultValue={appointment.service.serviceName}
+              columns={{ initial: "1", sm: "3" }}
+              onValueChange={field.onChange}
+            >
+              {services.map((service) => (
+                <CheckboxCards.Item key={service.value} value={service.value}>
+                  <Text weight="bold">{service.title}</Text>
+                </CheckboxCards.Item>
+              ))}
+            </CheckboxCards.Root>
+          )}
+        />
 
         <Button color="violet" disabled={isSubmitting}>
           <FaEdit />
