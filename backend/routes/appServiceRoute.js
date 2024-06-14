@@ -55,4 +55,43 @@ router.get("/:id", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+// Get the info by user's id
+router.get("/user/:id", async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    const data = await AppointmentService.find()
+      .populate({
+        path: "booking",
+        match: { user: id }, // Use the user ID to match
+        populate: [
+          {
+            path: "user",
+            model: "User",
+          },
+          { path: "admin", model: "Admin" },
+        ],
+      })
+      .populate("service")
+      .populate("mechanic")
+      .populate("inventory");
+
+    // Filter out any appointments where the booking did not match the user ID
+    const appService = data.filter((d) => d.booking);
+
+    if (!appService.length) {
+      return response.status(404).json({
+        message: "No appointment services found for the specified user",
+      });
+    }
+
+    return response.status(200).json({
+      appService,
+    });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 export default router;

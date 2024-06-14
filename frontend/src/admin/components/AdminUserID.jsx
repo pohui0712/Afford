@@ -15,6 +15,7 @@ import { useParams } from "react-router";
 import BackButton from "./BackButton";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import UserAppointment from "./UserAppointment";
 
 const AdminUserID = () => {
   const { id } = useParams();
@@ -99,6 +100,7 @@ const AdminUserID = () => {
       <Blockquote my="4" size="4" weight="light">
         Appointment History
       </Blockquote>
+      <UserAppointment userId={user._id} />
     </>
   );
 };
