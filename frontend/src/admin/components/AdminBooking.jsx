@@ -1,7 +1,8 @@
-import { Callout, Heading, Table, Link } from "@radix-ui/themes";
+import { Callout, Heading, Table, Link, Button } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
+import EmailButton from "./EmailButton";
 
 const AdminBooking = () => {
   const [appointments, SetAppointments] = useState([]);
@@ -60,6 +61,7 @@ const AdminBooking = () => {
             <Table.ColumnHeaderCell>Appointment Time</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Car Model</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>CreatedAt</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Send Email</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -84,6 +86,19 @@ const AdminBooking = () => {
               <Table.Cell>{appointment.booking.carModel}</Table.Cell>
               <Table.Cell>
                 {formatDate(appointment.booking.createdTime)}
+              </Table.Cell>
+              <Table.Cell>
+                {appointment.booking.status === "pending" ||
+                appointment.booking.status === "in_progress" ? (
+                  <Button size="1" disabled>
+                    Disable...
+                  </Button>
+                ) : (
+                  <EmailButton
+                    status={appointment.booking.status}
+                    data={appointment.booking}
+                  />
+                )}
               </Table.Cell>
             </Table.Row>
           ))}
