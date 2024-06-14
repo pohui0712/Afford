@@ -6,7 +6,6 @@ import {
   DataList,
   Em,
   Flex,
-  Grid,
   Heading,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
@@ -35,7 +34,7 @@ const AdminUserID = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [id]);
 
   if (!user) {
     return (
