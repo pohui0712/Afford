@@ -37,13 +37,16 @@ userSchema.methods.generateAuthToken = function () {
 };
 
 export function verifyToken(req, res, next) {
-  const token = req.header("x-auth-token");
+  const token = req.header("Authorization");
 
   if (!token) return res.status(401).send("Access denied. No token provided");
 
   try {
-    const decode = jwt.verify(token, config.get("jwtPrivateKey"));
-    req.user = decode;
+    const decoded = jwt.verify(
+      token.split(" ")[1],
+      config.get("jwtPrivateKey")
+    );
+    req.user = decoded;
     next();
   } catch (error) {
     res.status(400).send("Invalid token");

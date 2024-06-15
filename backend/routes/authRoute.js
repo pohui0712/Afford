@@ -21,7 +21,7 @@ router.post("/", async (request, response) => {
     return response.status(400).send("Invalid email or password");
 
   const token = user.generateAuthToken();
-  response.send(token);
+  response.send({ token });
 });
 
 function validate(request) {

@@ -26,7 +26,7 @@ router.post("/", async (request, response) => {
 
     const data = await User.create(newUser);
     const token = data.generateAuthToken();
-    return response.header("x-auth-token", token).send(data);
+    response.header("Authorization", `Bearer ${token}`).send(data);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });

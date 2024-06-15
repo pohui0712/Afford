@@ -1,20 +1,23 @@
-import "./App.css";
-import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
-import { Routes, Route } from "react-router-dom";
+import "@radix-ui/themes/styles.css";
+import { Route, Routes } from "react-router-dom";
+import AdminBookingEditPage from "./admin/pages/AdminBookingEditPage";
+import AdminBookingPage from "./admin/pages/AdminBookingPage";
+import AdminDashboardPage from "./admin/pages/AdminDashboardPage";
+import AdminSpecifyBookingPage from "./admin/pages/AdminSpecifyBookingPage";
+import AdminSpecifyUserPage from "./admin/pages/AdminSpecifyUserPage";
+import AdminUserEdit from "./admin/pages/AdminUserEdit";
+import AdminUserManagePage from "./admin/pages/AdminUserManagePage";
+import "./App.css";
 import { AuthProvider } from "./users/components/authProvider";
+import Appointment from "./users/components/userAppoinment";
+import Dashboard from "./users/components/userDashboard";
+import History from "./users/components/userHistory";
+import Settings from "./users/components/userSetting";
+import Booking from "./users/pages/Booking";
 import Home from "./users/pages/Home";
 import Login from "./users/pages/Login";
 import Register from "./users/pages/Register";
-import Booking from "./users/pages/Booking";
-import Profile from "./users/screen/profile";
-import AdminDashboardPage from "./admin/pages/AdminDashboardPage";
-import AdminBookingPage from "./admin/pages/AdminBookingPage";
-import AdminUserManagePage from "./admin/pages/AdminUserManagePage";
-import AdminSpecifyUserPage from "./admin/pages/AdminSpecifyUserPage";
-import AdminUserEdit from "./admin/pages/AdminUserEdit";
-import AdminSpecifyBookingPage from "./admin/pages/AdminSpecifyBookingPage";
-import AdminBookingEditPage from "./admin/pages/AdminBookingEditPage";
 
 function App() {
   return (
@@ -24,7 +27,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          {/* <Route path="/user/dashboard/:id" element={<Dashboard />} /> */}
+          <Route path="/user/dashboard" element={<Dashboard />} />
+          <Route path="/user/appointment/:id" element={<Appointment />} />
+          <Route path="/user/history/:id" element={<History />} />
+          <Route path="/user/settings/:id" element={<Settings />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/admin/booking" element={<AdminBookingPage />} />

@@ -29,8 +29,8 @@ const LoginForm = () => {
         email,
         password,
       });
-      login(response.data);
-      console.log("Succesffuly login");
+      login(response.data.token);
+      // console.log("Successfuly login");
       navigate("/");
     } catch (error) {
       setError(error.response.data);

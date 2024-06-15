@@ -38,7 +38,7 @@ const Navbar = ({ isTopOfPage }) => {
         </div>
         {isAuthenticated ? (
           <>
-            <Link to="/profile">
+            <Link to="/user/dashboard">
               <CgProfile className="w-8 h-8 hover:text-green-400" />
             </Link>
           </>
