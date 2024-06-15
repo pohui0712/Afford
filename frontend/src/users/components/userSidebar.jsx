@@ -6,7 +6,6 @@ import { TbLayoutDashboard, TbLogout2 } from "react-icons/tb";
 import { Link, Navigate } from "react-router-dom";
 import logo from "../assests/mustangLogo.png";
 import { useAuth } from "../components/authProvider";
-import { useParams } from "react-router";
 
 const SidebarItem = ({ icon: Icon, to, label }) => (
   <Link to={to} className="flex items-center text-left hover:text-green-400">
@@ -18,12 +17,10 @@ const SidebarItem = ({ icon: Icon, to, label }) => (
 const SideBar = () => {
   const { logout, isAuthenticated, user } = useAuth();
   // const userId = "6666d46268c32f9104f1f3b7";
-  const { id } = useParams();
 
   // if (!isAuthenticated) {
   //   return <Navigate to="/" />;
   // }
-
   return (
     <div className="p-4 w-1/6 text-white">
       <Link
@@ -37,23 +34,22 @@ const SideBar = () => {
         <SidebarItem
           icon={TbLayoutDashboard}
           label="Dashboard"
-          // to={`/user/dashboard/${id}`}
-          to={`/user/dashboard`}
+          to={`/user/dashboard/${user.id}`}
         />
         <SidebarItem
           icon={RiCalendarScheduleFill}
           label="Appointment"
-          to={`/user/appointment/${id}`}
+          to={`/user/appointment/${user.id}`}
         />
         <SidebarItem
           icon={MdOutlineHistory}
           label="Book History"
-          to={`/user/history/${id}`}
+          to={`/user/history/${user.id}`}
         />
         <SidebarItem
           icon={IoSettingsOutline}
           label="Settings"
-          to={`/user/settings/${id}`}
+          to={`/user/settings/${user.id}`}
         />
         <div className="flex items-center absolute bottom-8 hover:text-green-400">
           <TbLogout2 />

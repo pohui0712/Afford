@@ -29,7 +29,9 @@ const LoginForm = () => {
         email,
         password,
       });
-      login(response.data.token);
+      // const { token, user } = response.data;
+      // login(response.data.user);
+      login(response.data.token, response.data.user);
       // console.log("Successfuly login");
       navigate("/");
     } catch (error) {
