@@ -1,13 +1,11 @@
 import React from "react";
-import AdminLayout from "../components/AdminLayout";
 import Dashboard from "../components/AdminDashboard";
-import Email from "../components/Email";
+import AdminLayout from "../components/AdminLayout";
 
 const AdminDashboard = () => {
   return (
     <AdminLayout>
-      {/* <Dashboard /> */}
-      <Email />
+      <Dashboard />
     </AdminLayout>
   );
 };
