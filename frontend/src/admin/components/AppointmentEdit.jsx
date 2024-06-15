@@ -64,6 +64,17 @@ const AppointmentEdit = () => {
         data
       );
       onSubmit_service();
+      {
+        (data.status === "approved" || data.status === "rejected") &&
+          toast(
+            (t) => (
+              <span>
+                Please send <b>{data.status}</b> message to the client
+              </span>
+            ),
+            { icon: "⚠️" }
+          );
+      }
     } catch (error) {
       setSubmitting(false);
       toast.error("Update unsuccessfully!");
@@ -80,7 +91,7 @@ const AppointmentEdit = () => {
         `http://localhost:5500/service/${appointment.service._id}`,
         data
       );
-      toast.success("Update successfully");
+      toast.success("Update successfully!");
       setError("");
     } catch (error) {
       setSubmitting(false);
