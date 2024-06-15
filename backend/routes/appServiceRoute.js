@@ -18,7 +18,9 @@ router.get("/", async (request, response) => {
       })
       .populate("service")
       .populate("mechanic")
-      .populate("inventory");
+      .populate("inventory")
+      .sort({ createdAt: -1 })
+      .limit(8);
     return response.status(200).json({
       appService,
     });

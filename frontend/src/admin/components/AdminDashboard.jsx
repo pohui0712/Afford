@@ -3,6 +3,7 @@ import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import CarModelChart from "./CarModelChart";
 import StatusChart from "./StatusChart";
+import LatestBooking from "./LatestBooking";
 
 const Dashboard = () => {
   const [pendingCount, setPendingCount] = useState(0);
@@ -63,7 +64,7 @@ const Dashboard = () => {
             rejected={rejectedCount}
           />
         </Flex>
-        <p>Components</p>
+        <LatestBooking />
       </Grid>
     </>
   );
