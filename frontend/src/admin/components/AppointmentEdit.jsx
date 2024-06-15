@@ -74,6 +74,7 @@ const AppointmentEdit = () => {
 
   const onSubmit_service = handleSubmit_service(async (data) => {
     try {
+      setSubmitting(true);
       // update;
       await axios.patch(
         `http://localhost:5500/service/${appointment.service._id}`,
