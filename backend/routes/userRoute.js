@@ -1,5 +1,5 @@
 import express from "express";
-import { User, validateUser } from "../models/userModel.js";
+import { User, validateUser, verifyToken } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
@@ -54,7 +54,7 @@ router.get("/", async (request, response) => {
   }
 });
 
-// Route for GET ONE user
+// Route for GET ONE user (admin)
 router.get("/:id", async (request, response) => {
   const { id } = request.params;
 
@@ -69,8 +69,48 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-//Route for UPDATE
+//Route for UPDATE (admin)
 router.patch("/:id", async (request, response) => {
+  const { id } = request.params;
+  const updateObject = request.body;
+
+  try {
+    const updateUser = await User.findByIdAndUpdate(
+      id,
+      { $set: updateObject },
+      { new: true, runValidators: true }
+    );
+
+    if (!updateUser) {
+      return response.status(404).json({ message: "User not found" });
+    }
+
+    return response
+      .status(200)
+      .send({ message: "Update successfully", user: updateUser });
+  } catch (error) {
+    console.error(error.message);
+    return response.status(500).send({ message: error.message });
+  }
+});
+
+// Route for GET ONE user (user)
+router.get("/profile/:id", verifyToken, async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    const user = await User.findById(id);
+    return response.status(200).json({
+      user,
+    });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+//Route for UPDATE (user)
+router.patch("/profile/:id", verifyToken, async (request, response) => {
   const { id } = request.params;
   const updateObject = request.body;
 

@@ -26,7 +26,7 @@ const Settings = () => {
     console.log("User ID from Params:", id);
 
     axios
-      .get(`http://localhost:5500/users/${id}`, {
+      .get(`http://localhost:5500/users/profile/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +58,7 @@ const Settings = () => {
     };
     try {
       const token = localStorage.getItem("token");
-      await axios.patch(`http://localhost:5500/users/${id}`, userData, {
+      await axios.patch(`http://localhost:5500/users/profile/${id}`, userData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
