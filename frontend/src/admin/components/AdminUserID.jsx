@@ -6,7 +6,6 @@ import {
   DataList,
   Em,
   Flex,
-  Grid,
   Heading,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
@@ -15,6 +14,7 @@ import { useParams } from "react-router";
 import BackButton from "./BackButton";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import UserAppointment from "./UserAppointment";
 
 const AdminUserID = () => {
   const { id } = useParams();
@@ -34,7 +34,7 @@ const AdminUserID = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [id]);
 
   if (!user) {
     return (
@@ -99,6 +99,7 @@ const AdminUserID = () => {
       <Blockquote my="4" size="4" weight="light">
         Appointment History
       </Blockquote>
+      <UserAppointment userId={user._id} />
     </>
   );
 };

@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
-import axios, { CanceledError } from "axios";
+import axios from "axios";
 import { Heading, Table, Link, Callout } from "@radix-ui/themes";
+import Pagination from "./Pagination";
 
 const AdminUserManage = () => {
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState();
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const controller = new AbortController();
-    axios
-      .get("http://localhost:5500/users", { signal: controller.signal })
-      .then((response) => {
-        setUsers(response.data.users);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-      });
+    fetchData();
+  }, [currentPage]); // Fetch data whenever currentPage changes
 
-    return () => controller.abort();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5500/users`, {
+        params: { page: currentPage, pageSize: 10 }, // Adjust pageSize as needed
+      });
+      setUsers(response.data.users);
+      setTotalUsers(response.data.count);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   if (!users) {
     return (
@@ -69,6 +73,12 @@ const AdminUserManage = () => {
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagination
+        itemCount={totalUsers}
+        pageSize={10}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 };

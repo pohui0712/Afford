@@ -39,7 +39,7 @@ const AdminBookingID = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [id]);
 
   if (!appointment) {
     return (

@@ -35,9 +35,17 @@ router.post("/", async (request, response) => {
 
 // Route for GET ALL users
 router.get("/", async (request, response) => {
+  const page = parseInt(request.query.page) || 1;
+  const pageSize = parseInt(request.query.pageSize) || 10; // Default page size
   try {
-    const users = await User.find();
+    const skip = (page - 1) * pageSize;
+    // fetch users for the current page
+    const users = await User.find().skip(skip).limit(pageSize);
+
+    // count total number of users
+    const totalUsersCount = await User.countDocuments();
     return response.status(200).json({
+      count: totalUsersCount,
       users,
     });
   } catch (error) {
@@ -89,9 +97,8 @@ router.patch("/:id", async (request, response) => {
 //Route for DELETE
 router.delete("/:id", async (request, response) => {
   const { id } = request.params;
-
   try {
-    const result = await User.findOneAndDelete(id);
+    const result = await User.findOneAndDelete({ _id: id });
 
     if (!result) {
       return response.status(404).json({ message: "User not found" });

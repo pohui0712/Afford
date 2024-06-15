@@ -71,8 +71,76 @@ router.post("/", async (request, response) => {
 router.get("/", async (request, response) => {
   try {
     const bookings = await Booking.find().populate("user").populate("admin");
+
+    // Initialize counters for each status
+    let pendingCount = 0;
+    let inProgressCount = 0;
+    let approvedCount = 0;
+    let rejectedCount = 0;
+
+    // Initialize counters for each carModel type
+    let rangeRoverCount = 0;
+    let mustangCount = 0;
+    let mustangMachECount = 0;
+    let explorerCount = 0;
+    let territoryCount = 0;
+
+    // Count each status and carModel type
+    bookings.forEach((booking) => {
+      switch (booking.status) {
+        case "pending":
+          pendingCount++;
+          break;
+        case "in_progress":
+          inProgressCount++;
+          break;
+        case "approved":
+          approvedCount++;
+          break;
+        case "rejected":
+          rejectedCount++;
+          break;
+        default:
+          break;
+      }
+
+      switch (booking.carModel) {
+        case "Range_Rover":
+          rangeRoverCount++;
+          break;
+        case "Mustang":
+          mustangCount++;
+          break;
+        case "Mustang_Mach_E":
+          mustangMachECount++;
+          break;
+        case "Explorer":
+          explorerCount++;
+          break;
+        case "Territory":
+          territoryCount++;
+          break;
+        default:
+          break;
+      }
+    });
+
+    // Construct the response
     return response.status(200).json({
-      bookings,
+      statusCounts: {
+        pending: pendingCount,
+        inProgress: inProgressCount,
+        approved: approvedCount,
+        rejected: rejectedCount,
+      },
+      carModelCounts: {
+        Range_Rover: rangeRoverCount,
+        Mustang: mustangCount,
+        Mustang_Mach_E: mustangMachECount,
+        Explorer: explorerCount,
+        Territory: territoryCount,
+      },
+      bookings, // Optionally include all bookings
     });
   } catch (error) {
     console.error(error.message);
