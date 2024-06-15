@@ -12,8 +12,6 @@ const Pagination = ({ itemCount, pageSize, currentPage, onPageChange }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log("itemCount:", itemCount);
-  console.log("pageSize:", pageSize);
   const pageCount = Math.ceil(itemCount / pageSize);
   if (pageCount <= 1) return;
 
