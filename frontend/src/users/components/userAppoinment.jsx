@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "./userSidebar";
 import { CircularProgressbar } from "react-circular-progressbar";
+import { useParams } from "react-router";
+import axios, { CanceledError } from "axios";
 import mustang from "../assests/mustang.png";
 import "react-circular-progressbar/dist/styles.css";
 
 const Appointment = () => {
+  const { id } = useParams();
+  const [progress, setProgress] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(`http://localhost:5500/service/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      })
+      .then((response) => {
+        console.log(response.data.user.progress);
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    return () => controller.abort();
+  }, [id]);
+
   return (
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans relative">
       <SideBar />
