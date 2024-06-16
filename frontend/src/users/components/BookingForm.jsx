@@ -20,12 +20,14 @@ import services from "../data/services";
 import axios, { CanceledError } from "axios";
 import { Controller, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../components/authProvider";
 
 const BookingForm = () => {
+  const { user } = useAuth();
   const [error, setError] = useState();
   const [isSubmitting, setSubmitting] = useState(false);
   const { register, control, handleSubmit } = useForm({
-    defaultValues: { user: "666c4c910d7b368e7c9396dd" },
+    defaultValues: { user: user.id },
   });
 
   const onSubmit = handleSubmit(async (data) => {
