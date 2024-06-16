@@ -15,7 +15,7 @@ const Navbar = ({ isTopOfPage }) => {
     ? "bg-transparent"
     : "bg-blue-600 drop-shadow";
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <nav
@@ -38,7 +38,7 @@ const Navbar = ({ isTopOfPage }) => {
         </div>
         {isAuthenticated ? (
           <>
-            <Link to="/user/dashboard">
+            <Link to={`/user/dashboard/${user.id}`}>
               <CgProfile className="w-8 h-8 hover:text-green-400" />
             </Link>
           </>

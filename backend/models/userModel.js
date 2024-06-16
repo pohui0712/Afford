@@ -31,6 +31,17 @@ export function validateUser(user) {
   return schema.validate(user);
 }
 
+export function validateUpdateUser(user) {
+  const schema = Joi.object({
+    name: Joi.string().max(50),
+    email: Joi.string().min(5).max(255).email(),
+    password: Joi.string().min(5).max(255),
+    contact: Joi.string().max(11),
+  });
+
+  return schema.validate(user);
+}
+
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, config.get("jwtPrivateKey"));
   return token;

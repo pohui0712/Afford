@@ -1,5 +1,10 @@
 import express from "express";
-import { User, validateUser, verifyToken } from "../models/userModel.js";
+import {
+  User,
+  validateUpdateUser,
+  validateUser,
+  verifyToken,
+} from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
@@ -113,6 +118,14 @@ router.get("/profile/:id", verifyToken, async (request, response) => {
 router.patch("/profile/:id", verifyToken, async (request, response) => {
   const { id } = request.params;
   const updateObject = request.body;
+
+  const { error } = validateUpdateUser(updateObject);
+  if (error) return response.status(400).send(error.details[0].message);
+
+  if (updateObject.password) {
+    const salt = await bcrypt.genSalt(10);
+    updateObject.password = await bcrypt.hash(updateObject.password, salt);
+  }
 
   try {
     const updateUser = await User.findByIdAndUpdate(

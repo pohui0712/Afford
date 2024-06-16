@@ -16,11 +16,11 @@ const SidebarItem = ({ icon: Icon, to, label }) => (
 
 const SideBar = () => {
   const { logout, isAuthenticated, user } = useAuth();
-  // const userId = "6666d46268c32f9104f1f3b7";
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/" />;
-  // }
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="p-4 w-1/6 text-white">
       <Link

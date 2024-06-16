@@ -1,8 +1,13 @@
 import React from "react";
 import car from "../assests/ford4.webp";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useAuth } from "../components/authProvider";
 
 const HomePage = () => {
+  const { isAuthenticated } = useAuth();
+  const destination = isAuthenticated ? "/booking" : "/login";
+
   return (
     <section className="flex items-center h-screen relative bg-black">
       <img
@@ -21,11 +26,14 @@ const HomePage = () => {
           excellence, we take pride in keeping your car running smoothly and
           reliably on the road.
         </p>
-        <Link
-          className="bg-blue-400 hover:bg-red-300 px-4 py-2 text-white font-pt-sans-bold italic text-md mt-10 shadow-lg"
-          to="/booking"
-        >
-          Schedule An Appointment
+        <Link to={destination}>
+          <motion.div
+            className="bg-blue-400 hover:bg-blue-600 px-4 py-2 text-white font-pt-sans-bold italic text-md mt-10 shadow-lg"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 10 }}
+          >
+            Schedule An Appointment
+          </motion.div>
         </Link>
       </div>
     </section>

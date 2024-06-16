@@ -8,12 +8,11 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const user = localStorage.getItem("userInfo");
-    // console.log(user);
-    // console.log(token);
-    if (token && user) {
+    const userString = localStorage.getItem("user");
+
+    if (token && userString) {
       setIsAuthenticated(true);
-      setUser(user);
+      setUser(JSON.parse(userString));
     }
   }, []);
 
