@@ -1,9 +1,18 @@
-import { Box, Callout, Card, Code, Flex, Heading } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Callout,
+  Card,
+  Code,
+  DataList,
+  Flex,
+  Heading,
+} from "@radix-ui/themes";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import serviceProgress from "../data/serviceProgress";
-import { Header } from "@radix-ui/themes/dist/esm/components/table.js";
+import toast, { Toaster, toaster } from "react-hot-toast";
 
 const UpdateProgress = () => {
   const { id } = useParams();
@@ -105,9 +114,10 @@ const UpdateProgress = () => {
       await axios.patch(`http://localhost:5500/service/${id}`, {
         progress: totalProgress,
       });
-      alert("Progress updated successfully!");
+      toast.success(`Progress update to ${totalProgress} !`);
     } catch (err) {
       setError(err.message);
+      toast.error(`Progress update fail!`);
     }
   };
 
@@ -121,6 +131,7 @@ const UpdateProgress = () => {
 
   return (
     <>
+      <Toaster />
       {error && (
         <Callout.Root color="red" className="mt-3">
           <Callout.Text>{error}</Callout.Text>
@@ -128,7 +139,7 @@ const UpdateProgress = () => {
       )}
       <Box>
         <Flex gap="3">
-          <Card variant="classic">
+          <Card variant="classic" className="w-full">
             <Flex direction="column" gapY="2">
               {service.serviceName.map((s, index) => (
                 <Code key={index} size="3">
@@ -137,41 +148,48 @@ const UpdateProgress = () => {
               ))}
             </Flex>
           </Card>
-
-          <Card variant="classic">
+          <Card variant="classic" className="w-full">
             <Flex direction="column" align="center" gapX="3">
               <Heading size="4">Total Progress: </Heading>
-              <Heading mt="4" size="8">
-                {totalProgress}%
-              </Heading>
+              <div className="mt-9">
+                <Heading size="8">{totalProgress}%</Heading>
+              </div>
             </Flex>
           </Card>
         </Flex>
+
         <form onSubmit={handleSubmit}>
           <Card>
-            {service.serviceName.map((serviceName, index) => (
-              <div key={index}>
-                <h2>{serviceName}</h2>
-                {serviceProgress
-                  .find((item) => item.serviceName === serviceName)
-                  ?.checkBox.map((checkbox, idx) => (
-                    <label key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={
-                          progressState[serviceName]?.[checkbox] || false
-                        }
-                        onChange={() =>
-                          handleCheckboxChange(serviceName, checkbox)
-                        }
-                      />
-                      {checkbox}
-                    </label>
-                  ))}
-              </div>
-            ))}
+            <DataList.Root size="3">
+              {service.serviceName.map((serviceName, index) => (
+                <DataList.Item key={index} align="center">
+                  <DataList.Label color="indigo">{serviceName}</DataList.Label>
+                  <DataList.Value style={{ gap: "20px" }}>
+                    {serviceProgress
+                      .find((item) => item.serviceName === serviceName)
+                      ?.checkBox.map((checkbox, idx) => (
+                        <Flex key={idx} align="center">
+                          <input
+                            type="checkbox"
+                            checked={
+                              progressState[serviceName]?.[checkbox] || false
+                            }
+                            onChange={() =>
+                              handleCheckboxChange(serviceName, checkbox)
+                            }
+                            className="mr-3 w-4 h-4"
+                          />
+                          {checkbox}
+                        </Flex>
+                      ))}
+                  </DataList.Value>
+                </DataList.Item>
+              ))}
+            </DataList.Root>
           </Card>
-          <button type="submit">Update Progress</button>
+          <Button mt="3" type="submit">
+            Update
+          </Button>
         </form>
       </Box>
     </>
