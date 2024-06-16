@@ -21,6 +21,7 @@ import Register from "./users/pages/Register";
 import MechanistMain from "./mechanist/pages/MechanistMain";
 import MechanistUserAppointment from "./mechanist/pages/MechanistUserAppointment";
 import MechanistProgress from "./mechanist/pages/MechanistProgress";
+import MechanistInventoryaPage from "./mechanist/pages/MechanistInventoryaPage";
 
 function App() {
   return (
@@ -66,6 +67,10 @@ function App() {
           <Route
             path="/mechanist/progress/:id"
             element={<MechanistProgress />}
+          />
+          <Route
+            path="/mechanist/inventory/:id"
+            element={<MechanistInventoryaPage />}
           />
         </Routes>
       </AuthProvider>

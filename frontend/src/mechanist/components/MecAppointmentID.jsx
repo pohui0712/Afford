@@ -18,7 +18,6 @@ const MecAppointmentID = () => {
       })
       .then((response) => {
         setAppointment(response.data.appService);
-        console.log(response.data.appService);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -94,7 +93,7 @@ const MecAppointmentID = () => {
         <ProgressButton
           route={`/mechanist/progress/${appointment.service._id}`}
         />
-        <InventoryButton />
+        <InventoryButton route={`/mechanist/inventory/${appointment._id}`} />
       </Flex>
     </>
   );
