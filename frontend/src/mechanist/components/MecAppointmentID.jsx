@@ -83,8 +83,19 @@ const MecAppointmentID = () => {
           <DataList.Item>
             <DataList.Label>Car parts used</DataList.Label>
             <DataList.Value>
-              {/* {appointment.inventory.progress} */}
-              ABC
+              {appointment.inventory &&
+              appointment.inventory.inventory &&
+              appointment.inventory.inventory.length > 0 ? (
+                appointment.inventory.inventory.map((item, index) => (
+                  <span key={index}>
+                    <Code color="sky">{item.carPart}</Code>
+                    {index < appointment.inventory.inventory.length - 1 &&
+                      ",\u00A0"}
+                  </span>
+                ))
+              ) : (
+                <span>No add any Car Part yet.</span>
+              )}
             </DataList.Value>
           </DataList.Item>
         </DataList.Root>

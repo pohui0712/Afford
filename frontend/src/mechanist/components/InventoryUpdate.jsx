@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import inventoryData from "../data/inventory";
+import toast, { Toaster } from "react-hot-toast";
 
 const InventoryUpdate = () => {
   const { id } = useParams();
@@ -59,44 +60,43 @@ const InventoryUpdate = () => {
       // Filter out items with quantity 0
       const filteredInventory = inventory.filter((item) => item.quantity > 0);
 
-      // Prepare the data for submission
+      // PDta that filte out
       const data = filteredInventory.map(({ carPart, quantity, price }) => ({
         carPart,
         quantity,
         price,
       }));
-      console.log(data);
 
       // Fetch the current state of the appointment service
       const response = await axios.get(
         `http://localhost:5500/appointmentService/${id}`
       );
       const appService = response.data.appService;
-      const inventoryId = response.data.appService.inventory._id;
+      const inventoryId = response.data.appService?.inventory?._id;
 
-      if (appService && appService.inventory && appService.inventory._id) {
+      if (appService && inventoryId) {
         // If inventory exists, PATCH method
         await axios.put(`http://localhost:5500/inventory/${inventoryId}`, {
           inventory: data,
         });
-        alert("Inventory updated successfully!");
-        console.log(`Update successfully`);
+        toast.success("Inventory update successfully");
       } else {
         // If no inventory exists, POST method
         await axios.post(`http://localhost:5500/inventory/appService/${id}`, {
           inventory: data,
         });
         //    alert('Inventory created successfully!');
-        console.log("Didnt exist");
-        console.log("Add new inventory successfully");
+        toast.success("Inventory add successfully");
       }
     } catch (err) {
-      console.log(err.message);
+      setError(err.message);
+      toast.error(err.message);
     }
   };
 
   return (
     <>
+      <Toaster />
       <Box>
         {inventory.map((item, index) => (
           <Card key={index} variant="classic" size="3">
