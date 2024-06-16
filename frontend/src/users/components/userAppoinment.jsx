@@ -8,7 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 const Appointment = () => {
   const { id } = useParams();
-  const [progress, setProgress] = useState("");
+  const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -16,14 +16,19 @@ const Appointment = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`http://localhost:5500/service/${id}`, {
+      .get(`http://localhost:5500/appointmentService/user/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         signal: controller.signal,
       })
       .then((response) => {
-        console.log(response.data.user.progress);
+        // console.log(response.data.appService[0].service.progress);
+        if (response.data.appService && response.data.appService.length > 0) {
+          setProgress(response.data.appService[0].service.progress);
+        } else {
+          setError("Service not found");
+        }
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -42,7 +47,7 @@ const Appointment = () => {
           <div className="relative flex justify-center items-center">
             <img src={mustang} className="h-[35vh] absolute" />
             <div className="w-[70vh]">
-              <CircularProgressbar value={60} maxValue={100} />
+              <CircularProgressbar value={progress} maxValue={100} />
             </div>
           </div>
         </div>
