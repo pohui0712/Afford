@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import mustang from "../assests/mustang.png";
 import SideBar from "./userSidebar";
+import { useParams } from "react-router";
+import axios, { CanceledError } from "axios";
 
 const Dashboard = () => {
+  const { id } = useParams();
+  const [car, setCar] = useState("");
+  const [carPlate, setCarPlate] = useState("");
+  const [mileage, setMileage] = useState("");
+  const [services, setServices] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(`http://localhost:5500/appointmentService/user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal: controller.signal,
+      })
+      .then((response) => {
+        console.log(response.data.appService);
+        if (response.data.appService && response.data.appService.length > 0) {
+          const userService = response.data.appService[0];
+          setCar(userService.booking.carModel);
+          setCarPlate(userService.booking.carPlate);
+          setMileage(userService.booking.mileage);
+          // setServices(
+          //   response.data.appService.map((app) => app.service.serviceName)
+          // );
+          setServices(userService.service.serviceName);
+        } else {
+          setError("Service not found");
+        }
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    return () => controller.abort();
+  }, [id]);
+
   return (
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans">
       <SideBar />
@@ -15,29 +58,37 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-4 flex-grow">
             <div className="bg-gray-100 p-4 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Vehicle Details</h3>
-              <ul className="list-disc list-inside">
-                <li>Car Model: Mustang</li>
-                <li>Year: 2019</li>
-                <li>Car Plate: SYP 630</li>
-                <li>Current Mileage: 10000km</li>
+              <ul className="list-disc list-inside spacing-y-3">
+                <li className="mt-3">
+                  <span>Car Model:</span>
+                  <span className="font-semibold ml-2">{car}</span>
+                </li>
+                <li className="mt-3">
+                  <span>Car Plate:</span>
+                  <span className="font-semibold ml-2">{carPlate}</span>
+                </li>
+                <li className="mt-3">
+                  <span>Mileage:</span>
+                  <span className="font-semibold ml-2">{mileage} KM</span>
+                </li>
               </ul>
             </div>
             <div className="bg-gray-100 p-4 rounded-lg shadow">
-              <h3 className="text-lg font-semibold mb-2">
-                Maintenance Schedule
-              </h3>
+              <h3 className="text-lg font-semibold mb-2">Upcoming Schedule</h3>
               <ul className="list-disc list-inside">
-                <li>Oil Change: 01/01/2021</li>
-                <li>Tire Rotation: 03/06/2021</li>
-                <li>Brake Inspection: 05/12/2021</li>
+                {services.map((service, index) => (
+                  <li className="mt-3" key={index}>
+                    {service}
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="bg-gray-100 p-4 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Service Reminder</h3>
               <ul className="list-disc list-inside">
-                <li>MileageToService: 10000km</li>
-                <li>MileageToService: 20000km</li>
-                <li>MileageToService: 30000km</li>
+                <li className="mt-3">MileageToService: 10000 KM</li>
+                <li className="mt-3">MileageToService: 20000 KM</li>
+                <li className="mt-3">MileageToService: 30000 KM</li>
               </ul>
             </div>
           </div>
