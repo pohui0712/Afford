@@ -14,12 +14,13 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { IoKeyOutline, IoPeople } from "react-icons/io5";
 import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -30,6 +31,9 @@ const RegisterForm = () => {
       // navigate(0);
       toast.success("Register successfully");
       setError("");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       setSubmitting(false);
       toast.error("Email already registered!");

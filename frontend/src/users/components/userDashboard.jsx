@@ -24,7 +24,6 @@ const Dashboard = () => {
         signal: controller.signal,
       })
       .then((response) => {
-        console.log(response.data.appService);
         if (response.data.appService && response.data.appService.length > 0) {
           const userService = response.data.appService[0];
           setCar(userService.booking.carModel);
