@@ -20,7 +20,7 @@ const MecAppointmentsList = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [appointments]);
   if (!appointments) {
     return (
       <Callout.Root color="red" className="mb-5">
