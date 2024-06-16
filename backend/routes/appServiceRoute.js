@@ -77,11 +77,85 @@ router.get("/", async (request, response) => {
       { $sort: { "booking.createdTime": -1 } },
     ]);
     return response.status(200).json({
+      count: appService.length,
       appService,
     });
   } catch (error) {
     console.error(error.message);
     response.status(500).send({ message: error.message });
+  }
+});
+
+// Get All approved data for mechanist
+router.get("/mechanist", async (req, res) => {
+  try {
+    const appService = await AppointmentService.aggregate([
+      {
+        $lookup: {
+          from: "bookings",
+          localField: "booking",
+          foreignField: "_id",
+          as: "booking",
+        },
+      },
+      { $unwind: "$booking" },
+      {
+        $lookup: {
+          from: "users",
+          localField: "booking.user",
+          foreignField: "_id",
+          as: "booking.user",
+        },
+      },
+      { $unwind: "$booking.user" },
+      {
+        $lookup: {
+          from: "admins",
+          localField: "booking.admin",
+          foreignField: "_id",
+          as: "booking.admin",
+        },
+      },
+      { $unwind: "$booking.admin" },
+      {
+        $lookup: {
+          from: "services",
+          localField: "service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      { $unwind: "$service" },
+      {
+        $lookup: {
+          from: "mechanics",
+          localField: "mechanic",
+          foreignField: "_id",
+          as: "mechanic",
+        },
+      },
+      { $unwind: "$mechanic" },
+      {
+        $lookup: {
+          from: "inventories",
+          localField: "inventory",
+          foreignField: "_id",
+          as: "inventory",
+        },
+      },
+      { $unwind: { path: "$inventory", preserveNullAndEmptyArrays: true } },
+      {
+        $match: {
+          "booking.status": "approved",
+        },
+      },
+      { $sort: { "booking.createdTime": -1 } },
+    ]);
+
+    return res.status(200).json({ count: appService.length, appService });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
   }
 });
 

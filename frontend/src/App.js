@@ -18,6 +18,8 @@ import Booking from "./users/pages/Booking";
 import Home from "./users/pages/Home";
 import Login from "./users/pages/Login";
 import Register from "./users/pages/Register";
+import MechanistMain from "./mechanist/pages/MechanistMain";
+import MechanistUserAppointment from "./mechanist/pages/MechanistUserAppointment";
 
 function App() {
   return (
@@ -54,6 +56,11 @@ function App() {
           <Route
             path="/admin/userManagement/edit/:id"
             element={<AdminUserEdit />}
+          />
+          <Route path="/mechanist" element={<MechanistMain />} />
+          <Route
+            path="/mechanist/userAppointment/:id"
+            element={<MechanistUserAppointment />}
           />
         </Routes>
       </AuthProvider>
