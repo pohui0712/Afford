@@ -91,7 +91,9 @@ const MecAppointmentID = () => {
         </DataList.Root>
       </Card>
       <Flex gapX="3" mt="3">
-        <ProgressButton />
+        <ProgressButton
+          route={`/mechanist/progress/${appointment.service._id}`}
+        />
         <InventoryButton />
       </Flex>
     </>

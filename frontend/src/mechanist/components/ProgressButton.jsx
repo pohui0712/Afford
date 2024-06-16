@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { RiDonutChartFill } from "react-icons/ri";
 import { Button } from "@radix-ui/themes";
 
-const ProgressButton = () => {
+const ProgressButton = ({ route }) => {
   return (
     <Button color="violet">
       <RiDonutChartFill />
-      <Link>Update progress</Link>
+      <Link to={route}>Update progress</Link>
     </Button>
   );
 };
