@@ -5,8 +5,7 @@ import { useParams } from "react-router";
 import inventoryData from "../data/inventory";
 import toast, { Toaster } from "react-hot-toast";
 import BackButton from "../../admin/components/BackButton";
-import { AiOutlinePlus } from "react-icons/ai";
-import { AiOutlineMinus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 const InventoryUpdate = () => {
   const { id } = useParams();
@@ -26,7 +25,7 @@ const InventoryUpdate = () => {
             return {
               ...item,
               quantity: foundItem.quantity,
-              price: foundItem.price,
+              price: `RM${foundItem.quantity * item.basePrice}`,
             };
           }
           return item;
@@ -37,22 +36,23 @@ const InventoryUpdate = () => {
         console.error("Error fetching appointment service:", error);
         setError(error.message);
       });
-  }, []);
+  }, [id]);
+
   const handleIncrease = (index) => {
     const newInventory = [...inventory];
-    const basePrice = parseInt(inventoryData[index].price.replace("RM", "")); // Extract base price
     newInventory[index].quantity += 1;
-    newInventory[index].price = `RM${basePrice * newInventory[index].quantity}`;
+    newInventory[index].price = `RM${
+      newInventory[index].quantity * newInventory[index].basePrice
+    }`;
     setInventory(newInventory);
   };
 
   const handleDecrease = (index) => {
     const newInventory = [...inventory];
-    const basePrice = parseInt(inventoryData[index].price.replace("RM", "")); // Extract base price
     if (newInventory[index].quantity > 0) {
       newInventory[index].quantity -= 1;
       newInventory[index].price = `RM${
-        basePrice * newInventory[index].quantity
+        newInventory[index].quantity * newInventory[index].basePrice
       }`;
     }
     setInventory(newInventory);
@@ -60,17 +60,13 @@ const InventoryUpdate = () => {
 
   const handleSubmit = async () => {
     try {
-      // Filter out items with quantity 0
       const filteredInventory = inventory.filter((item) => item.quantity > 0);
-
-      // PDta that filte out
       const data = filteredInventory.map(({ carPart, quantity, price }) => ({
         carPart,
         quantity,
         price,
       }));
 
-      // Fetch the current state of the appointment service
       const response = await axios.get(
         `http://localhost:5500/appointmentService/${id}`
       );
@@ -78,18 +74,15 @@ const InventoryUpdate = () => {
       const inventoryId = response.data.appService?.inventory?._id;
 
       if (appService && inventoryId) {
-        // If inventory exists, PATCH method
         await axios.put(`http://localhost:5500/inventory/${inventoryId}`, {
           inventory: data,
         });
-        toast.success("Inventory update successfully");
+        toast.success("Inventory updated successfully");
       } else {
-        // If no inventory exists, POST method
         await axios.post(`http://localhost:5500/inventory/appService/${id}`, {
           inventory: data,
         });
-        //    alert('Inventory created successfully!');
-        toast.success("Inventory add successfully");
+        toast.success("Inventory added successfully");
       }
     } catch (err) {
       setError(err.message);
