@@ -7,7 +7,7 @@ const appointmentServiceSchema = new mongoose.Schema(
     mechanic: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Mechanic",
-      default: "6662dda5d457cada8551f4ec",
+      default: "667041f5eb8f531e8a3e5497",
     },
     inventory: { type: mongoose.Schema.Types.ObjectId, ref: "Inventory" },
   },

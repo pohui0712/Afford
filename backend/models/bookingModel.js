@@ -14,17 +14,19 @@ const bookingSchema = new mongoose.Schema(
     admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Admin",
-      default: "6662dc604fe11de2e92f7253",
+      default: "667041d480e08e7044225f71",
     },
   },
   { versionKey: false }
 );
 
 bookingSchema.index(
-  { user: 1, date: 1 },
+  { user: 1, carPlate: 1, date: 1 },
   {
     unique: true,
-    partialFilterExpression: { status: { $in: "confirmed" } },
+    partialFilterExpression: {
+      status: { $in: ["pending", "completed", "in_progress"] },
+    },
   }
 );
 

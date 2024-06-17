@@ -11,6 +11,7 @@ import appServiceRouter from "./routes/appServiceRoute.js";
 import protectRouter from "./routes/protectRoute.js";
 import emailRouter from "./routes/emailRoute.js";
 import config from "config";
+import { Booking } from "./models/bookingModel.js";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
@@ -196,8 +197,8 @@ app.use("/api/sendEmail", emailRouter);
 //   time,
 //   date,
 //   mileage,
-//   admin,
-//   user
+//   user,
+//   status
 // ) {
 //   const booking = new Booking({
 //     carPlate,
@@ -205,8 +206,8 @@ app.use("/api/sendEmail", emailRouter);
 //     time,
 //     date,
 //     mileage,
-//     admin,
 //     user,
+//     status,
 //   });
 
 //   const result = await booking.save();
@@ -215,12 +216,12 @@ app.use("/api/sendEmail", emailRouter);
 
 // createBooking(
 //   "SYP 630",
-//   "Ranger",
-//   "9 am",
-//   "6 June 2024",
+//   "Toyota",
+//   "11 am",
+//   "30 September 2024",
 //   "10000",
-//   "66619cd39e8645bb07eef999",
-//   "666117db1d9744606d86cb24"
+//   "666ed2e70c91e8fe7dd5c1e0",
+//   "pending"
 // );
 
 // async function createUser(name, email, password, contact) {
