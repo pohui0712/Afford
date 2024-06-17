@@ -2,10 +2,12 @@ import express from "express";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import Joi from "joi";
+import { Admin } from "../models/adminModel.js";
+import { Mechanic } from "../models/mechanicModel.js";
 
 const router = express.Router();
 
-router.post("/", async (request, response) => {
+router.post("/user", async (request, response) => {
   const { error } = validate(request.body);
   if (error) return response.status(400).send(error.details[0].message);
 
@@ -32,6 +34,50 @@ router.post("/", async (request, response) => {
   });
 });
 
+router.post("/admin", async (request, response) => {
+  const { error } = validate(request.body);
+  if (error) return response.status(400).send(error.details[0].message);
+
+  let admin = await Admin.findOne({ email: request.body.email });
+  if (!admin) return response.status(400).send("Invalid email or password");
+
+  const validPassword = await bcrypt.compare(
+    request.body.password,
+    admin.password
+  );
+
+  if (!validPassword)
+    return response.status(400).send("Invalid email or password");
+
+  response.send({
+    admin: {
+      email: admin.email,
+    },
+  });
+});
+
+router.post("/mechanist", async (request, response) => {
+  const { error } = validate(request.body);
+  if (error) return response.status(400).send(error.details[0].message);
+
+  let mechanist = await Mechanic.findOne({ email: request.body.email });
+  if (!mechanist) return response.status(400).send("Invalid email or password");
+
+  const validPassword = await bcrypt.compare(
+    request.body.password,
+    mechanist.password
+  );
+
+  if (!validPassword)
+    return response.status(400).send("Invalid email or password");
+
+  response.send({
+    mechanist: {
+      email: mechanist.email,
+    },
+  });
+});
+
 function validate(request) {
   const schema = Joi.object({
     email: Joi.string().min(5).max(255).required().email(),
@@ -40,5 +86,4 @@ function validate(request) {
 
   return schema.validate(request);
 }
-
 export default router;

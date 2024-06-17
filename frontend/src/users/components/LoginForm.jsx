@@ -20,21 +20,54 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { loginUser, loginAdmin, loginMechanist } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:5500/auth", {
-        email,
-        password,
-      });
-      login(response.data.token, response.data.user);
 
-      navigate("/");
-    } catch (error) {
-      setError(error.response.data);
-      toast.error("Invalid Email or Password!");
+    try {
+      // Attempt to log in as admin
+      const responseAdmin = await axios.post(
+        "http://localhost:5500/auth/admin",
+        {
+          email,
+          password,
+        }
+      );
+      navigate("/admin/dashboard");
+      return; // Exit function after successful login
+    } catch (errorAdmin) {
+      // If admin login fails, attempt mechanist login
+      try {
+        const responseMechanist = await axios.post(
+          "http://localhost:5500/auth/mechanist",
+          {
+            email,
+            password,
+          }
+        );
+        navigate("/mechanist");
+        return;
+      } catch (errorMechanist) {
+        // If mechanist login fails, attempt user login
+        try {
+          const responseUser = await axios.post(
+            "http://localhost:5500/auth/user",
+            {
+              email,
+              password,
+            }
+          );
+          console.log("user");
+          loginUser(responseUser.data.token, responseUser.data.user);
+          navigate("/");
+          return;
+        } catch (errorUser) {
+          // If all login attempts fail
+          setError(error);
+          toast.error("Invalid email or password");
+        }
+      }
     }
   };
 
@@ -84,7 +117,7 @@ const LoginForm = () => {
           Sign In
         </Button>
 
-        <Separator orientation="borizontal" size="4" my="3" />
+        <Separator orientation="horizontal" size="4" my="3" />
 
         <Flex direction="column" align="center">
           <Text color="gray" size="3">

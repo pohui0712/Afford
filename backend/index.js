@@ -14,6 +14,7 @@ import config from "config";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
+import bcrypt from "bcrypt";
 
 const app = express();
 
@@ -141,6 +142,9 @@ app.use("/api/sendEmail", emailRouter);
 //     password,
 //   });
 
+//   const salt = await bcrypt.genSalt(10);
+//   admin.password = await bcrypt.hash(admin.password, salt);
+
 //   const result = await admin.save();
 //   console.log(result);
 // }
@@ -152,6 +156,9 @@ app.use("/api/sendEmail", emailRouter);
 //     email,
 //     password,
 //   });
+
+//   const salt = await bcrypt.genSalt(10);
+//   mechanic.password = await bcrypt.hash(mechanic.password, salt);
 
 //   const result = await mechanic.save();
 //   console.log(result);
