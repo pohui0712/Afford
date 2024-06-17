@@ -9,9 +9,13 @@ const MecNavBar = () => {
     <nav className="border-b-2 mb-5 px-5 py-3">
       <Container>
         <Flex justify="between">
-          <Flex align="center" gap="3">
-            <GrUserWorker />
-            <Heading size="4">Afford - Mechanist</Heading>
+          <Flex align="center" justify="center" gap="3">
+            <Link to="/mechanist">
+              <GrUserWorker />
+            </Link>
+            <Link to="/mechanist">
+              <Heading size="4">Afford - Mechanist</Heading>
+            </Link>
           </Flex>
           <div className="p-2 rounded-md transition-colors duration-200 hover:bg-red-600 hover:font-bold hover:text-white">
             <Link to={"/"}>
