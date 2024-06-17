@@ -1,9 +1,12 @@
-import { Avatar, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
+import { Avatar, Box, Button, Card, Flex, Grid, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import inventoryData from "../data/inventory";
 import toast, { Toaster } from "react-hot-toast";
+import BackButton from "../../admin/components/BackButton";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
 
 const InventoryUpdate = () => {
   const { id } = useParams();
@@ -97,40 +100,52 @@ const InventoryUpdate = () => {
   return (
     <>
       <Toaster />
-      <Box>
+      <Grid columns={{ initial: "1", md: "3" }} gap="3">
         {inventory.map((item, index) => (
           <Card key={index} variant="classic" size="3">
             <Flex gap="3" align="center">
               <Avatar src={item.img} radius="full" fallback="A" size="5" />
               <Box>
-                <Text as="div" size="3" weight="bold">
-                  {item.carPart} - {item.price}
-                </Text>
-                <Flex align="center" gapX="3">
+                <Flex gapX="5">
+                  <Text size="3" color="gray" weight="medium">
+                    {item.carPart} :
+                  </Text>
+                  <Text size="3" weight="bold">
+                    {item.price}
+                  </Text>
+                </Flex>
+                <Flex ml="2" align="center" gapX="3">
                   <Button
                     size="1"
                     radius="full"
+                    variant="surface"
+                    color="red"
                     onClick={() => handleDecrease(index)}
                   >
-                    -
+                    <AiOutlineMinus />
                   </Button>
-                  <Text as="span" size="5" color="gray">
+                  <Text as="span" size="7">
                     {item.quantity}
                   </Text>
                   <Button
                     size="1"
                     radius="full"
+                    variant="surface"
+                    color="blue"
                     onClick={() => handleIncrease(index)}
                   >
-                    +
+                    <AiOutlinePlus />
                   </Button>
                 </Flex>
               </Box>
             </Flex>
           </Card>
         ))}
+      </Grid>
+      <Flex gapX="3" mt="3">
         <Button onClick={handleSubmit}>Submit</Button>
-      </Box>
+        <BackButton href={`/mechanist/userAppointment/${id}`} />
+      </Flex>
     </>
   );
 };
