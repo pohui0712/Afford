@@ -1,4 +1,11 @@
-import { Callout, Card, Code, DataList, Flex } from "@radix-ui/themes";
+import {
+  Callout,
+  Card,
+  Code,
+  DataList,
+  Flex,
+  Progress,
+} from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -85,7 +92,7 @@ const MecAppointmentID = () => {
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Progress</DataList.Label>
-            <DataList.Value>{appointment.service.progress}</DataList.Value>
+            <DataList.Value>{appointment.service.progress}%</DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Car parts used</DataList.Label>
