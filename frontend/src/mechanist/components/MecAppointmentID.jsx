@@ -2,6 +2,7 @@ import { Callout, Card, Code, DataList, Flex } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import BackButton from "../../admin/components/BackButton";
 import InventoryButton from "./InventoryButton";
 import ProgressButton from "./ProgressButton";
 
@@ -62,7 +63,13 @@ const MecAppointmentID = () => {
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Remark</DataList.Label>
-            <DataList.Value>{appointment.booking.remark}</DataList.Value>
+            <DataList.Value>
+              {appointment.booking.remark ? (
+                appointment.booking.remark
+              ) : (
+                <span>No remarks by client</span>
+              )}
+            </DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Services</DataList.Label>
@@ -105,6 +112,7 @@ const MecAppointmentID = () => {
           route={`/mechanist/progress/${appointment.service._id}`}
         />
         <InventoryButton route={`/mechanist/inventory/${appointment._id}`} />
+        <BackButton href={`/mechanist`} />
       </Flex>
     </>
   );
