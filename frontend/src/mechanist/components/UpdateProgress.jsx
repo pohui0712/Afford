@@ -11,12 +11,14 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import serviceProgress from "../data/serviceProgress";
-import toast, { Toaster, toaster } from "react-hot-toast";
-import BackButton from "../../admin/components/BackButton";
+import toast, { Toaster } from "react-hot-toast";
+import { FaArrowRotateLeft } from "react-icons/fa6";
 
 const UpdateProgress = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [service, setService] = useState(null);
   const [error, setError] = useState(null);
   const [progressState, setProgressState] = useState({});
@@ -201,7 +203,10 @@ const UpdateProgress = () => {
             <Button type="submit" color="violet">
               Update
             </Button>
-            <BackButton href={`/mechanist/`} />
+            <Button color="blue" onClick={() => navigate(-1)}>
+              <FaArrowRotateLeft />
+              Back to prvious
+            </Button>
           </Flex>
         </form>
       </Box>
