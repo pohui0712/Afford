@@ -1,4 +1,4 @@
-import { Callout, Link, Table } from "@radix-ui/themes";
+import { Callout, Link, Table, Progress, Button } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ const MecAppointmentsList = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [appointments]);
   if (!appointments) {
     return (
       <Callout.Root color="red" className="mb-5">
@@ -35,7 +35,7 @@ const MecAppointmentsList = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <Table.Root>
+      <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Car Plate</Table.ColumnHeaderCell>
@@ -61,7 +61,19 @@ const MecAppointmentsList = () => {
               <Table.Cell>{appointment.booking.carModel}</Table.Cell>
               <Table.Cell>{appointment.booking.date}</Table.Cell>
               <Table.Cell>{appointment.booking.mileage}</Table.Cell>
-              <Table.Cell>{appointment.service.progress}</Table.Cell>
+              <Table.Cell>
+                {appointment.service.progress === 100 ? (
+                  <Button color="red" size="1">
+                    Complete
+                  </Button>
+                ) : (
+                  <Progress
+                    value={appointment.service.progress}
+                    size="2"
+                    mt="2"
+                  />
+                )}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

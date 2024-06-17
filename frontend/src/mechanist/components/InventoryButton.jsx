@@ -3,11 +3,11 @@ import { FaScrewdriverWrench } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { Button } from "@radix-ui/themes";
 
-const InventoryButton = () => {
+const InventoryButton = ({ route }) => {
   return (
     <Button color="indigo">
       <FaScrewdriverWrench />
-      <Link>Update inventory</Link>
+      <Link to={route}>Update inventory</Link>
     </Button>
   );
 };

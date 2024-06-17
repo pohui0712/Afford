@@ -73,6 +73,33 @@ router.get("/:id", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+// Route for UPDATE the inventory
+router.put("/:id", async (request, response) => {
+  const { id } = request.params;
+  const { inventory } = request.body;
+
+  try {
+    // Find the inventory document by its ID
+    const existingInventory = await Inventory.findById(id);
+    if (!existingInventory) {
+      return response.status(404).json({ message: "Inventory not found" });
+    }
+
+    // Update the inventory array
+    existingInventory.inventory = inventory;
+
+    // Save the updated inventory document
+    const updatedInventory = await existingInventory.save();
+
+    return response.status(200).send({
+      inventory: updatedInventory,
+    });
+  } catch (error) {
+    return response.status(500).send({ message: error.message });
+  }
+});
+
 // Route for DELETE a inventory
 router.delete("/:id", async (request, response) => {
   const { id } = request.params;

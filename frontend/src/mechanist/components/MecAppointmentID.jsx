@@ -1,7 +1,15 @@
-import { Callout, Card, Code, DataList, Flex } from "@radix-ui/themes";
+import {
+  Callout,
+  Card,
+  Code,
+  DataList,
+  Flex,
+  Progress,
+} from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import BackButton from "../../admin/components/BackButton";
 import InventoryButton from "./InventoryButton";
 import ProgressButton from "./ProgressButton";
 
@@ -18,7 +26,6 @@ const MecAppointmentID = () => {
       })
       .then((response) => {
         setAppointment(response.data.appService);
-        console.log(response.data.appService);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -63,7 +70,13 @@ const MecAppointmentID = () => {
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Remark</DataList.Label>
-            <DataList.Value>{appointment.booking.remark}</DataList.Value>
+            <DataList.Value>
+              {appointment.booking.remark ? (
+                appointment.booking.remark
+              ) : (
+                <span>No remarks by client</span>
+              )}
+            </DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Services</DataList.Label>
@@ -79,13 +92,24 @@ const MecAppointmentID = () => {
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Progress</DataList.Label>
-            <DataList.Value>{appointment.service.progress}</DataList.Value>
+            <DataList.Value>{appointment.service.progress}%</DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Car parts used</DataList.Label>
             <DataList.Value>
-              {/* {appointment.inventory.progress} */}
-              ABC
+              {appointment.inventory &&
+              appointment.inventory.inventory &&
+              appointment.inventory.inventory.length > 0 ? (
+                appointment.inventory.inventory.map((item, index) => (
+                  <span key={index}>
+                    <Code color="sky">{item.carPart}</Code>
+                    {index < appointment.inventory.inventory.length - 1 &&
+                      ",\u00A0"}
+                  </span>
+                ))
+              ) : (
+                <span>No add any Car Part yet.</span>
+              )}
             </DataList.Value>
           </DataList.Item>
         </DataList.Root>
@@ -94,7 +118,8 @@ const MecAppointmentID = () => {
         <ProgressButton
           route={`/mechanist/progress/${appointment.service._id}`}
         />
-        <InventoryButton />
+        <InventoryButton route={`/mechanist/inventory/${appointment._id}`} />
+        <BackButton href={`/mechanist`} />
       </Flex>
     </>
   );
