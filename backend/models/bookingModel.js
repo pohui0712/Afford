@@ -20,4 +20,12 @@ const bookingSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
+bookingSchema.index(
+  { user: 1, date: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { status: { $in: "confirmed" } },
+  }
+);
+
 export const Booking = mongoose.model("Booking", bookingSchema);

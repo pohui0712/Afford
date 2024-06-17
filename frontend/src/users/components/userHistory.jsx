@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "./userSidebar";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@material-ui/core";
+import { Table } from "@radix-ui/themes";
 import { useParams } from "react-router";
 import axios, { CanceledError } from "axios";
 
@@ -63,7 +55,7 @@ const History = () => {
       <SideBar />
       <div className="p-3 flex-1">
         <div className="bg-white rounded-2xl h-full p-4">
-          <TableContainer component={Paper}>
+          {/* <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow className="bg-blue-100">
@@ -85,11 +77,6 @@ const History = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* <TableCell>{car}</TableCell>
-                <TableCell>{carPlate}</TableCell>
-                <TableCell>{date}</TableCell>
-                <TableCell>{status}</TableCell>
-                <TableCell>{remark}</TableCell> */}
                 {services.map((service, index) => (
                   <TableRow key={index}>
                     <TableCell>{service.booking.carModel}</TableCell>
@@ -101,7 +88,29 @@ const History = () => {
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>
+          </TableContainer> */}
+          <Table.Root variant="surface">
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeaderCell>Car Model</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Car Plate</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Remarks</Table.ColumnHeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {services.map((service, index) => (
+                <Table.Row key={index}>
+                  <Table.Cell>{service.booking.carModel}</Table.Cell>
+                  <Table.Cell>{service.booking.carPlate}</Table.Cell>
+                  <Table.Cell>{service.booking.date}</Table.Cell>
+                  <Table.Cell>{service.booking.status}</Table.Cell>
+                  <Table.Cell>{service.booking.remark}</Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Root>
         </div>
       </div>
     </div>
