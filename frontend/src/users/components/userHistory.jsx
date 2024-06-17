@@ -15,11 +15,12 @@ import axios, { CanceledError } from "axios";
 const History = () => {
   const { id } = useParams();
   const [error, setError] = useState();
-  const [car, setCar] = useState("");
-  const [carPlate, setCarPlate] = useState("");
-  const [date, setDate] = useState("");
-  const [status, setStatus] = useState();
-  const [remark, setRemark] = useState("");
+  // const [car, setCar] = useState("");
+  // const [carPlate, setCarPlate] = useState("");
+  // const [date, setDate] = useState("");
+  // const [status, setStatus] = useState();
+  // const [remark, setRemark] = useState("");
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -34,12 +35,17 @@ const History = () => {
       })
       .then((response) => {
         if (response.data.appService && response.data.appService.length > 0) {
-          const userService = response.data.appService[0];
-          setCar(userService.booking.carModel);
-          setCarPlate(userService.booking.carPlate);
-          setDate(userService.booking.date);
-          setStatus(userService.booking.status);
-          setRemark(userService.booking.remark);
+          // const userService = response.data.appService[0];
+          // setCar(userService.booking.carModel);
+          // setCarPlate(userService.booking.carPlate);
+          // setDate(userService.booking.date);
+          // setStatus(userService.booking.status);
+          // setRemark(userService.booking.remark);
+
+          const sortedServices = response.data.appService.sort(
+            (a, b) => new Date(a.booking.date) - new Date(b.booking.date)
+          );
+          setServices(sortedServices);
         } else {
           setError("Service not found");
         }
@@ -79,11 +85,20 @@ const History = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableCell>{car}</TableCell>
+                {/* <TableCell>{car}</TableCell>
                 <TableCell>{carPlate}</TableCell>
                 <TableCell>{date}</TableCell>
                 <TableCell>{status}</TableCell>
-                <TableCell>{remark}</TableCell>
+                <TableCell>{remark}</TableCell> */}
+                {services.map((service, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{service.booking.carModel}</TableCell>
+                    <TableCell>{service.booking.carPlate}</TableCell>
+                    <TableCell>{service.booking.date}</TableCell>
+                    <TableCell>{service.booking.status}</TableCell>
+                    <TableCell>{service.booking.remark}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

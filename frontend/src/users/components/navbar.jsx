@@ -44,7 +44,7 @@ const Navbar = ({ isTopOfPage }) => {
           </>
         ) : (
           <Link to="/login">
-            <CgProfile className="w-8 h-8 hover:text-green-400" />
+            <CgProfile className="w-8 h-8 hover:text-red-500" />
           </Link>
         )}
       </ul>
