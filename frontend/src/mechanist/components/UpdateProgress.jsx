@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import serviceProgress from "../data/serviceProgress";
 import toast, { Toaster, toaster } from "react-hot-toast";
+import BackButton from "../../admin/components/BackButton";
 
 const UpdateProgress = () => {
   const { id } = useParams();
@@ -142,16 +143,25 @@ const UpdateProgress = () => {
           <Card variant="classic" className="w-full">
             <Flex direction="column" gapY="2">
               {service.serviceName.map((s, index) => (
-                <Code key={index} size="3">
-                  {s}
-                </Code>
+                <Box className="w-auto">
+                  <Code key={index} size="3">
+                    {s}
+                  </Code>
+                </Box>
               ))}
             </Flex>
           </Card>
           <Card variant="classic" className="w-full">
-            <Flex direction="column" align="center" gapX="3">
-              <Heading size="4">Total Progress: </Heading>
-              <div className="mt-9">
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              height="100%"
+            >
+              <Heading size="4" mb={3}>
+                Total Progress:{" "}
+              </Heading>
+              <div>
                 <Heading size="8">{totalProgress}%</Heading>
               </div>
             </Flex>
@@ -159,7 +169,7 @@ const UpdateProgress = () => {
         </Flex>
 
         <form onSubmit={handleSubmit}>
-          <Card>
+          <Card mt="3" variant="classic">
             <DataList.Root size="3">
               {service.serviceName.map((serviceName, index) => (
                 <DataList.Item key={index} align="center">
@@ -187,9 +197,12 @@ const UpdateProgress = () => {
               ))}
             </DataList.Root>
           </Card>
-          <Button mt="3" type="submit">
-            Update
-          </Button>
+          <Flex mt="3" gapX="3">
+            <Button type="submit" color="violet">
+              Update
+            </Button>
+            <BackButton href={`/mechanist/`} />
+          </Flex>
         </form>
       </Box>
     </>

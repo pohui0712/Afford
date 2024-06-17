@@ -1,11 +1,12 @@
 import React from "react";
 import UpdatePorgress from "../components/UpdateProgress";
+import MecLayout from "../components/MecLayout";
 
 const MechanistProgress = () => {
   return (
-    <div>
+    <MecLayout>
       <UpdatePorgress />
-    </div>
+    </MecLayout>
   );
 };
 
