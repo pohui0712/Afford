@@ -35,7 +35,7 @@ const MecAppointmentsList = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <Table.Root>
+      <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Car Plate</Table.ColumnHeaderCell>

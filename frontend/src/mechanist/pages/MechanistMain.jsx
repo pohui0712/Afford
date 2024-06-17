@@ -1,11 +1,12 @@
 import React from "react";
+import MecLayout from "../components/MecLayout";
 import MecAppointmentsList from "../components/MecAppointmentsList";
 
 const MechanistMain = () => {
   return (
-    <div>
+    <MecLayout>
       <MecAppointmentsList />
-    </div>
+    </MecLayout>
   );
 };
 
