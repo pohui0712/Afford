@@ -1,22 +1,36 @@
-import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, Spinner, TextArea } from "@radix-ui/themes";
 import axios from "axios";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
-const CompleteButton = ({ id }) => {
+const CompleteButton = ({ id, serviceID }) => {
   const [error, setError] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
+  const { register, handleSubmit } = useForm();
   const onComplete = async () => {
     try {
       setSubmitting(true);
       await axios.patch(`http://localhost:5500/booking/${id}`, {
         status: "completed",
       });
+      updateRemark();
     } catch (error) {
       setSubmitting(false);
       setError(true);
     }
     setSubmitting(false);
   };
+
+  const updateRemark = handleSubmit(async (data) => {
+    try {
+      await axios.patch(`http://localhost:5500/service/${serviceID}`, data);
+    } catch (error) {
+      setSubmitting(false);
+      setError(true);
+    }
+    setSubmitting(false);
+  });
+
   return (
     <>
       <AlertDialog.Root>
@@ -33,7 +47,13 @@ const CompleteButton = ({ id }) => {
             Are you sure all the services and maintenance by client is done?
             This action will remove this list from the table.
           </AlertDialog.Description>
-
+          <TextArea
+            mt="3"
+            size="3"
+            className="h-60"
+            placeholder="Any additional comments...(optional)"
+            {...register("remark")}
+          />
           <Flex mt="4" gap="3">
             <AlertDialog.Cancel>
               <Button variant="soft" color="gray">

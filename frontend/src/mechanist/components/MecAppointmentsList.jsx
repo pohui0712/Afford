@@ -1,8 +1,8 @@
-import { Callout, Link, Table, Progress, Button } from "@radix-ui/themes";
+import { Callout, Link, Table } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
-import ProgressState from "./ProgressState";
 import CompleteButton from "./CompleteButton";
+import ProgressState from "./ProgressState";
 
 const MecAppointmentsList = () => {
   const [appointments, SetAppointments] = useState([]);
@@ -65,7 +65,10 @@ const MecAppointmentsList = () => {
               <Table.Cell>{appointment.booking.mileage}</Table.Cell>
               <Table.Cell>
                 {appointment.service.progress === 100 ? (
-                  <CompleteButton id={appointment.booking._id} />
+                  <CompleteButton
+                    id={appointment.booking._id}
+                    serviceID={appointment.service._id}
+                  />
                 ) : (
                   <ProgressState progress={appointment.service.progress} />
                 )}
