@@ -10,7 +10,7 @@ const AdminBooking = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService`, {
+      .get(`http://localhost:5500/appointmentService/exCompleted`, {
         signal: controller.signal,
       })
       .then((response) => {
