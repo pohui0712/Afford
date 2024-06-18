@@ -121,7 +121,7 @@ const AdminBookingID = () => {
               <DataList.Value>{appointment.booking.mileage}km</DataList.Value>
             </DataList.Item>
             <DataList.Item>
-              <DataList.Label>Clint's Remark</DataList.Label>
+              <DataList.Label>Client's Remark</DataList.Label>
               <DataList.Value>{appointment.booking.remark}</DataList.Value>
             </DataList.Item>
             <DataList.Item>
