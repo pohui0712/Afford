@@ -35,7 +35,7 @@ const History = () => {
           // setRemark(userService.booking.remark);
 
           const sortedServices = response.data.appService.sort(
-            (a, b) => new Date(a.booking.date) - new Date(b.booking.date)
+            (a, b) => new Date(b.booking.date) - new Date(a.booking.date)
           );
           setServices(sortedServices);
         } else {
