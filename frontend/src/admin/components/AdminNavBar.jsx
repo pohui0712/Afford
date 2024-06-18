@@ -1,4 +1,4 @@
-import { Box, Flex } from "@radix-ui/themes";
+import { Box, Flex, Heading } from "@radix-ui/themes";
 import React from "react";
 import { LuBarChartBig } from "react-icons/lu";
 import { SlCalender } from "react-icons/sl";
@@ -6,13 +6,19 @@ import { Link, useLocation } from "react-router-dom";
 import { IoPeopleSharp } from "react-icons/io5";
 import { IoMdExit } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 const AdminNavBar = () => {
   return (
     <Flex direction="column" gapY="4" align="center" height="100%">
-      <a href="#" className="font-pt-sans-bold italic text-3xl mt-5">
-        AFFORD
-      </a>
+      <Flex align="center" justify="center" gap="3" mt="4">
+        <Link to="/mechanist">
+          <MdOutlineAdminPanelSettings size="30px" />
+        </Link>
+        <Link to="/mechanist">
+          <Heading size="7">Afford - Admin</Heading>
+        </Link>
+      </Flex>
       <Box width="250px" height="100%">
         <Flex direction="column" justify="between" height="100%">
           <NavLinks />
