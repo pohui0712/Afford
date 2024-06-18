@@ -7,6 +7,7 @@ const statusMap = {
   in_progress: { label: "In Progress", color: "violet" },
   rejected: { label: "Rejected", color: "red" },
   approved: { label: "Approved", color: "green" },
+  completed: { label: "completed", color: "pink" },
 };
 
 const AppointmentStatusBadge = ({ status }) => {
