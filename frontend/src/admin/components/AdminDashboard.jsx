@@ -50,7 +50,7 @@ const Dashboard = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <Grid columns={{ initial: "1", md: "2" }} gap="5" height="100vh">
+      <Grid columns={{ initial: "1", md: "2" }} gap="5" height="95vh">
         <Flex direction="column" gap="5">
           <CarModelChart
             rangeRover={rangeRoverCount}

@@ -25,11 +25,16 @@ const Appointment = () => {
         signal: controller.signal,
       })
       .then((response) => {
-        console.log("API response:", response.data);
-        const appointments = response.data.appService;
-        if (appointments && appointments.length > 0) {
-          setAppointments(appointments);
-          const defaultAppointment = appointments[0];
+        // console.log("API response:", response.data.appService[0].booking);
+        const validAppointment = response.data.appService.filter(
+          (app) =>
+            app.booking.status !== "completed" &&
+            app.booking.status !== "pending"
+        );
+
+        if (validAppointment && validAppointment.length > 0) {
+          setAppointments(validAppointment);
+          const defaultAppointment = validAppointment[0];
           setSelectedAppointment(defaultAppointment);
           setProgress(defaultAppointment.service.progress);
         } else {
@@ -49,7 +54,6 @@ const Appointment = () => {
     const selectedDateTime = event.target.value;
     const [selectedDate, selectedTime] = selectedDateTime.split(" - ");
 
-    // compare value get of time
     const appointment = appointments.find((app) => {
       return (
         app.booking.date === selectedDate && app.booking.time === selectedTime

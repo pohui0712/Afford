@@ -12,17 +12,17 @@ const AdminNavBar = () => {
   return (
     <Flex direction="column" gapY="4" align="center" height="100%">
       <Flex align="center" justify="center" gap="3" mt="4">
-        <Link to="/mechanist">
+        <Link to="/admin/dashboard">
           <MdOutlineAdminPanelSettings size="30px" />
         </Link>
-        <Link to="/mechanist">
+        <Link to="/admin/dashboard">
           <Heading size="7">Afford - Admin</Heading>
         </Link>
       </Flex>
       <Box width="250px" height="100%">
         <Flex direction="column" justify="between" height="100%">
           <NavLinks />
-          <div className="p-2 rounded-md mb-2 transition-colors duration-200 hover:bg-red-600 hover:font-bold hover:text-white">
+          <div className="p-2 rounded-md mb-5 transition-colors duration-200 hover:bg-red-600 hover:font-bold hover:text-white">
             <Link to={"/"}>
               <Flex align="center" gap="4">
                 <IoMdExit />
