@@ -10,11 +10,11 @@ import {
 } from "@radix-ui/themes";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { FaArrowRotateLeft } from "react-icons/fa6";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import serviceProgress from "../data/serviceProgress";
-import toast, { Toaster } from "react-hot-toast";
-import { FaArrowRotateLeft } from "react-icons/fa6";
 
 const UpdateProgress = () => {
   const { id } = useParams();
@@ -203,9 +203,9 @@ const UpdateProgress = () => {
             <Button type="submit" color="violet">
               Update
             </Button>
-            <Button color="blue" onClick={() => navigate(-1)}>
+            <Button type="button" onClick={() => navigate(-1)}>
               <FaArrowRotateLeft />
-              Back to prvious
+              Back to previous
             </Button>
           </Flex>
         </form>

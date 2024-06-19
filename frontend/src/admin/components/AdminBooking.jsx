@@ -1,4 +1,4 @@
-import { Callout, Heading, Table, Link, Button } from "@radix-ui/themes";
+import { Callout, Heading, Table, Link, Button, Badge } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
@@ -10,7 +10,7 @@ const AdminBooking = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService`, {
+      .get(`http://localhost:5500/appointmentService/exCompleted`, {
         signal: controller.signal,
       })
       .then((response) => {
@@ -93,6 +93,8 @@ const AdminBooking = () => {
                   <Button size="1" disabled>
                     Disable...
                   </Button>
+                ) : appointment.booking.status === "completed" ? (
+                  <AppointmentStatusBadge status={appointment.booking.status} />
                 ) : (
                   <EmailButton
                     status={appointment.booking.status}

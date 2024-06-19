@@ -22,6 +22,8 @@ import MechanistMain from "./mechanist/pages/MechanistMain";
 import MechanistUserAppointment from "./mechanist/pages/MechanistUserAppointment";
 import MechanistProgress from "./mechanist/pages/MechanistProgress";
 import MechanistInventoryaPage from "./mechanist/pages/MechanistInventoryaPage";
+import AdminCompletedPage from "./admin/pages/AdminCompletedPage";
+import AdminCompletedDetailPage from "./admin/pages/AdminCompletedDetailPage";
 
 function App() {
   return (
@@ -38,6 +40,14 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/admin/booking" element={<AdminBookingPage />} />
+          <Route
+            path="/admin/completedMaintenance"
+            element={<AdminCompletedPage />}
+          />
+          <Route
+            path="/admin/completedMaintenance/details/:id"
+            element={<AdminCompletedDetailPage />}
+          />
           <Route
             path="/admin/booking/:id"
             element={<AdminSpecifyBookingPage />}

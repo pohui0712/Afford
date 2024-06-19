@@ -1,20 +1,19 @@
-import { Callout, Link, Table } from "@radix-ui/themes";
+import { Callout, Heading, Link, Table } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
-import CompleteButton from "./CompleteButton";
-import ProgressState from "./ProgressState";
+import AppointmentStatusBadge from "./AppointmentStatusBadge";
 
-const MecAppointmentsList = () => {
-  const [appointments, SetAppointments] = useState([]);
+const AppointmentComplete = () => {
+  const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState();
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService/mechanist`, {
+      .get(`http://localhost:5500/appointmentService/completed`, {
         signal: controller.signal,
       })
       .then((response) => {
-        SetAppointments(response.data.appService);
+        setAppointments(response.data.appService);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -22,16 +21,19 @@ const MecAppointmentsList = () => {
       });
 
     return () => controller.abort();
-  }, [appointments]);
+  }, []);
+
   if (!appointments) {
     return (
       <Callout.Root color="red" className="mb-5">
-        <Callout.Text>There are no any appointments</Callout.Text>
+        <Callout.Text>No completed lists found</Callout.Text>
       </Callout.Root>
     );
   }
+
   return (
     <>
+      <Heading mb="3">Completed List</Heading>
       {error && (
         <Callout.Root color="red" className="mb-5">
           <Callout.Text>{error}</Callout.Text>
@@ -40,11 +42,11 @@ const MecAppointmentsList = () => {
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
+            <Table.ColumnHeaderCell>Client Name</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Appointment Time</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Car Plate</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Car Model</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Appointment Date</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Mileage</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Progress</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -52,27 +54,21 @@ const MecAppointmentsList = () => {
             <Table.Row key={appointment._id}>
               <Table.Cell>
                 <Link
+                  href={`/admin/completedMaintenance/details/${appointment._id}`}
                   underline="always"
-                  href={`/mechanist/userAppointment/${appointment._id}`}
-                  color="blue"
+                  highContrast
                 >
-                  {appointment.booking.carPlate}
+                  {appointment.booking.user.name}
                 </Link>
               </Table.Cell>
-
-              <Table.Cell>{appointment.booking.carModel}</Table.Cell>
-              <Table.Cell>{appointment.booking.date}</Table.Cell>
-              <Table.Cell>{appointment.booking.mileage}</Table.Cell>
               <Table.Cell>
-                {appointment.service.progress === 100 ? (
-                  <CompleteButton
-                    id={appointment.booking._id}
-                    serviceID={appointment.service._id}
-                  />
-                ) : (
-                  <ProgressState progress={appointment.service.progress} />
-                )}
+                <AppointmentStatusBadge status={appointment.booking.status} />
               </Table.Cell>
+              <Table.Cell>
+                {appointment.booking.date} at {appointment.booking.time}
+              </Table.Cell>
+              <Table.Cell>{appointment.booking.carPlate}</Table.Cell>
+              <Table.Cell>{appointment.booking.carModel}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -81,4 +77,4 @@ const MecAppointmentsList = () => {
   );
 };
 
-export default MecAppointmentsList;
+export default AppointmentComplete;
