@@ -10,7 +10,8 @@ const Appointment = () => {
   const { id } = useParams();
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
-  const [appointment, setAppointment] = useState(null);
+  const [appointments, setAppointments] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -24,13 +25,16 @@ const Appointment = () => {
         signal: controller.signal,
       })
       .then((response) => {
-        console.log(response.data.appService[0].booking);
-        if (response.data.appService && response.data.appService.length > 0) {
-          setAppointment(response.data.appService[0].booking);
-          setProgress(response.data.appService[0].service.progress);
+        console.log("API response:", response.data);
+        const appointments = response.data.appService;
+        if (appointments && appointments.length > 0) {
+          setAppointments(appointments);
+          const defaultAppointment = appointments[0];
+          setSelectedAppointment(defaultAppointment);
+          setProgress(defaultAppointment.service.progress);
         } else {
           setError("Appointment not found");
-          setAppointment(null);
+          setAppointments([]);
         }
       })
       .catch((err) => {
@@ -41,21 +45,63 @@ const Appointment = () => {
     return () => controller.abort();
   }, [id]);
 
+  const handleSelectChange = (event) => {
+    const selectedDateTime = event.target.value;
+    const [selectedDate, selectedTime] = selectedDateTime.split(" - ");
+
+    // compare value get of time
+    const appointment = appointments.find((app) => {
+      return (
+        app.booking.date === selectedDate && app.booking.time === selectedTime
+      );
+    });
+    if (appointment) {
+      setSelectedAppointment(appointment);
+      setProgress(appointment.service.progress);
+    } else {
+      console.log("Appointment not found");
+    }
+  };
+
   return (
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans relative">
       <SideBar />
       <div className="p-3 flex-1">
         <div className="bg-white rounded-2xl h-full flex flex-col justify-center items-center">
           <div className="text-2xl font-bold mb-8">
-            {/* {(appointment && progress === 100)
-              ? "All set! Get your car now"
-              : "Services in Progress"} */}
-            {appointment
+            {selectedAppointment
               ? progress === 100
                 ? "All set! Get your car now"
                 : "Services in Progress"
-              : "You have not appointment yet. Go to book now!"}
+              : "You have no any appointment yet. Book now!"}
           </div>
+          {appointments.length > 1 && (
+            <div className="mb-4">
+              <label htmlFor="appointment-select" className="mr-2">
+                Select Appointment:
+              </label>
+              <select
+                id="appointment-select"
+                value={
+                  `${selectedAppointment?.booking.date} - ${selectedAppointment?.booking.time}` ||
+                  ""
+                }
+                onChange={handleSelectChange}
+              >
+                <option value="" disabled>
+                  Select an appointment
+                </option>
+                {appointments.map((appointment) => (
+                  <option
+                    key={appointment.booking.id}
+                    value={`${appointment.booking.date} - ${appointment.booking.time}`}
+                  >
+                    {appointment.booking.date} - {appointment.booking.time}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="relative flex justify-center items-center">
             <img src={mustang} className="h-[35vh] absolute" />
             <div className="w-[70vh]">
