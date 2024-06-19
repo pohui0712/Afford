@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 import BackButton from "../../admin/components/BackButton";
 import InventoryButton from "./InventoryButton";
 import ProgressButton from "./ProgressButton";
+import ProgressState from "./ProgressState";
 
 const MecAppointmentID = () => {
   const { id } = useParams();
@@ -92,7 +93,9 @@ const MecAppointmentID = () => {
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Progress</DataList.Label>
-            <DataList.Value>{appointment.service.progress}%</DataList.Value>
+            <DataList.Value>
+              <ProgressState progress={appointment.service.progress} />
+            </DataList.Value>
           </DataList.Item>
           <DataList.Item>
             <DataList.Label>Car parts used</DataList.Label>

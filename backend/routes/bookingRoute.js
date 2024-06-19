@@ -77,6 +77,7 @@ router.get("/", async (request, response) => {
     let inProgressCount = 0;
     let approvedCount = 0;
     let rejectedCount = 0;
+    let completedCount = 0;
 
     // Initialize counters for each carModel type
     let rangeRoverCount = 0;
@@ -99,6 +100,9 @@ router.get("/", async (request, response) => {
           break;
         case "rejected":
           rejectedCount++;
+          break;
+        case "completed":
+          completedCount++;
           break;
         default:
           break;
@@ -132,6 +136,7 @@ router.get("/", async (request, response) => {
         inProgress: inProgressCount,
         approved: approvedCount,
         rejected: rejectedCount,
+        completed: completedCount,
       },
       carModelCounts: {
         Range_Rover: rangeRoverCount,

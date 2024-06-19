@@ -86,6 +86,155 @@ router.get("/", async (request, response) => {
   }
 });
 
+// Get ALL except "status : completed"
+router.get("/exCompleted", async (request, response) => {
+  try {
+    const appService = await AppointmentService.aggregate([
+      {
+        $lookup: {
+          from: "bookings",
+          localField: "booking",
+          foreignField: "_id",
+          as: "booking",
+        },
+      },
+      { $unwind: "$booking" },
+      {
+        $match: {
+          "booking.status": { $ne: "completed" },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "booking.user",
+          foreignField: "_id",
+          as: "booking.user",
+        },
+      },
+      { $unwind: "$booking.user" },
+      {
+        $lookup: {
+          from: "admins",
+          localField: "booking.admin",
+          foreignField: "_id",
+          as: "booking.admin",
+        },
+      },
+      { $unwind: "$booking.admin" },
+      {
+        $lookup: {
+          from: "services",
+          localField: "service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      { $unwind: "$service" },
+      {
+        $lookup: {
+          from: "mechanics",
+          localField: "mechanic",
+          foreignField: "_id",
+          as: "mechanic",
+        },
+      },
+      { $unwind: "$mechanic" },
+      {
+        $lookup: {
+          from: "inventories",
+          localField: "inventory",
+          foreignField: "_id",
+          as: "inventory",
+        },
+      },
+      { $unwind: { path: "$inventory", preserveNullAndEmptyArrays: true } },
+      { $sort: { "booking.createdTime": -1 } },
+    ]);
+    return response.status(200).json({
+      count: appService.length,
+      appService,
+    });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+router.get("/completed", async (request, response) => {
+  try {
+    const appService = await AppointmentService.aggregate([
+      {
+        $lookup: {
+          from: "bookings",
+          localField: "booking",
+          foreignField: "_id",
+          as: "booking",
+        },
+      },
+      { $unwind: "$booking" },
+      {
+        $match: {
+          "booking.status": "completed",
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "booking.user",
+          foreignField: "_id",
+          as: "booking.user",
+        },
+      },
+      { $unwind: "$booking.user" },
+      {
+        $lookup: {
+          from: "admins",
+          localField: "booking.admin",
+          foreignField: "_id",
+          as: "booking.admin",
+        },
+      },
+      { $unwind: "$booking.admin" },
+      {
+        $lookup: {
+          from: "services",
+          localField: "service",
+          foreignField: "_id",
+          as: "service",
+        },
+      },
+      { $unwind: "$service" },
+      {
+        $lookup: {
+          from: "mechanics",
+          localField: "mechanic",
+          foreignField: "_id",
+          as: "mechanic",
+        },
+      },
+      { $unwind: "$mechanic" },
+      {
+        $lookup: {
+          from: "inventories",
+          localField: "inventory",
+          foreignField: "_id",
+          as: "inventory",
+        },
+      },
+      { $unwind: { path: "$inventory", preserveNullAndEmptyArrays: true } },
+      { $sort: { "booking.createdTime": -1 } },
+    ]);
+    return response.status(200).json({
+      count: appService.length,
+      appService,
+    });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 // Get All approved data for mechanist
 router.get("/mechanist", async (req, res) => {
   try {
