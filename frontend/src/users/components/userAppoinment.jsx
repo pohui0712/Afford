@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "./userSidebar";
 import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router";
 import axios, { CanceledError } from "axios";
 import mustang from "../assests/mustang.png";
-import "react-circular-progressbar/dist/styles.css";
 
 const Appointment = () => {
   const { id } = useParams();
@@ -59,6 +59,7 @@ const Appointment = () => {
         app.booking.date === selectedDate && app.booking.time === selectedTime
       );
     });
+
     if (appointment) {
       setSelectedAppointment(appointment);
       setProgress(appointment.service.progress);
@@ -81,11 +82,10 @@ const Appointment = () => {
           </div>
           {appointments.length > 1 && (
             <div className="mb-4">
-              <label htmlFor="appointment-select" className="mr-2">
-                Select Appointment:
-              </label>
+              <div className="mr-2">Select Appointment:</div>
               <select
                 id="appointment-select"
+                key=""
                 value={
                   `${selectedAppointment?.booking.date} - ${selectedAppointment?.booking.time}` ||
                   ""

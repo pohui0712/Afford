@@ -56,7 +56,7 @@ const Dashboard = () => {
     if (car) {
       setSelectedCar(car);
       setSelectedCarImage(getCarImage(car.booking.carModel));
-      setServices(car.service.serviceName); // Update services for the selected car
+      setServices(car.service.serviceName);
     } else {
       console.log("Car not found");
     }
@@ -73,9 +73,8 @@ const Dashboard = () => {
         return machE;
       case "Range_Rover":
         return rangerover;
-
       default:
-        return null;
+        return mustang;
     }
   };
 
@@ -86,19 +85,13 @@ const Dashboard = () => {
         <div className="bg-white rounded-2xl h-full flex flex-col">
           <div className="flex justify-center">
             {selectedCarImage && (
-              <img
-                src={selectedCarImage}
-                alt={selectedCar?.booking.carModel}
-                className="h-[400px]"
-              />
+              <img src={selectedCarImage} className="h-[400px]" />
             )}
           </div>
 
           {appointments.length > 1 && (
             <div className="mb-4 flex justify-center">
-              <label htmlFor="car-select" className="mr-2">
-                Select Car:
-              </label>
+              <div className="mr-2">Select Car:</div>
               <select
                 id="car-select"
                 value={selectedCar?.booking.carModel || ""}

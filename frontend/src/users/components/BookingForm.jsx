@@ -21,6 +21,7 @@ import axios, { CanceledError } from "axios";
 import { Controller, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "../components/authProvider";
+import { useNavigate } from "react-router";
 
 const BookingForm = () => {
   const { user } = useAuth();
@@ -29,6 +30,7 @@ const BookingForm = () => {
   const { register, control, handleSubmit } = useForm({
     defaultValues: { user: user.id },
   });
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -36,6 +38,9 @@ const BookingForm = () => {
       // console.log(data);
       await axios.post("http://localhost:5500/booking", data);
       toast.success("Your appointment is successful!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       setSubmitting(false);
       // console.log(error);

@@ -11,8 +11,9 @@ const Settings = () => {
   const [contact, setContact] = useState("");
   const { id } = useParams();
   const [error, setError] = useState();
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
+  const [initialUser, setInitialUser] = useState({});
 
   const textGray = "block text-sm font-medium text-gray-700";
   const inputStyling =
@@ -30,9 +31,11 @@ const Settings = () => {
         signal: controller.signal,
       })
       .then((response) => {
-        setUser(response.data.user);
-        setName(response.data.user.name);
-        setContact(response.data.user.contact);
+        const userData = response.data.user;
+        setUser(userData);
+        setInitialUser(userData);
+        setName(userData.name);
+        setContact(userData.contact);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -45,13 +48,18 @@ const Settings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userData = {};
-    if (name !== user.name) userData.name = name;
-    if (password) userData.password = password;
-    if (contact !== user.contact) userData.contact = contact;
-
     if (password && password !== confirmPassword) {
       toast.error("Passwords do not match!");
+      return;
+    }
+
+    const userData = {};
+    if (name !== initialUser.name) userData.name = name;
+    if (password) userData.password = password;
+    if (contact !== initialUser.contact) userData.contact = contact;
+
+    if (Object.keys(userData).length === 0) {
+      toast.error("No changes made!");
       return;
     }
 
@@ -65,6 +73,8 @@ const Settings = () => {
       });
       toast.success("Update successfully");
       setError("");
+      // update the userdata
+      setInitialUser({ ...initialUser, ...userData });
     } catch (error) {
       setSubmitting(false);
       toast.error("Update unsuccessfully!");
