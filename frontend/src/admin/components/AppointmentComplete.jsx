@@ -33,13 +33,12 @@ const AppointmentComplete = () => {
 
   return (
     <>
-      <Heading mb="3">Completed List</Heading>
       {error && (
         <Callout.Root color="red" className="mb-5">
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <Table.Root variant="surface">
+      <Table.Root variant="surface" mt="8">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Client Name</Table.ColumnHeaderCell>
@@ -56,7 +55,6 @@ const AppointmentComplete = () => {
                 <Link
                   href={`/admin/completedMaintenance/details/${appointment._id}`}
                   underline="always"
-                  highContrast
                 >
                   {appointment.booking.user.name}
                 </Link>
