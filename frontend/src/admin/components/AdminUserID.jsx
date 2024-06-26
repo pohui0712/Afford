@@ -53,7 +53,7 @@ const AdminUserID = () => {
       )}
 
       <div className="md:grid grid-cols-4 gap-3">
-        <Box className="col-span-3" mt="8">
+        <Box className="col-span-3">
           <Card>
             <DataList.Root>
               <DataList.Item>
@@ -79,7 +79,7 @@ const AdminUserID = () => {
             </DataList.Root>
           </Card>
         </Box>
-        <Box className="w-[10rem]" mt="8">
+        <Box className="w-[10rem]">
           <Flex direction="column" gapY="3">
             <EditButton
               href={`/admin/userManagement/edit/${user._id}`}

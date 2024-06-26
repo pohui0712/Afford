@@ -52,7 +52,7 @@ const AdminBooking = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <Table.Root variant="surface" mt="8">
+      <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Client Name</Table.ColumnHeaderCell>

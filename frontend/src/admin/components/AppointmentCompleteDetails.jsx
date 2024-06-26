@@ -53,7 +53,7 @@ const AppointmentCompleteDetails = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <Box mt="8">
+      <Box>
         <Flex direction="column" gapY="3">
           <Card>
             <Heading size="3" mb="3">

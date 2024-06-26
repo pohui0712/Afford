@@ -119,7 +119,7 @@ const AppointmentEdit = () => {
         </Callout.Root>
       )}
 
-      <Box mt="8">
+      <Box>
         <form onSubmit={onSubmit_booking}>
           <Flex gap="4" mb="2">
             <Heading size="5" color="red">
