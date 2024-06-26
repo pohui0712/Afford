@@ -1,7 +1,8 @@
-import { AlertDialog, Button, Flex, DataList, Box } from "@radix-ui/themes";
+import { AlertDialog, Box, Button, DataList, Flex } from "@radix-ui/themes";
+import axios from "axios";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
+import { IoPaperPlaneOutline } from "react-icons/io5";
 
 const EmailButton = ({ status, data }) => {
   const [error, setError] = useState(false);
@@ -19,6 +20,7 @@ const EmailButton = ({ status, data }) => {
       <AlertDialog.Root>
         <AlertDialog.Trigger>
           <Button color={status === "approved" ? "green" : "red"} size="1">
+            <IoPaperPlaneOutline />{" "}
             {status === "approved" ? "Approved" : "Rejected"}
           </Button>
         </AlertDialog.Trigger>

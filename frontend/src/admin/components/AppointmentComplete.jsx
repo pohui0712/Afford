@@ -1,4 +1,4 @@
-import { Callout, Heading, Link, Table } from "@radix-ui/themes";
+import { Callout, Link, Table } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";

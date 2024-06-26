@@ -56,9 +56,7 @@ const AdminBookingID = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-
-      <Heading mb="3">Appointment Details</Heading>
-      <Box>
+      <Box mt="8">
         <Card>
           <DataList.Root>
             <DataList.Item>
@@ -69,7 +67,6 @@ const AdminBookingID = () => {
                     <Link
                       href={`/admin/userManagement/${appointment.booking.user._id}`}
                       underline="always"
-                      color="violet"
                     >
                       {appointment.booking.user.name}
                     </Link>
