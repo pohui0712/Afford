@@ -3,7 +3,6 @@ import {
   Button,
   Callout,
   Flex,
-  Heading,
   Spinner,
   TextField,
 } from "@radix-ui/themes";
@@ -66,9 +65,8 @@ const UserEdit = () => {
   return (
     <Box className="max-w-3xl">
       <Toaster />
-      <Heading mb="3">Edit Personal Information</Heading>
       <form onSubmit={onSubmit}>
-        <Flex direction="column" gapY="3">
+        <Flex direction="column" gapY="3" mt="8">
           {error && (
             <Callout.Root color="red" className="mb-5">
               <Callout.Text>{error}</Callout.Text>

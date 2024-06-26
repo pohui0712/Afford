@@ -52,13 +52,8 @@ const AdminUserID = () => {
         </Callout.Root>
       )}
 
-      <Heading mb="3">
-        <Em>{user.name}</Em>'s Personal Information
-      </Heading>
-
-      {/* <Flex gapX="8"> */}
       <div className="md:grid grid-cols-4 gap-3">
-        <Box className="col-span-3">
+        <Box className="col-span-3" mt="8">
           <Card>
             <DataList.Root>
               <DataList.Item>
@@ -84,7 +79,7 @@ const AdminUserID = () => {
             </DataList.Root>
           </Card>
         </Box>
-        <Box className="w-[10rem]">
+        <Box className="w-[10rem]" mt="8">
           <Flex direction="column" gapY="3">
             <EditButton
               href={`/admin/userManagement/edit/${user._id}`}
