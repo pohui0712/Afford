@@ -82,10 +82,11 @@ const Dashboard = () => {
     <div className="flex flex-row bg-blue-900 h-screen font-pt-sans">
       <SideBar />
       <div className="p-3 flex-1">
-        <div className="bg-white rounded-2xl h-full flex flex-col">
+        {/* <div className="bg-white rounded-2xl h-full flex flex-col"> */}
+        <div className="rounded-2xl h-full flex flex-col w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="flex justify-center">
-            {selectedCarImage || (
-              <img src={selectedCarImage} className="h-[400px]" />
+            {selectedCarImage && (
+              <img src={selectedCarImage} className="h-[300px]" />
             )}
           </div>
 
