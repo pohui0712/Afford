@@ -10,7 +10,7 @@
     "@react-three/fiber": "^8.16.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/u``ser-event": "^13.5.0",
     "@types/three": "^0.164.0",
     "@types/webgi": "https://storage.googleapis.com/dist.pixotronics.com/webgi/runtime/bundle-types-0.5.5.tgz",
     "axios": "^1.7.2",
