@@ -84,9 +84,7 @@ const Dashboard = () => {
       <div className="p-3 flex-1">
         <div className="bg-white rounded-2xl h-full flex flex-col">
           <div className="flex justify-center">
-            {selectedCarImage || (
-              <img src={selectedCarImage} className="h-[400px]" />
-            )}
+            <img src={selectedCarImage} className="h-[400px]" />
           </div>
 
           {appointments.length > 1 && (
@@ -94,7 +92,7 @@ const Dashboard = () => {
               <div className="mr-2">Select Car:</div>
               <select
                 id="car-select"
-                value={selectedCar?.booking.carModel || ""}
+                value={selectedCar?.booking.carModel}
                 onChange={handleSelectChange}
               >
                 <option value="" disabled>
@@ -137,7 +135,7 @@ const Dashboard = () => {
                   </li>
                 </ul>
               ) : (
-                <p>No car selected</p>
+                <p>No car information</p>
               )}
             </div>
             <div className="bg-gray-100 p-4 rounded-lg shadow">
