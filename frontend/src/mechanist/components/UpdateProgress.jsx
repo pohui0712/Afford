@@ -15,6 +15,7 @@ import { FaArrowRotateLeft } from "react-icons/fa6";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import serviceProgress from "../data/serviceProgress";
+import { RiDonutChartFill } from "react-icons/ri";
 
 const UpdateProgress = () => {
   const { id } = useParams();
@@ -201,6 +202,7 @@ const UpdateProgress = () => {
           </Card>
           <Flex mt="3" gapX="3">
             <Button type="submit" color="violet">
+              <RiDonutChartFill />
               Update
             </Button>
             <Button type="button" onClick={() => navigate(-1)}>

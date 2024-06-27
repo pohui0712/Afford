@@ -32,11 +32,6 @@ const UserAppointment = ({ userId }) => {
   }
   return (
     <>
-      {/* {error && (
-        <Callout.Root color="red" className="mb-5">
-          <Callout.Text>{error}</Callout.Text>
-        </Callout.Root>
-      )} */}
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>

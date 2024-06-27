@@ -6,6 +6,7 @@ import inventoryData from "../data/inventory";
 import toast, { Toaster } from "react-hot-toast";
 import BackButton from "../../admin/components/BackButton";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { FaScrewdriverWrench } from "react-icons/fa6";
 
 const InventoryUpdate = () => {
   const { id } = useParams();
@@ -136,7 +137,10 @@ const InventoryUpdate = () => {
         ))}
       </Grid>
       <Flex gapX="3" mt="3">
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit}>
+          <FaScrewdriverWrench />
+          Submit
+        </Button>
         <BackButton href={`/mechanist/userAppointment/${id}`} />
       </Flex>
     </>

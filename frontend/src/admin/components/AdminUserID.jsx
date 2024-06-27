@@ -52,11 +52,6 @@ const AdminUserID = () => {
         </Callout.Root>
       )}
 
-      <Heading mb="3">
-        <Em>{user.name}</Em>'s Personal Information
-      </Heading>
-
-      {/* <Flex gapX="8"> */}
       <div className="md:grid grid-cols-4 gap-3">
         <Box className="col-span-3">
           <Card>

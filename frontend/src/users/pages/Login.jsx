@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import GridLayout from "../components/GridLayout";
 import LoginForm from "../components/LoginForm";
+import CardGrid from "../components/CardGrid";
 
 const Login = () => {
   useEffect(() => {
@@ -9,7 +10,7 @@ const Login = () => {
 
   return (
     <GridLayout>
-      <p>Design</p>
+      <CardGrid />
       <LoginForm />
     </GridLayout>
   );

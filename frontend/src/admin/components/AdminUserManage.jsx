@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { Callout, Link, Table } from "@radix-ui/themes";
 import axios from "axios";
-import { Heading, Table, Link, Callout } from "@radix-ui/themes";
+import React, { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 
 const AdminUserManage = () => {
@@ -35,7 +35,6 @@ const AdminUserManage = () => {
 
   return (
     <>
-      <Heading mb="3">User Management</Heading>
       {error && (
         <Callout.Root color="red" className="mb-5">
           <Callout.Text>{error}</Callout.Text>
@@ -59,7 +58,6 @@ const AdminUserManage = () => {
                 <Link
                   href={`/admin/userManagement/${user._id}`}
                   underline="always"
-                  highContrast
                 >
                   {user.name}
                 </Link>

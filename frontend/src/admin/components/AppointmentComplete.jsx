@@ -1,4 +1,4 @@
-import { Callout, Heading, Link, Table } from "@radix-ui/themes";
+import { Callout, Link, Table } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
@@ -33,7 +33,6 @@ const AppointmentComplete = () => {
 
   return (
     <>
-      <Heading mb="3">Completed List</Heading>
       {error && (
         <Callout.Root color="red" className="mb-5">
           <Callout.Text>{error}</Callout.Text>
@@ -56,7 +55,6 @@ const AppointmentComplete = () => {
                 <Link
                   href={`/admin/completedMaintenance/details/${appointment._id}`}
                   underline="always"
-                  highContrast
                 >
                   {appointment.booking.user.name}
                 </Link>

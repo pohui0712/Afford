@@ -53,8 +53,6 @@ const AppointmentCompleteDetails = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-
-      <Heading mb="3">Maintenance Info</Heading>
       <Box>
         <Flex direction="column" gapY="3">
           <Card>
@@ -70,7 +68,6 @@ const AppointmentCompleteDetails = () => {
                       <Link
                         href={`/admin/userManagement/${appointment.booking.user._id}`}
                         underline="always"
-                        color="violet"
                       >
                         {appointment.booking.user.name}
                       </Link>

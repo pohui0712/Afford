@@ -16,7 +16,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
 import BackButton from "./BackButton";
-import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 
 const AdminBookingID = () => {
@@ -56,8 +55,6 @@ const AdminBookingID = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-
-      <Heading mb="3">Appointment Details</Heading>
       <Box>
         <Card>
           <DataList.Root>
@@ -69,7 +66,6 @@ const AdminBookingID = () => {
                     <Link
                       href={`/admin/userManagement/${appointment.booking.user._id}`}
                       underline="always"
-                      color="violet"
                     >
                       {appointment.booking.user.name}
                     </Link>
@@ -144,7 +140,6 @@ const AdminBookingID = () => {
           href={`/admin/booking/edit/${appointment._id}`}
           target="Appointment"
         />
-        <DeleteButton />
         <BackButton href={`/admin/booking`} />
       </Flex>
     </>
