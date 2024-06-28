@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fbe1d0a9.css",
+    "main.js": "/static/js/main.8c107e72.js",
+    "static/js/453.272d0268.chunk.js": "/static/js/453.272d0268.chunk.js",
+    "static/media/mustang.png": "/static/media/mustang.07776453794c7dac34fd.png",
+    "static/media/worker.jpeg": "/static/media/worker.17d85a19b43e10a9d4e8.jpeg",
+    "static/media/micheal.jpg": "/static/media/micheal.253514a47a582c3bfff9.jpg",
+    "static/media/territory.png": "/static/media/territory.03825cfcd32586f898bc.png",
+    "static/media/ford4.webp": "/static/media/ford4.b8717447538ad685e298.webp",
+    "static/media/machE.png": "/static/media/machE.ef723bd4d4957fc50bf3.png",
+    "static/media/sarah.jpg": "/static/media/sarah.24ac823863eb7640c502.jpg",
+    "static/media/explorer.png": "/static/media/explorer.3f67fd41d60c029d6669.png",
+    "static/media/star.png": "/static/media/star.590421d9424098649727.png",
+    "static/media/mustangLogo.png": "/static/media/mustangLogo.957a3e7fe75e16d29c73.png",
+    "static/media/diagnosis.png": "/static/media/diagnosis.f7593c4c3ac8d12ec03f.png",
+    "static/media/david.jpg": "/static/media/david.9ecfeb2955c8e5238ce8.jpg",
+    "static/media/engine.jpg": "/static/media/engine.6fc5041c60ce4b2586d1.jpg",
+    "static/media/brake.jpg": "/static/media/brake.9b05f4c7a68fcce53a17.jpg",
+    "static/media/suspension.jpg": "/static/media/suspension.e3e01b729a1c578a4264.jpg",
+    "static/media/johnson.webp": "/static/media/johnson.ed5ed3f7185aa3c493f8.webp",
+    "static/media/jessica.avif": "/static/media/jessica.b0ee3735536f8f49baa6.avif",
+    "index.html": "/index.html",
+    "main.fbe1d0a9.css.map": "/static/css/main.fbe1d0a9.css.map",
+    "main.8c107e72.js.map": "/static/js/main.8c107e72.js.map",
+    "453.272d0268.chunk.js.map": "/static/js/453.272d0268.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fbe1d0a9.css",
+    "static/js/main.8c107e72.js"
+  ]
+}

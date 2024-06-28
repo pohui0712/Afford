@@ -4,9 +4,7 @@ import {
   Callout,
   Card,
   DataList,
-  Em,
   Flex,
-  Heading,
 } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";

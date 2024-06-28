@@ -1,4 +1,4 @@
-import { Box, Callout, Flex, Grid } from "@radix-ui/themes";
+import { Callout, Flex, Grid } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import CarModelChart from "./CarModelChart";
