@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
-import GridLayout from "../components/GridLayout";
-import LoginForm from "../components/LoginForm";
-import CardGrid from "../components/CardGrid";
-import WebgiViewer from "../components/webgi";
 import { motion } from "framer-motion";
-import { AuroraBackground } from "../components/ui/aurora-background";
-import { Grid } from "@radix-ui/themes";
+import React, { useEffect } from "react";
 import { IoHomeSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import LoginForm from "../components/LoginForm";
+import { AuroraBackground } from "../components/ui/aurora-background";
 
 const Login = () => {
   useEffect(() => {
@@ -15,11 +11,6 @@ const Login = () => {
   }, []);
 
   return (
-    // <GridLayout>
-    //   <p></p>
-    //   <WebgiViewer />
-    //   <LoginForm />
-    // </GridLayout>
     <AuroraBackground>
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
