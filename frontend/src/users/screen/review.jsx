@@ -23,6 +23,7 @@ const Review = () => {
               key={index}
               comments={review.comments}
               name={review.name}
+              image={review.image}
             />
           ))}
         </motion.div>

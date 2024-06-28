@@ -3,16 +3,28 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineHistory } from "react-icons/md";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { TbLayoutDashboard, TbLogout2 } from "react-icons/tb";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import logo from "../assests/mustangLogo.png";
 import { useAuth } from "../components/authProvider";
 
-const SidebarItem = ({ icon: Icon, to, label }) => (
-  <Link to={to} className="flex items-center text-left hover:text-green-400">
-    <Icon />
-    <div className="ml-2">{label}</div>
-  </Link>
-);
+const SidebarItem = ({ icon: Icon, to, label }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
+  return (
+    <Link
+      to={to}
+      className={`flex items-center text-left py-2 px-4 rounded-lg ${
+        isActive
+          ? "bg-blue-700 text-white"
+          : "hover:bg-blue-600 hover:text-white"
+      }`}
+    >
+      <Icon className="mr-2" />
+      <div>{label}</div>
+    </Link>
+  );
+};
 
 const SideBar = () => {
   const { logout, isAuthenticated, user } = useAuth();
