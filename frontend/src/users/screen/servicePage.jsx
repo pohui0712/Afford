@@ -5,7 +5,7 @@ import serviceInfo from "../data/serviceInfo";
 
 const Service = () => {
   return (
-    <div id="service" className="flex flex-wrap bg-gray-50">
+    <div id="service" className="flex flex-wrap">
       <div id="serviceContent" className="flex-1 p-10">
         <div className="text-4xl mb-2 mt-3 font-pt-sans-bold max-w-md">
           WE OFFER A WIDE RANGE OF CAR SERVICES

@@ -4,7 +4,7 @@ import infoCard from "../data/planCard";
 
 const Planning = () => {
   return (
-    <section id="planning" className="bg-gray-100">
+    <section id="planning">
       <div
         id="planningContent"
         className="flex justify-center flex-col items-center"

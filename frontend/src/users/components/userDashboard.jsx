@@ -61,6 +61,7 @@ const Dashboard = () => {
       console.log("Car not found");
     }
   };
+
   const getCarImage = (carModel) => {
     switch (carModel) {
       case "Mustang":
@@ -78,11 +79,24 @@ const Dashboard = () => {
     }
   };
 
+  const getServiceReminders = (currentMileage) => {
+    const reminders = [];
+    const interval = 10000;
+    const maxReminders = 3; // Only get the first three reminders
+    let nextServiceMileage = Math.ceil(currentMileage / interval) * interval;
+
+    while (reminders.length < maxReminders) {
+      reminders.push(nextServiceMileage - currentMileage);
+      nextServiceMileage += interval;
+    }
+
+    return reminders;
+  };
+
   return (
     <div className="flex flex-row bg-blue-900 h-screen font-pt-sans">
       <SideBar />
       <div className="p-3 flex-1">
-        {/* <div className="bg-white rounded-2xl h-full flex flex-col"> */}
         <div className="rounded-2xl h-full flex flex-col w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="flex justify-center">
             <img src={selectedCarImage} className="h-[400px]" />
@@ -101,7 +115,7 @@ const Dashboard = () => {
                 </option>
                 {appointments.map((appointment) => (
                   <option
-                    key={appointment.booking.id}
+                    key={appointment.booking._id}
                     value={appointment.booking.carModel}
                   >
                     {appointment.booking.carModel}
@@ -155,11 +169,19 @@ const Dashboard = () => {
             </div>
             <div className="bg-gray-100 p-4 rounded-lg shadow">
               <h3 className="text-lg font-semibold mb-2">Service Reminder</h3>
-              <ul className="list-disc list-inside">
-                <li className="mt-3">MileageToService: 10000 KM</li>
-                <li className="mt-3">MileageToService: 20000 KM</li>
-                <li className="mt-3">MileageToService: 30000 KM</li>
-              </ul>
+              {selectedCar ? (
+                <ul className="list-disc list-inside">
+                  {getServiceReminders(selectedCar.booking.mileage).map(
+                    (reminder, index) => (
+                      <li className="mt-3" key={index}>
+                        MileageToService: {reminder} KM
+                      </li>
+                    )
+                  )}
+                </ul>
+              ) : (
+                <p>No mileage information</p>
+              )}
             </div>
           </div>
         </div>

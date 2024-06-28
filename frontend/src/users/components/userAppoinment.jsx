@@ -72,7 +72,6 @@ const Appointment = () => {
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans relative">
       <SideBar />
       <div className="p-3 flex-1">
-        {/* <div className="bg-white rounded-2xl h-full flex flex-col justify-center items-center"> */}
         <div className="rounded-2xl h-full flex flex-col justify-center items-center w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="text-2xl font-bold mb-8">
             {selectedAppointment
@@ -81,32 +80,30 @@ const Appointment = () => {
                 : "Services in Progress"
               : "You have no any appointment yet. Book now!"}
           </div>
-          {appointments.length > 1 && (
-            <div className="mb-4">
-              <div className="mr-2">Select Appointment:</div>
-              <select
-                id="appointment-select"
-                key=""
-                value={
-                  `${selectedAppointment?.booking.date} - ${selectedAppointment?.booking.time}` ||
-                  ""
-                }
-                onChange={handleSelectChange}
-              >
-                <option value="" disabled>
-                  Select an appointment
+          <div className="mb-4">
+            <div className="mr-2">Select Appointment:</div>
+            <select
+              id="appointment-select"
+              key=""
+              value={
+                `${selectedAppointment?.booking.date} - ${selectedAppointment?.booking.time}` ||
+                ""
+              }
+              onChange={handleSelectChange}
+            >
+              <option value="" disabled>
+                Select an appointment
+              </option>
+              {appointments.map((appointment) => (
+                <option
+                  key={appointment.booking.id}
+                  value={`${appointment.booking.date} - ${appointment.booking.time}`}
+                >
+                  {appointment.booking.date} - {appointment.booking.time}
                 </option>
-                {appointments.map((appointment) => (
-                  <option
-                    key={appointment.booking.id}
-                    value={`${appointment.booking.date} - ${appointment.booking.time}`}
-                  >
-                    {appointment.booking.date} - {appointment.booking.time}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+              ))}
+            </select>
+          </div>
           <div className="relative flex justify-center items-center">
             <img src={mustang} className="h-[35vh] absolute" />
             <div className="w-[70vh]">
