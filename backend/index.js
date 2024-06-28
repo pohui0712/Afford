@@ -19,7 +19,7 @@ import bcrypt from "bcrypt";
 
 const app = express();
 
-if (!config.get("jwtPrivateKey")) {
+if (!config.has("jwtPrivateKey")) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
 }
