@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import mustang from "../assests/mustang.png";
 import explorer from "../assests/explorer.png";
-import rangerover from "../assests/rangerover.png";
 import machE from "../assests/machE.png";
 import territory from "../assests/territory.png";
 import SideBar from "./userSidebar";
@@ -72,8 +71,6 @@ const Dashboard = () => {
         return territory;
       case "Mustang_Mach_E":
         return machE;
-      case "Range_Rover":
-        return rangerover;
       default:
         return mustang;
     }
