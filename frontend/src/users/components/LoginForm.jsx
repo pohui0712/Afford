@@ -19,6 +19,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const { loginUser } = useAuth();
 
@@ -26,6 +27,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
+      setSubmitting(true);
       // Attempt to log in as admin
       const responseAdmin = await axios.post(
         "http://localhost:5500/auth/admin",
@@ -63,12 +65,14 @@ const LoginForm = () => {
           navigate("/");
           return;
         } catch (errorUser) {
+          setSubmitting(false);
           // If all login attempts fail
           setError(error);
           toast.error("Invalid email or password");
         }
       }
     }
+    setSubmitting(false);
   };
 
   return (
