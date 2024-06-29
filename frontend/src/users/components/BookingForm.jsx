@@ -33,6 +33,12 @@ const BookingForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
+    const carPlateRegex = /^[a-zA-Z0-9]*$/;
+
+    if (!carPlateRegex.test(data.carPlate)) {
+      toast.error("Please type the valid car plate format! Exp: SYP123");
+      return;
+    }
     try {
       setSubmitting(true);
       // console.log(data);
