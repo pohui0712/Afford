@@ -19,8 +19,6 @@ import bcrypt from "bcrypt";
 
 const app = express();
 
-const config = require("config");
-
 console.log("NODE_ENV:", process.env.NODE_ENV); // Should be 'production'
 console.log("Config jwtPrivateKey:", config.get("jwtPrivateKey")); // Should log the production key
 
