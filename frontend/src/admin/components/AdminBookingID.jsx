@@ -17,28 +17,45 @@ import { useParams } from "react-router";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
 import BackButton from "./BackButton";
 import EditButton from "./EditButton";
+import SkeletonTable from "./SkeletonTable";
 
 const AdminBookingID = () => {
   const { id } = useParams();
-  const [appointment, setUser] = useState();
-  const [error, setError] = useState();
+  const [appointment, setAppointment] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
+
     axios
       .get(`http://localhost:5500/appointmentService/${id}`, {
         signal: controller.signal,
       })
       .then((response) => {
-        setUser(response.data.appService);
+        setAppointment(response.data.appService);
+        setLoading(false);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
 
     return () => controller.abort();
   }, [id]);
+
+  if (isLoading) {
+    return <SkeletonTable />;
+  }
+
+  if (error) {
+    return (
+      <Callout.Root color="red" className="mb-5">
+        <Callout.Text>{error}</Callout.Text>
+      </Callout.Root>
+    );
+  }
 
   if (!appointment) {
     return (
@@ -50,11 +67,6 @@ const AdminBookingID = () => {
 
   return (
     <>
-      {error && (
-        <Callout.Root color="red" className="mb-5">
-          <Callout.Text>{error}</Callout.Text>
-        </Callout.Root>
-      )}
       <Box>
         <Card>
           <DataList.Root>
@@ -121,7 +133,7 @@ const AdminBookingID = () => {
               <DataList.Value>{appointment.booking.remark}</DataList.Value>
             </DataList.Item>
             <DataList.Item>
-              <DataList.Label>Servcices</DataList.Label>
+              <DataList.Label>Services</DataList.Label>
               <DataList.Value>
                 {appointment.service.serviceName.map((service, index) => (
                   <span key={index}>
