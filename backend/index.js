@@ -31,7 +31,12 @@ console.log(`${config.get("jwtPrivateKey")}`);
 app.use(express.json());
 
 /// Middleware for handling CORS policy
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://afford-backend.vercel.app",
+    method: ["POST", "GET", "PATCH", "UPDATE", "DELETE"],
+  })
+);
 
 mongoose
   .connect(mongoDBURL)

@@ -28,7 +28,7 @@ const LoginForm = () => {
     try {
       // Attempt to log in as admin
       const responseAdmin = await axios.post(
-        "http://localhost:5500/auth/admin",
+        `${process.env.REACT_APP_API_URL}/auth/admin`,
         {
           email,
           password,
@@ -40,7 +40,7 @@ const LoginForm = () => {
       // If admin login fails, attempt mechanist login
       try {
         const responseMechanist = await axios.post(
-          "http://localhost:5500/auth/mechanist",
+          `${process.env.REACT_APP_API_URL}/auth/mechanist`,
           {
             email,
             password,
@@ -52,13 +52,12 @@ const LoginForm = () => {
         // If mechanist login fails, attempt user login
         try {
           const responseUser = await axios.post(
-            "http://localhost:5500/auth/user",
+            `${process.env.REACT_APP_API_URL}/auth/user`,
             {
               email,
               password,
             }
           );
-          console.log("user");
           loginUser(responseUser.data.token, responseUser.data.user);
           navigate("/");
           return;
