@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT, mongoDBURL } from "./config.js";
+// import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
@@ -40,11 +40,11 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.mongoDBURL)
+  .connect(config.get("database"))
   .then(() => {
     console.log("Connect databse successfully.");
-    app.listen(process.env.PORT, () => {
-      console.log(`App is listening to port: ${PORT}`);
+    app.listen(config.get("PORT"), () => {
+      console.log(`App is listening to port:`, config.get("PORT"));
     });
   })
   .catch((error) => {
