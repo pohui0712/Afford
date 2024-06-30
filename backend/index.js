@@ -28,13 +28,7 @@ if (!config.get("jwtPrivateKey")) {
 app.use(express.json());
 
 /// Middleware for handling CORS policy
-app.use(
-  cors({
-    origin: "https://afford-frontend.vercel.app",
-    method: ["POST", "GET", "PATCH", "UPDATE", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.options("*", cors()); // Enable pre-flight requests for all routes
 
