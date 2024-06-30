@@ -54,6 +54,42 @@ const SkeletonTable = () => {
             <Skeleton />
           </Table.Cell>
         </Table.Row>
+
+        <Table.Row>
+          <Table.RowHeaderCell>
+            <Skeleton />
+          </Table.RowHeaderCell>
+          <Table.Cell>
+            <Skeleton />
+          </Table.Cell>
+          <Table.Cell>
+            <Skeleton />
+          </Table.Cell>
+        </Table.Row>
+
+        <Table.Row>
+          <Table.RowHeaderCell>
+            <Skeleton />
+          </Table.RowHeaderCell>
+          <Table.Cell>
+            <Skeleton />
+          </Table.Cell>
+          <Table.Cell>
+            <Skeleton />
+          </Table.Cell>
+        </Table.Row>
+
+        <Table.Row>
+          <Table.RowHeaderCell>
+            <Skeleton />
+          </Table.RowHeaderCell>
+          <Table.Cell>
+            <Skeleton />
+          </Table.Cell>
+          <Table.Cell>
+            <Skeleton />
+          </Table.Cell>
+        </Table.Row>
       </Table.Body>
     </Table.Root>
   );
