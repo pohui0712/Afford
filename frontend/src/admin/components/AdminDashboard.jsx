@@ -21,7 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/booking`, {
+      .get(`${process.env.REACT_APP_BACKEND_URI}/booking`, {
         signal: controller.signal,
       })
       .then((response) => {

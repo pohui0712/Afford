@@ -26,7 +26,7 @@ const RegisterForm = () => {
     try {
       setSubmitting(true);
       // create
-      await axios.post("http://localhost:5500/users", data);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URI}/users`, data);
 
       // navigate(0);
       toast.success("Register successfully");

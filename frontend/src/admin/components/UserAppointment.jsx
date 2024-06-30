@@ -9,9 +9,12 @@ const UserAppointment = ({ userId }) => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService/user/${userId}`, {
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/user/${userId}`,
+        {
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         setAppointmentList(response.data.appService);
       })

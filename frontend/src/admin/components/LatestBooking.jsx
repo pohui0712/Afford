@@ -9,9 +9,12 @@ const LatestBooking = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService/exCompleted`, {
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/exCompleted`,
+        {
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         setData(response.data.appService);
         // console.log(response.data.appService);

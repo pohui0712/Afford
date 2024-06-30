@@ -24,7 +24,7 @@ const Settings = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`http://localhost:5500/users/profile/${id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_URI}/users/profile/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

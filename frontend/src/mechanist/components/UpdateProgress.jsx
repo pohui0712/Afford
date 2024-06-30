@@ -31,7 +31,7 @@ const UpdateProgress = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/service/${id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_URI}/service/${id}`, {
         signal: controller.signal,
       })
       .then((response) => {
@@ -115,7 +115,7 @@ const UpdateProgress = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`http://localhost:5500/service/${id}`, {
+      await axios.patch(`${process.env.REACT_APP_BACKEND_URI}/service/${id}`, {
         progress: totalProgress,
       });
       toast.success(`Progress update to ${totalProgress} !`);

@@ -20,12 +20,15 @@ const Dashboard = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`http://localhost:5500/appointmentService/user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         if (response.data.appService && response.data.appService.length > 0) {
           setAppointments(response.data.appService);

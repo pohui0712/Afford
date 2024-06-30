@@ -13,7 +13,7 @@ const DeleteButton = ({ route }) => {
   const onDelete = async () => {
     try {
       setDeleting(true);
-      await axios.delete(`http://localhost:5500/${route}/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URI}/${route}/${id}`);
       navigate("/admin/userManagement");
     } catch (error) {
       setDeleting(false);

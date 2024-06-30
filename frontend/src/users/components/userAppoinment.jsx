@@ -18,12 +18,15 @@ const Appointment = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`http://localhost:5500/appointmentService/user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         // console.log("API response:", response.data.appService[0].booking);
         const validAppointment = response.data.appService.filter(
