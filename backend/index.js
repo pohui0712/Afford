@@ -10,16 +10,27 @@ import authRouter from "./routes/authRoute.js";
 import appServiceRouter from "./routes/appServiceRoute.js";
 import protectRouter from "./routes/protectRoute.js";
 import emailRouter from "./routes/emailRoute.js";
-import config from "config";
+// import config from "config";
 import { Booking } from "./models/bookingModel.js";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 
 const app = express();
 
-if (!config.get("jwtPrivateKey")) {
+dotenv.config();
+
+const jwtPrivateKey = process.env.JWT_PRIVATE_KEY;
+const db = process.env.MONGO_URI;
+const port = process.env.PORT;
+
+// if (!config.get("jwtPrivateKey")) {
+//   console.error("FATAL ERROR: jwtPrivateKey is not defined");
+//   process.exit(1);
+// }
+if (!jwtPrivateKey) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
 }
@@ -40,11 +51,11 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(config.get("database"))
+  .connect(db)
   .then(() => {
     console.log("Connect databse successfully.");
-    app.listen(config.get("PORT"), () => {
-      console.log(`App is listening to port:`, config.get("PORT"));
+    app.listen(port, () => {
+      console.log(`App is listening to port:`, port);
     });
   })
   .catch((error) => {

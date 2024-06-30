@@ -1,5 +1,0 @@
-{
-  "jwtPrivateKey": "Afford_jwtPrivateKey",
-  "database": "mongodb+srv://pohui:Hui_11234@afford.c6vv5gv.mongodb.net/?retryWrites=true&w=majority&appName=Afford",
-  "PORT": "process.env.PORT || 5500"
-}
