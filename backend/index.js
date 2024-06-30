@@ -33,13 +33,7 @@ if (!jwtPrivateKey) {
 app.use(express.json());
 
 /// Middleware for handling CORS policy
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-  })
-);
+app.use(cors());
 
 app.options("*", cors()); // Enable pre-flight requests for all routes
 
