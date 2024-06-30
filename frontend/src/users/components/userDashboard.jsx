@@ -96,11 +96,11 @@ const Dashboard = () => {
       <div className="p-3 flex-1">
         <div className="rounded-2xl h-full flex flex-col w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="flex justify-center">
-            <img src={selectedCarImage} className="h-[400px]" />
+            <img src={selectedCarImage} className="h-[300px] md:h-[400px]" />
           </div>
 
           {appointments.length > 1 && (
-            <div className="mb-4 flex justify-center">
+            <div className="flex justify-center">
               <div className="mr-2">Select Car:</div>
               <select
                 id="car-select"

@@ -54,7 +54,7 @@ const PlanningCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="rounded-lg bg-white flex flex-col items-center text-center h-[500px] w-[400px] md:h-full md:w-full">
+      <div className="rounded-lg bg-white flex flex-col items-center text-center h-[500px] mx-auto w-full md:h-full">
         <h2 className="text-2xl font-bold mb-2 mt-4">{title}</h2>
         <p className="font-light text-sm max-w-sm">{description}</p>
         <p className="text-4xl text-blue-700 font-bold m-6">{price}</p>
