@@ -33,7 +33,7 @@ const Contact = () => {
         </div>
 
         {/* Contact Information */}
-        <div className="flex flex-col justify-center space-y-6 text-left text-lg md:text-base w-full md:w-2/6 mb-4 md:mb-0 max-md:text-center">
+        <div className="flex flex-col justify-center space-y-6 text-left text-md md:text-base w-full md:w-2/6 mb-4 max-md:text-center max-sm:mt-8">
           <div className="font-pt-sans">
             <h3 className="font-bold">ADDRESS:</h3>
             <p>No.16, Jln BK 1/13</p>
