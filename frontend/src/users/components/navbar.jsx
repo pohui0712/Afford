@@ -54,11 +54,11 @@ const Navbar = ({ isTopOfPage }) => {
 
       {/* Mobile Menu Button */}
       <div className="md:hidden flex items-center justify-between py-3 text-xl font-pt-sans text-white">
-        <a href="#" className="font-bold italic">
+        <a href="#" className="font-bold italic ml-3">
           AFFORD
         </a>
         <button
-          className="text-white focus:outline-none"
+          className="text-white focus:outline-none mr-3"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg
