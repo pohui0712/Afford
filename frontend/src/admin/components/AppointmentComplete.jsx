@@ -2,10 +2,13 @@ import { Callout, Link, Table } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
+import SkeletonTable from "./SkeletonTable";
 
 const AppointmentComplete = () => {
   const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+
   useEffect(() => {
     const controller = new AbortController();
     axios
@@ -14,16 +17,22 @@ const AppointmentComplete = () => {
       })
       .then((response) => {
         setAppointments(response.data.appService);
+        setLoading(false); // Set loading to false once data is fetched
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false); // Set loading to false in case of error
       });
 
     return () => controller.abort();
   }, []);
 
-  if (!appointments) {
+  if (loading) {
+    return <SkeletonTable />;
+  }
+
+  if (appointments.length === 0) {
     return (
       <Callout.Root color="red" className="mb-5">
         <Callout.Text>No completed lists found</Callout.Text>

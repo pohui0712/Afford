@@ -3,7 +3,7 @@ import React from "react";
 
 const SkeletonTable = () => {
   return (
-    <Table.Root>
+    <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeaderCell>
