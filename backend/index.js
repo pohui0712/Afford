@@ -36,6 +36,15 @@ app.use(
   })
 );
 
+app.options("*", cors()); // Enable pre-flight requests for all routes
+
+app.use((req, res, next) => {
+  console.log(
+    `Received request: ${req.method} ${req.path} from origin: ${req.headers.origin}`
+  );
+  next();
+});
+
 mongoose
   .connect(mongoDBURL)
   .then(() => {
