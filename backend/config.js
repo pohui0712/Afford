@@ -1,4 +1,4 @@
-export const PORT = 5500;
+export const PORT = process.env.PORT || 5500;
 
 // mongodb
 export const mongoDBURL =
