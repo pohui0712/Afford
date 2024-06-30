@@ -16,10 +16,10 @@ const HomePage = () => {
         className="w-full h-full absolute object-cover z-0 opacity-[.35]"
       />
       <div className="flex flex-col justify-center items-end relative z-10 w-full pr-20 text-right">
-        <div className="mb-12 text-6xl font-pt-sans-bold italic text-red-600 max-w-3xl">
+        <div className="mb-12 text-6xl font-pt-sans-bold italic text-red-600 max-w-3xl max-sm:text-2xl">
           AUTO MAINTENANCE, SERVICE & REPAIR
         </div>
-        <p className="text-white font-pt-sans max-w-sm">
+        <p className="text-white font-pt-sans max-w-sm max-sm:m-5, ml-5">
           Welcome to Afford, where we offer a comprehensive range of auto
           maintenance, service, and repair solutions tailored to meet all your
           vehicle's needs. With years of expertise and a commitment to
