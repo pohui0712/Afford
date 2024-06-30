@@ -1,5 +1,4 @@
 import express from "express";
-// import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
@@ -10,7 +9,6 @@ import authRouter from "./routes/authRoute.js";
 import appServiceRouter from "./routes/appServiceRoute.js";
 import protectRouter from "./routes/protectRoute.js";
 import emailRouter from "./routes/emailRoute.js";
-// import config from "config";
 import { Booking } from "./models/bookingModel.js";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
@@ -26,10 +24,6 @@ const jwtPrivateKey = process.env.JWT_PRIVATE_KEY;
 const db = process.env.MONGO_URI;
 const port = process.env.PORT;
 
-// if (!config.get("jwtPrivateKey")) {
-//   console.error("FATAL ERROR: jwtPrivateKey is not defined");
-//   process.exit(1);
-// }
 if (!jwtPrivateKey) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
@@ -42,13 +36,6 @@ app.use(express.json());
 app.use(cors());
 
 app.options("*", cors()); // Enable pre-flight requests for all routes
-
-app.use((req, res, next) => {
-  console.log(
-    `Received request: ${req.method} ${req.path} from origin: ${req.headers.origin}`
-  );
-  next();
-});
 
 mongoose
   .connect(db)

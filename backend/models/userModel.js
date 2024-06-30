@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import config from "config";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -46,7 +45,6 @@ export function validateUpdateUser(user) {
 }
 
 userSchema.methods.generateAuthToken = function () {
-  // const token = jwt.sign({ _id: this._id }, config.get("jwtPrivateKey"));
   const token = jwt.sign({ _id: this._id }, process.env.JWT_PRIVATE_KEY);
   return token;
 };
@@ -57,10 +55,6 @@ export function verifyToken(req, res, next) {
   if (!token) return res.status(401).send("Access denied. No token provided");
 
   try {
-    // const decoded = jwt.verify(
-    //   token.split(" ")[1],
-    //   config.get("jwtPrivateKey")
-    // );
     const decoded = jwt.verify(
       token.split(" ")[1],
       process.env.JWT_PRIVATE_KEY
