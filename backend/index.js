@@ -40,10 +40,10 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(mongoDBURL)
+  .connect(process.env.mongoDBURL)
   .then(() => {
     console.log("Connect databse successfully.");
-    app.listen(PORT, () => {
+    app.listen(process.env.PORT, () => {
       console.log(`App is listening to port: ${PORT}`);
     });
   })
