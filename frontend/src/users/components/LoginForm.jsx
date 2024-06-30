@@ -3,6 +3,7 @@ import {
   Flex,
   Link,
   Separator,
+  Spinner,
   Text,
   TextField,
 } from "@radix-ui/themes";
@@ -76,7 +77,10 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="mx-auto my-auto w-[28rem]" onSubmit={handleSubmit}>
+    <form
+      className="mx-auto my-auto md:w-[28rem] w-[20rem]"
+      onSubmit={handleSubmit}
+    >
       <Toaster />
       <Flex direction="column">
         <Flex direction="column" align="center">
@@ -118,7 +122,7 @@ const LoginForm = () => {
         </TextField.Root>
 
         <Button color="gray" variant="soft" size="3" radius="large">
-          Sign In
+          {isSubmitting ? <Spinner /> : "Sign In"}
         </Button>
 
         <Separator orientation="horizontal" size="4" my="3" />

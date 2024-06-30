@@ -18,7 +18,11 @@ const GridLayout = ({ children }) => {
         }}
         // className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
-        <Grid columns="2" minHeight="100vh" className="relative">
+        <Grid
+          columns={{ initial: "1", md: "2" }}
+          minHeight="100vh"
+          className="relative"
+        >
           <Link to="/" className="absolute">
             <IoHomeSharp className="text-xl m-2 dark:text-white" />
           </Link>

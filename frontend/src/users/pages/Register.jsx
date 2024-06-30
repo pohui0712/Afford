@@ -11,7 +11,9 @@ const Register = () => {
   return (
     <GridLayout>
       <RegisterForm />
-      <GitGlobe />
+      <div className="hidden md:block">
+        <GitGlobe />
+      </div>
     </GridLayout>
   );
 };

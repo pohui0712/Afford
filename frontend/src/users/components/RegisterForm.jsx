@@ -43,7 +43,10 @@ const RegisterForm = () => {
   });
 
   return (
-    <form onSubmit={onSubmit} className="mx-auto my-auto w-[28rem] ">
+    <form
+      onSubmit={onSubmit}
+      className="mx-auto my-auto md:w-[28rem] w-[20rem] "
+    >
       <Toaster />;
       <Flex direction="column">
         <Flex direction="column" align="center">
