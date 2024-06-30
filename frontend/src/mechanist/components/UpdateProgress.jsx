@@ -176,26 +176,39 @@ const UpdateProgress = () => {
             <DataList.Root size="3">
               {service.serviceName.map((serviceName, index) => (
                 <DataList.Item key={index} align="center">
-                  <DataList.Label color="indigo">{serviceName}</DataList.Label>
-                  <DataList.Value style={{ gap: "20px" }}>
-                    {serviceProgress
-                      .find((item) => item.serviceName === serviceName)
-                      ?.checkBox.map((checkbox, idx) => (
-                        <Flex key={idx} align="center">
-                          <input
-                            type="checkbox"
-                            checked={
-                              progressState[serviceName]?.[checkbox] || false
-                            }
-                            onChange={() =>
-                              handleCheckboxChange(serviceName, checkbox)
-                            }
-                            className="mr-3 w-4 h-4"
-                          />
-                          {checkbox}
-                        </Flex>
-                      ))}
-                  </DataList.Value>
+                  <Flex
+                    direction={{ initial: "column", sm: "row" }}
+                    justify="start"
+                  >
+                    <DataList.Label color="indigo">
+                      {serviceName}
+                    </DataList.Label>
+                    <DataList.Value style={{ gap: "20px" }}>
+                      <Flex
+                        direction={{ initial: "column", sm: "row" }}
+                        gap="4"
+                      >
+                        {serviceProgress
+                          .find((item) => item.serviceName === serviceName)
+                          ?.checkBox.map((checkbox, idx) => (
+                            <Flex key={idx} align="center">
+                              <input
+                                type="checkbox"
+                                checked={
+                                  progressState[serviceName]?.[checkbox] ||
+                                  false
+                                }
+                                onChange={() =>
+                                  handleCheckboxChange(serviceName, checkbox)
+                                }
+                                className="mr-3 w-4 h-4"
+                              />
+                              {checkbox}
+                            </Flex>
+                          ))}
+                      </Flex>
+                    </DataList.Value>
+                  </Flex>
                 </DataList.Item>
               ))}
             </DataList.Root>

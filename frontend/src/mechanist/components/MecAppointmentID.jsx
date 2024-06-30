@@ -117,7 +117,7 @@ const MecAppointmentID = () => {
           </DataList.Item>
         </DataList.Root>
       </Card>
-      <Flex gapX="3" mt="3">
+      <Flex direction={{ initial: "column", sm: "row" }} gap="3" mt="3">
         <ProgressButton
           route={`/mechanist/progress/${appointment.service._id}`}
         />
