@@ -81,7 +81,7 @@ const Appointment = () => {
               ? progress === 100
                 ? "All set! Get your car now"
                 : "Services in Progress"
-              : "You have no any appointment yet. Book now!"}
+              : "Book your appointment now!"}
           </div>
           <div className="mb-4">
             <div className="mr-2">Select Appointment:</div>
