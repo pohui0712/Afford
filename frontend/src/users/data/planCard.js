@@ -1,8 +1,7 @@
 const infoCard = [
   {
     title: "Essential",
-    description:
-      "All the essentials your car needs to keep it running in good condition.",
+    description: "Basic protection to keep it running in good condition.",
     price: "RM99",
     priceDescription: "Recommended for every 5,000km or 10,000km",
     items: [
@@ -30,7 +29,7 @@ const infoCard = [
   {
     title: "Comprehensive",
     description:
-      "Our most comprehensive service that takes care of it all to maintain peak performance.",
+      "Our most comprehensive service that takes care all to maintain peak performance.",
     price: "RM199",
     priceDescription: "Recommended for every 40,000km",
     items: [

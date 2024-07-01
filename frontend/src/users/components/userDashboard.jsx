@@ -128,9 +128,11 @@ const Dashboard = () => {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 p-2 gap-4 md:flex-grow md:p-6 max-sm:text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 p-2 gap-4 md:flex-grow md:p-6 max-sm:text-sm max-sm:mt-3">
             <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
-              <h3 className="text-lg font-semibold mb-2">Vehicle Details</h3>
+              <h3 className="text-md font-semibold mb-2 md:text-lg">
+                Vehicle Details
+              </h3>
               {selectedCar ? (
                 <ul className="list-disc list-inside spacing-y-3">
                   <li className="mt-3">
@@ -157,7 +159,9 @@ const Dashboard = () => {
               )}
             </div>
             <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
-              <h3 className="text-lg font-semibold mb-2">Upcoming Schedule</h3>
+              <h3 className="text-md font-semibold mb-2 md:text-lg">
+                Upcoming Schedule
+              </h3>
               {services.length > 0 ? (
                 <ul className="list-disc list-inside">
                   {services.map((service, index) => (
@@ -171,7 +175,9 @@ const Dashboard = () => {
               )}
             </div>
             <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
-              <h3 className="text-lg font-semibold mb-2">Service Reminder</h3>
+              <h3 className="text-md font-semibold mb-2 md:text-lg">
+                Service Reminder
+              </h3>
               {selectedCar ? (
                 <ul className="list-disc list-inside">
                   {getServiceReminders(selectedCar.booking.mileage).map(

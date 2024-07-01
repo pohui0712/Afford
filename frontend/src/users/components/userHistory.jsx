@@ -61,10 +61,10 @@ const History = () => {
       <SideBar />
       <div className="md:p-3 flex-1">
         <div
-          className="rounded-2xl h-full p-2 md:p-4 w-full dark:bg-black
+          className="rounded-2xl h-full md:p-4 w-full dark:bg-black
          bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative"
         >
-          <Table.Root variant="surface" className="max-sm:mt-14">
+          <Table.Root variant="surface" className="max-sm:pt-20 p-1">
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeaderCell>Car Model</Table.ColumnHeaderCell>

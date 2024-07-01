@@ -132,7 +132,7 @@ const SideBar = () => {
           <img src={logo} className="w-[70px] h-[70px]" alt="logo" />
           AFFORD
         </Link>
-        <div className="space-y-10 mt-10 ml-5">
+        <div className="space-y-10 mt-10 ml-2">
           <SidebarItem
             icon={TbLayoutDashboard}
             label="Dashboard"

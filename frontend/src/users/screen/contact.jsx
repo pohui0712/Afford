@@ -5,35 +5,35 @@ import { RiInstagramFill } from "react-icons/ri";
 const Contact = () => {
   return (
     <div id="contact" className="flex flex-col p-4 bg-black text-white">
-      <div className="text-center mt-5 text-2xl font-bold md:text-3xl">
+      <div className="text-center mt-5 text-xl font-bold md:text-3xl">
         VISIT OUR SERVICES
       </div>
 
       <div className="flex flex-col md:flex-row mt-5">
         {/* Social Media Links */}
-        <div className="flex flex-row md:flex-col justify-center space-x-4 md:space-x-0 md:space-y-6 w-full md:w-1/6 mb-4 md:mb-0">
+        <div className="flex flex-row md:flex-col justify-center space-x-4 md:space-x-0 md:space-y-6 w-full md:w-1/6 mb-4">
           <a
             href="https://www.facebook.com/FordMalaysia/"
             className="text-blue-600 hover:text-blue-800 text-center"
           >
-            <FaFacebook className="w-8 h-8 md:w-10 md:h-10" />
+            <FaFacebook className="w-6 h-6 md:w-10 md:h-10" />
           </a>
           <a
             href="https://www.instagram.com/fordmalaysia/?hl=en"
             className="text-pink-500 hover:text-pink-700 text-center"
           >
-            <RiInstagramFill className="w-8 h-8 md:w-10 md:h-10" />
+            <RiInstagramFill className="w-6 h-6 md:w-10 md:h-10" />
           </a>
           <a
             href="https://www.ford.com/"
             className="text-red-500 hover:text-red-700 text-center"
           >
-            <FaGoogle className="w-8 h-8 md:w-10 md:h-10" />
+            <FaGoogle className="w-6 h-6 md:w-10 md:h-10" />
           </a>
         </div>
 
         {/* Contact Information */}
-        <div className="flex flex-col justify-center space-y-6 text-left text-md md:text-base w-full md:w-2/6 mb-4 max-md:text-center max-sm:mt-8">
+        <div className="flex flex-col justify-center space-y-6 text-left text-sm md:text-base w-full md:w-2/6 mb-4 max-md:text-center max-sm:mt-8">
           <div className="font-pt-sans">
             <h3 className="font-bold">ADDRESS:</h3>
             <p>No.16, Jln BK 1/13</p>

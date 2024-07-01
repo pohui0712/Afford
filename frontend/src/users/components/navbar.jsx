@@ -82,7 +82,7 @@ const Navbar = ({ isTopOfPage }) => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 right-0  bg-blue-600 h-full w-[200px] text-white transition-transform transform ${
+        className={`md:hidden fixed top-0 right-0  bg-blue-600 h-full w-[200px] drop-shadow-xl text-white transition-transform transform ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -107,7 +107,7 @@ const Navbar = ({ isTopOfPage }) => {
             </svg>
           </button>
         </div>
-        <div className="flex flex-col h-full mt-4 ml-[25%] gap-10">
+        <div className="flex flex-col h-full p-4 mt-[33%] ml-[18%] gap-10">
           {links.map((link) => (
             <a
               key={link.label}

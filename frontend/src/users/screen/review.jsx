@@ -13,7 +13,7 @@ const Review = () => {
 
   return (
     <div className="relative h-[300vh]" ref={targetRef}>
-      <div className="font-pt-sans-bold italic text-xl text-center mt-5 md:text-3xl md:p-10 md:text-left">
+      <div className="font-pt-sans-bold italic text-xl text-center mt-8 md:text-3xl md:p-10 md:text-left">
         WHAT OUR CLIENTS COMMENTS
       </div>
       <div className="hidden md:flex sticky top-0 h-screen items-center overflow-hidden">
@@ -29,7 +29,7 @@ const Review = () => {
         </motion.div>
       </div>
       {/* Mobile View */}
-      <div className="md:hidden grid grid-cols-1 gap-6 py-10">
+      <div className="md:hidden grid grid-cols-1 gap-10 py-8 text-sm">
         {reviews.map((review, index) => (
           <ReviewCard
             key={index}

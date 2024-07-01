@@ -54,10 +54,12 @@ const PlanningCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="rounded-lg bg-white flex flex-col items-center text-center h-[500px] mx-auto w-full md:h-full">
+      <div className="rounded-lg bg-white flex flex-col items-center text-center h-[470px] mx-auto md:h-full max-sm:text-sm">
         <h2 className="text-2xl font-bold mb-2 mt-4">{title}</h2>
-        <p className="font-light text-sm max-w-sm">{description}</p>
-        <p className="text-4xl text-blue-700 font-bold m-6">{price}</p>
+        <p className="font-light text-sm md:max-w-sm">{description}</p>
+        <p className="md:text-4xl text-blue-700 text-2xl font-bold m-6">
+          {price}
+        </p>
         <p className="m-3">{priceDescription}</p>
         {items.map((item, index) => (
           <p key={index} className="flex items-center m-1 font-pt-sans italic">

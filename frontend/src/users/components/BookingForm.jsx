@@ -64,7 +64,7 @@ const BookingForm = () => {
         </Callout.Root>
       )}
 
-      <Box className="w-[400px] md:w-[800px]">
+      <Box className="w-[450px] md:w-[800px] max-sm:text-sm">
         <Card size={{ initial: "1", md: "3" }}>
           <div className="grid grid-cols-2 gap-4">
             {/* Grid Left */}
