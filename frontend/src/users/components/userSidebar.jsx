@@ -38,13 +38,13 @@ const SideBar = () => {
   return (
     <div className="relative">
       {/* Mobile Navbar */}
-      <div className="md:hidden fixed top-0 left-0 w-full p-4 bg-blue-800 text-white z-50">
+      <div className="md:hidden fixed top-0 left-0 w-full p-3 bg-blue-600 text-white z-50">
         <div className="flex items-center justify-between">
           <Link
             to="/"
             className="flex items-center text-xl font-semibold italic"
           >
-            <img src={logo} className="w-[30px] h-[30px]" alt="logo" />
+            <img src={logo} className="w-[40px] h-[40px]" alt="logo" />
             AFFORD
           </Link>
           <button
@@ -67,33 +67,59 @@ const SideBar = () => {
             </svg>
           </button>
         </div>
-        <div className={`mt-4 space-y-5 ${isMenuOpen ? "block" : "hidden"}`}>
-          <SidebarItem
-            icon={TbLayoutDashboard}
-            label="Dashboard"
-            to={`/user/dashboard/${user.id}`}
-          />
-          <SidebarItem
-            icon={RiCalendarScheduleFill}
-            label="Appointment"
-            to={`/user/appointment/${user.id}`}
-          />
-          <SidebarItem
-            icon={MdOutlineHistory}
-            label="Book History"
-            to={`/user/history/${user.id}`}
-          />
-          <SidebarItem
-            icon={IoSettingsOutline}
-            label="Settings"
-            to={`/user/settings/${user.id}`}
-          />
-          <SidebarItem
-            icon={TbLogout2}
-            label="Sign Out"
-            to="/"
-            onClick={logout}
-          />
+
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden fixed top-0 right-0 h-full w-[200px] bg-blue-600 text-white transition-transform transform ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex justify-end p-4">
+            <button className="text-white" onClick={() => setIsMenuOpen(false)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="flex flex-col items-start p-4 mt-[33%] gap-10">
+            <SidebarItem
+              icon={TbLayoutDashboard}
+              label="Dashboard"
+              to={`/user/dashboard/${user.id}`}
+            />
+            <SidebarItem
+              icon={RiCalendarScheduleFill}
+              label="Appointment"
+              to={`/user/appointment/${user.id}`}
+            />
+            <SidebarItem
+              icon={MdOutlineHistory}
+              label="Book History"
+              to={`/user/history/${user.id}`}
+            />
+            <SidebarItem
+              icon={IoSettingsOutline}
+              label="Settings"
+              to={`/user/settings/${user.id}`}
+            />
+            <SidebarItem
+              icon={TbLogout2}
+              label="Sign Out"
+              to="/"
+              onClick={logout}
+            />
+          </div>
         </div>
       </div>
 

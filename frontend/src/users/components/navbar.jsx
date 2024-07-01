@@ -53,7 +53,9 @@ const Navbar = ({ isTopOfPage }) => {
       </div>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden flex items-center justify-between py-3 text-xl font-pt-sans text-white">
+      <div
+        className={`md:hidden flex items-center justify-between py-3 text-xl font-pt-sans text-white ${navBarBackground}`}
+      >
         <a href="#" className="font-bold italic ml-3">
           AFFORD
         </a>
@@ -80,15 +82,15 @@ const Navbar = ({ isTopOfPage }) => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full bg-blue-600 h-full text-white transition-transform transform ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`md:hidden fixed top-0 right-0  bg-blue-600 h-full w-[200px] text-white transition-transform transform ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center p-4">
-          <a href="#" className="font-bold italic text-xl">
-            AFFORD
-          </a>
-          <button className="text-white" onClick={() => setIsMenuOpen(false)}>
+        <div className="flex justify-end p-4">
+          <button
+            className="text-white flex items-end"
+            onClick={() => setIsMenuOpen(false)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -105,7 +107,7 @@ const Navbar = ({ isTopOfPage }) => {
             </svg>
           </button>
         </div>
-        <div className="flex flex-col items-center justify-center h-full py-4">
+        <div className="flex flex-col h-full mt-4 ml-[25%] gap-10">
           {links.map((link) => (
             <a
               key={link.label}
