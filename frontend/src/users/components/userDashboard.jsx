@@ -99,7 +99,7 @@ const Dashboard = () => {
       <div className="p-3 flex-1">
         <div className="rounded-2xl h-full flex flex-col w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="flex justify-center">
-            <img src={selectedCarImage} className="h-[300px] md:h-[400px]" />
+            <img src={selectedCarImage} className="h-[250px] md:h-[400px]" />
           </div>
 
           {appointments.length > 1 && (
@@ -125,8 +125,8 @@ const Dashboard = () => {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-4 flex-grow">
-            <div className="bg-gray-100 p-4 rounded-lg shadow">
+          <div className="grid grid-cols-1 md:grid-cols-3 p-2 gap-4 flex-grow md:p-6 max-sm:text-sm">
+            <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
               <h3 className="text-lg font-semibold mb-2">Vehicle Details</h3>
               {selectedCar ? (
                 <ul className="list-disc list-inside spacing-y-3">
@@ -153,7 +153,7 @@ const Dashboard = () => {
                 <p>No car information</p>
               )}
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow">
+            <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
               <h3 className="text-lg font-semibold mb-2">Upcoming Schedule</h3>
               {services.length > 0 ? (
                 <ul className="list-disc list-inside">
@@ -167,7 +167,7 @@ const Dashboard = () => {
                 <p>No services scheduled</p>
               )}
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow">
+            <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
               <h3 className="text-lg font-semibold mb-2">Service Reminder</h3>
               {selectedCar ? (
                 <ul className="list-disc list-inside">
