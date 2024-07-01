@@ -15,7 +15,7 @@ const InventoryUpdate = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5500/appointmentService/${id}`)
+      .get(`${process.env.REACT_APP_BACKEND_URI}/appointmentService/${id}`)
       .then((res) => {
         const existInventory = res.data.appService.inventory.inventory;
         const updatedInventory = inventory.map((item) => {
@@ -69,20 +69,26 @@ const InventoryUpdate = () => {
       }));
 
       const response = await axios.get(
-        `http://localhost:5500/appointmentService/${id}`
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/${id}`
       );
       const appService = response.data.appService;
       const inventoryId = response.data.appService?.inventory?._id;
 
       if (appService && inventoryId) {
-        await axios.put(`http://localhost:5500/inventory/${inventoryId}`, {
-          inventory: data,
-        });
+        await axios.put(
+          `${process.env.REACT_APP_BACKEND_URI}/inventory/${inventoryId}`,
+          {
+            inventory: data,
+          }
+        );
         toast.success("Inventory updated successfully");
       } else {
-        await axios.post(`http://localhost:5500/inventory/appService/${id}`, {
-          inventory: data,
-        });
+        await axios.post(
+          `${process.env.REACT_APP_BACKEND_URI}/inventory/appService/${id}`,
+          {
+            inventory: data,
+          }
+        );
         toast.success("Inventory added successfully");
       }
     } catch (err) {

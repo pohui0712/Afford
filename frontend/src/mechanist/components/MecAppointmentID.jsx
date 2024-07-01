@@ -22,7 +22,7 @@ const MecAppointmentID = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService/${id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_URI}/appointmentService/${id}`, {
         signal: controller.signal,
       })
       .then((response) => {

@@ -8,7 +8,10 @@ const EmailButton = ({ status, data }) => {
   const [error, setError] = useState(false);
   const onSend = async () => {
     try {
-      await axios.post("http://localhost:5500/api/sendEmail", data);
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URI}/api/sendEmail`,
+        data
+      );
       toast.success("Email sent successfully");
     } catch (error) {
       toast.error("Update unsuccessfully!");

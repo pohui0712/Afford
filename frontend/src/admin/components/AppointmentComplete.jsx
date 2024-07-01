@@ -12,9 +12,12 @@ const AppointmentComplete = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService/completed`, {
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/completed`,
+        {
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         setAppointments(response.data.appService);
         setLoading(false); // Set loading to false once data is fetched

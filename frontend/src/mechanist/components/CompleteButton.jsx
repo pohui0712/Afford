@@ -10,7 +10,7 @@ const CompleteButton = ({ id, serviceID }) => {
   const onComplete = async () => {
     try {
       setSubmitting(true);
-      await axios.patch(`http://localhost:5500/booking/${id}`, {
+      await axios.patch(`${process.env.REACT_APP_BACKEND_URI}/booking/${id}`, {
         status: "completed",
       });
       updateRemark();
@@ -23,7 +23,10 @@ const CompleteButton = ({ id, serviceID }) => {
 
   const updateRemark = handleSubmit(async (data) => {
     try {
-      await axios.patch(`http://localhost:5500/service/${serviceID}`, data);
+      await axios.patch(
+        `${process.env.REACT_APP_BACKEND_URI}/service/${serviceID}`,
+        data
+      );
     } catch (error) {
       setSubmitting(false);
       setError(true);

@@ -8,7 +8,7 @@ import suspension from "../assests/suspension.jpg";
 const serviceInfo = [
   {
     image: battery,
-    description: "Battery Replacement",
+    description: "Battery Change",
   },
   {
     image: aircond,

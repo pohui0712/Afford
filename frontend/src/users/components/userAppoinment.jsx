@@ -18,12 +18,15 @@ const Appointment = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`http://localhost:5500/appointmentService/user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         // console.log("API response:", response.data.appService[0].booking);
         const validAppointment = response.data.appService.filter(
@@ -71,8 +74,8 @@ const Appointment = () => {
   return (
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans relative">
       <SideBar />
-      <div className="p-3 flex-1">
-        <div className="rounded-2xl h-full flex flex-col justify-center items-center w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
+      <div className="md:p-3 flex-1">
+        <div className="rounded-2xl h-full flex flex-col justify-center items-center w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative md:w-auto">
           <div className="text-2xl font-bold mb-8">
             {selectedAppointment
               ? progress === 100
@@ -105,8 +108,8 @@ const Appointment = () => {
             </select>
           </div>
           <div className="relative flex justify-center items-center">
-            <img src={mustang} className="h-[35vh] absolute" />
-            <div className="w-[70vh]">
+            <img src={mustang} className="h-[35vh] max-sm:h-[28vh] absolute" />
+            <div className="w-[70vh] max-sm:w-[48vh]">
               <CircularProgressbar value={progress} maxValue={100} />
             </div>
           </div>

@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import config from "config";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const userSchema = new mongoose.Schema(
   {
@@ -43,7 +45,7 @@ export function validateUpdateUser(user) {
 }
 
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, config.get("jwtPrivateKey"));
+  const token = jwt.sign({ _id: this._id }, process.env.JWT_PRIVATE_KEY);
   return token;
 };
 
@@ -55,7 +57,7 @@ export function verifyToken(req, res, next) {
   try {
     const decoded = jwt.verify(
       token.split(" ")[1],
-      config.get("jwtPrivateKey")
+      process.env.JWT_PRIVATE_KEY
     );
     req.user = decoded;
     next();

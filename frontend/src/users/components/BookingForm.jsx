@@ -42,7 +42,7 @@ const BookingForm = () => {
     try {
       setSubmitting(true);
       // console.log(data);
-      await axios.post("http://localhost:5500/booking", data);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URI}/booking`, data);
       toast.success("Your appointment is successful!");
       setTimeout(() => {
         navigate("/");

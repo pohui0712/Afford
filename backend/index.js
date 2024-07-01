@@ -1,5 +1,4 @@
 import express from "express";
-import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
@@ -10,25 +9,25 @@ import authRouter from "./routes/authRoute.js";
 import appServiceRouter from "./routes/appServiceRoute.js";
 import protectRouter from "./routes/protectRoute.js";
 import emailRouter from "./routes/emailRoute.js";
-import config from "config";
 import { Booking } from "./models/bookingModel.js";
 import { AppointmentService } from "./models/appService.js";
 import { Admin } from "./models/adminModel.js";
 import { Mechanic } from "./models/mechanicModel.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 
 const app = express();
 
-console.log("NODE_ENV:", process.env.NODE_ENV); // Should be 'production'
-console.log("Config jwtPrivateKey:", config.get("jwtPrivateKey")); // Should log the production key
+dotenv.config();
 
-if (!config.get("jwtPrivateKey")) {
+const jwtPrivateKey = process.env.JWT_PRIVATE_KEY;
+const db = process.env.MONGO_URI;
+const port = process.env.PORT;
+
+if (!jwtPrivateKey) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
 }
-
-// const app = express();
-console.log(`${config.get("jwtPrivateKey")}`);
 
 // Middleware for pasesing JSON request body
 app.use(express.json());
@@ -36,12 +35,14 @@ app.use(express.json());
 /// Middleware for handling CORS policy
 app.use(cors());
 
+app.options("*", cors()); // Enable pre-flight requests for all routes
+
 mongoose
-  .connect(mongoDBURL)
+  .connect(db)
   .then(() => {
     console.log("Connect databse successfully.");
-    app.listen(PORT, () => {
-      console.log(`App is listening to port: ${PORT}`);
+    app.listen(port, () => {
+      console.log(`App is listening to port:`, port);
     });
   })
   .catch((error) => {

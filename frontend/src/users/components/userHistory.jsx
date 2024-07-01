@@ -24,12 +24,15 @@ const History = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`http://localhost:5500/appointmentService/user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal: controller.signal,
-      })
+      .get(
+        `${process.env.REACT_APP_BACKEND_URI}/appointmentService/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          signal: controller.signal,
+        }
+      )
       .then((response) => {
         if (response.data.appService && response.data.appService.length > 0) {
           const sortedServices = response.data.appService.sort(
@@ -56,21 +59,24 @@ const History = () => {
   return (
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans">
       <SideBar />
-      <div className="p-3 flex-1">
-        {/* <div className="bg-white rounded-2xl h-full p-4"> */}
+      <div className="md:p-3 flex-1">
         <div
-          className="rounded-2xl h-full p-4 w-full dark:bg-black
+          className="rounded-2xl h-full p-2 md:p-4 w-full dark:bg-black
          bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative"
         >
-          <Table.Root variant="surface">
+          <Table.Root variant="surface" className="max-sm:mt-14">
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeaderCell>Car Model</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>Car Plate</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>Date</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>Feedback</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>Remarks</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="max-sm:hidden">
+                  Feedback
+                </Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="max-sm:hidden">
+                  Remarks
+                </Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -80,7 +86,7 @@ const History = () => {
                   <Table.Cell>{service.booking.carPlate}</Table.Cell>
                   <Table.Cell>{service.booking.date}</Table.Cell>
                   <Table.Cell>{service.booking.status}</Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell className="max-sm:hidden">
                     {service.booking.status == "completed" ? (
                       <button
                         className={`${buttonStyle} hover:bg-green-400`}
@@ -97,7 +103,9 @@ const History = () => {
                       </button>
                     )}
                   </Table.Cell>
-                  <Table.Cell>{service.booking.remark}</Table.Cell>
+                  <Table.Cell className="max-sm:hidden">
+                    {service.booking.remark}
+                  </Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>

@@ -22,7 +22,9 @@ const AdminUserID = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/users/${id}`, { signal: controller.signal })
+      .get(`${process.env.REACT_APP_BACKEND_URI}/users/${id}`, {
+        signal: controller.signal,
+      })
       .then((response) => {
         setUser(response.data.user);
       })

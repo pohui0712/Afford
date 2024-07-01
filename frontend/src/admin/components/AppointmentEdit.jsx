@@ -42,7 +42,7 @@ const AppointmentEdit = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/appointmentService/${id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_URI}/appointmentService/${id}`, {
         signal: controller.signal,
       })
       .then((response) => {
@@ -61,7 +61,7 @@ const AppointmentEdit = () => {
       setSubmitting(true);
       //   update;
       await axios.patch(
-        `http://localhost:5500/booking/${appointment.booking._id}`,
+        `${process.env.REACT_APP_BACKEND_URI}/booking/${appointment.booking._id}`,
         data
       );
       onSubmit_service();
@@ -89,7 +89,7 @@ const AppointmentEdit = () => {
       setSubmitting(true);
       // update;
       await axios.patch(
-        `http://localhost:5500/service/${appointment.service._id}`,
+        `${process.env.REACT_APP_BACKEND_URI}/service/${appointment.service._id}`,
         data
       );
       toast.success("Update successfully!");

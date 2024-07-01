@@ -26,7 +26,9 @@ const UserEdit = () => {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .get(`http://localhost:5500/users/${id}`, { signal: controller.signal })
+      .get(`${process.env.REACT_APP_BACKEND_URI}/users/${id}`, {
+        signal: controller.signal,
+      })
       .then((response) => {
         setUser(response.data.user);
         reset(response.data.user); // Reset the form values with fetched data
@@ -43,7 +45,10 @@ const UserEdit = () => {
     try {
       setSubmitting(true);
       //update
-      await axios.patch(`http://localhost:5500/users/${id}`, data);
+      await axios.patch(
+        `${process.env.REACT_APP_BACKEND_URI}/users/${id}`,
+        data
+      );
 
       toast.success("Update successfully");
       setError("");
