@@ -74,7 +74,7 @@ const Appointment = () => {
   return (
     <div className="flex flex-row bg-blue-900 h-[100vh] font-pt-sans relative">
       <SideBar />
-      <div className="p-3 flex-1">
+      <div className="md:p-3 flex-1">
         <div className="rounded-2xl h-full flex flex-col justify-center items-center w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative md:w-auto">
           <div className="text-2xl font-bold mb-8">
             {selectedAppointment

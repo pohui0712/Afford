@@ -44,7 +44,7 @@ const SideBar = () => {
             to="/"
             className="flex items-center text-xl font-semibold italic"
           >
-            <img src={logo} className="w-[40px] h-[40px]" alt="logo" />
+            <img src={logo} className="w-[30px] h-[30px]" alt="logo" />
             AFFORD
           </Link>
           <button

@@ -96,10 +96,13 @@ const Dashboard = () => {
   return (
     <div className="flex flex-row bg-blue-900 h-screen font-pt-sans">
       <SideBar />
-      <div className="p-3 flex-1">
-        <div className="rounded-2xl h-full flex flex-col w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
+      <div className="flex-1 md:p-3">
+        <div className="md:rounded-2xl h-full flex flex-col w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="flex justify-center">
-            <img src={selectedCarImage} className="h-[250px] md:h-[400px]" />
+            <img
+              src={selectedCarImage}
+              className="h-[250px] md:h-[400px] max-sm:mt-5"
+            />
           </div>
 
           {appointments.length > 1 && (
@@ -125,7 +128,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 p-2 gap-4 flex-grow md:p-6 max-sm:text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 p-2 gap-4 md:flex-grow md:p-6 max-sm:text-sm">
             <div className="bg-gray-100 p-2 rounded-lg shadow md:p-4">
               <h3 className="text-lg font-semibold mb-2">Vehicle Details</h3>
               {selectedCar ? (

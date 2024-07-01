@@ -88,7 +88,7 @@ const Settings = () => {
     <div className="flex flex-row bg-blue-900 h-screen font-pt-sans">
       <SideBar />
       <Toaster />
-      <div className="p-3 flex-1">
+      <div className="md:p-3 flex-1">
         <div className="flex justify-center items-center rounded-2xl h-full p-4 w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative">
           <div className="bg-blue-100 rounded-2xl p-8 w-full max-w-md">
             <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
