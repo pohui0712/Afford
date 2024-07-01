@@ -45,8 +45,12 @@ const MecAppointmentsList = () => {
           <Table.Row>
             <Table.ColumnHeaderCell>Car Plate</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Car Model</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Appointment Date</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Mileage</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Appointment Date
+            </Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Mileage
+            </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Progress</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
@@ -64,8 +68,12 @@ const MecAppointmentsList = () => {
               </Table.Cell>
 
               <Table.Cell>{appointment.booking.carModel}</Table.Cell>
-              <Table.Cell>{appointment.booking.date}</Table.Cell>
-              <Table.Cell>{appointment.booking.mileage}</Table.Cell>
+              <Table.Cell className="md:table-cell hidden">
+                {appointment.booking.date}
+              </Table.Cell>
+              <Table.Cell className="md:table-cell hidden">
+                {appointment.booking.mileage}
+              </Table.Cell>
               <Table.Cell>
                 {appointment.service.progress === 100 ? (
                   <CompleteButton

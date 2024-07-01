@@ -16,11 +16,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
 import BackButton from "./BackButton";
+import SkeletonTable from "./SkeletonTable";
 
 const AppointmentCompleteDetails = () => {
   const { id } = useParams();
-  const [appointment, setUser] = useState();
-  const [error, setError] = useState();
+  const [appointment, setAppointment] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,7 +30,7 @@ const AppointmentCompleteDetails = () => {
         signal: controller.signal,
       })
       .then((response) => {
-        setUser(response.data.appService);
+        setAppointment(response.data.appService);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -41,11 +42,26 @@ const AppointmentCompleteDetails = () => {
 
   if (!appointment) {
     return (
-      <Callout.Root color="red" className="mb-5">
-        <Callout.Text>Appointment not found</Callout.Text>
-      </Callout.Root>
+      <Box>
+        <Flex direction="column" gapY="3">
+          <Card>
+            <Heading size="3" mb="3">
+              Client & Vehicle Info
+            </Heading>
+            <SkeletonTable />
+          </Card>
+
+          <Card>
+            <Heading size="3" mb="3">
+              Services & Maintenance Info
+            </Heading>
+            <SkeletonTable />
+          </Card>
+        </Flex>
+      </Box>
     );
   }
+
   return (
     <>
       {error && (
@@ -57,7 +73,7 @@ const AppointmentCompleteDetails = () => {
         <Flex direction="column" gapY="3">
           <Card>
             <Heading size="3" mb="3">
-              Client & Vehical Info
+              Client & Vehicle Info
             </Heading>
             <DataList.Root>
               <DataList.Item>
@@ -113,7 +129,9 @@ const AppointmentCompleteDetails = () => {
               </DataList.Item>
               <DataList.Item>
                 <DataList.Label>Car Mileage</DataList.Label>
-                <DataList.Value>{appointment.booking.mileage}km</DataList.Value>
+                <DataList.Value>
+                  {appointment.booking.mileage} km
+                </DataList.Value>
               </DataList.Item>
               <DataList.Item>
                 <DataList.Label>Client's Remark</DataList.Label>

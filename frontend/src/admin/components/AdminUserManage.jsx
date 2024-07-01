@@ -2,11 +2,13 @@ import { Callout, Link, Table } from "@radix-ui/themes";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Pagination from "./Pagination";
+import SkeletonTable from "./SkeletonTable";
 
 const AdminUserManage = () => {
   const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -14,6 +16,7 @@ const AdminUserManage = () => {
   }, [currentPage]); // Fetch data whenever currentPage changes
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URI}/users`,
@@ -23,12 +26,18 @@ const AdminUserManage = () => {
       );
       setUsers(response.data.users);
       setTotalUsers(response.data.count);
+      setLoading(false);
     } catch (error) {
       setError(error.message);
+      setLoading(false);
     }
   };
 
-  if (!users) {
+  if (loading) {
+    return <SkeletonTable />;
+  }
+
+  if (users.length === 0) {
     return (
       <Callout.Root color="red" className="mb-5">
         <Callout.Text>There are no users registered.</Callout.Text>

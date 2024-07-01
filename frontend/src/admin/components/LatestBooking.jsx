@@ -1,11 +1,14 @@
-import { Card, Flex, Heading, Link, Table, Text } from "@radix-ui/themes";
+import { Card, Heading, Link, Table } from "@radix-ui/themes";
 import axios, { CanceledError } from "axios";
 import React, { useEffect, useState } from "react";
 import AppointmentStatusBadge from "./AppointmentStatusBadge";
+import SkeletonTable from "./SkeletonTable";
 
 const LatestBooking = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState();
+  const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
     const controller = new AbortController();
     axios
@@ -17,15 +20,25 @@ const LatestBooking = () => {
       )
       .then((response) => {
         setData(response.data.appService);
-        // console.log(response.data.appService);
+        setLoading(false);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
-
     return () => controller.abort();
   }, []);
+
+  if (isLoading)
+    return (
+      <Card>
+        <Heading size="4" mb="3">
+          Latest Appointments
+        </Heading>
+        <SkeletonTable />
+      </Card>
+    );
 
   return (
     <Card>

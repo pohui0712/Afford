@@ -33,6 +33,12 @@ const BookingForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
+    const carPlateRegex = /^[a-zA-Z0-9]*$/;
+
+    if (!carPlateRegex.test(data.carPlate)) {
+      toast.error("Please type the valid car plate format! Exp: SYP123");
+      return;
+    }
     try {
       setSubmitting(true);
       // console.log(data);
@@ -58,8 +64,8 @@ const BookingForm = () => {
         </Callout.Root>
       )}
 
-      <Box width="800px">
-        <Card size="3">
+      <Box className="w-[400px] md:w-[800px]">
+        <Card size={{ initial: "1", md: "3" }}>
           <div className="grid grid-cols-2 gap-4">
             {/* Grid Left */}
             <div className="col-span-1">

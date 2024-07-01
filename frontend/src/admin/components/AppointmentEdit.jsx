@@ -24,6 +24,7 @@ import carModels from "../../users/data/carModels";
 import services from "../../users/data/services";
 import slots from "../../users/data/slots";
 import BackButton from "./BackButton";
+import SkeletonTable from "./SkeletonTable";
 
 const AppointmentEdit = () => {
   const { id } = useParams();
@@ -102,11 +103,7 @@ const AppointmentEdit = () => {
   });
 
   if (!appointment) {
-    return (
-      <Callout.Root color="red" className="mb-5">
-        <Callout.Text>Appointment not found</Callout.Text>
-      </Callout.Root>
-    );
+    return <SkeletonTable />;
   }
 
   return (
