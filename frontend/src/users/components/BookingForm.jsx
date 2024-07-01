@@ -55,6 +55,7 @@ const BookingForm = () => {
     }
     setSubmitting(false);
   });
+
   return (
     <form onSubmit={onSubmit}>
       <Toaster />
@@ -64,7 +65,7 @@ const BookingForm = () => {
         </Callout.Root>
       )}
 
-      <Box className="w-[400px] md:w-[800px] max-sm:text-sm">
+      <Box className="w-[400px] md:w-[800px] max-sm:text-sm max-sm:mt-10">
         <Card size={{ initial: "1", md: "3" }}>
           <div className="grid grid-cols-2 gap-4">
             {/* Grid Left */}
